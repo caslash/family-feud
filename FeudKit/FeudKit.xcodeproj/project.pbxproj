@@ -8,11 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		2EC661C22B13104A00E3EFE0 /* FeudKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EC661C12B13104A00E3EFE0 /* FeudKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2EC661C92B13113E00E3EFE0 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661C82B13113E00E3EFE0 /* Answer.swift */; };
+		2EC661CB2B13122A00E3EFE0 /* Family.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661CA2B13122A00E3EFE0 /* Family.swift */; };
+		2EC661CE2B13152700E3EFE0 /* FamilyCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661CD2B13152700E3EFE0 /* FamilyCollection.swift */; };
+		2EC661D02B1318A500E3EFE0 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661CF2B1318A500E3EFE0 /* Question.swift */; };
+		2EC661D22B131A7E00E3EFE0 /* QuestionSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661D12B131A7E00E3EFE0 /* QuestionSet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2EC661BE2B13104A00E3EFE0 /* FeudKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FeudKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EC661C12B13104A00E3EFE0 /* FeudKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeudKit.h; sourceTree = "<group>"; };
+		2EC661C82B13113E00E3EFE0 /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
+		2EC661CA2B13122A00E3EFE0 /* Family.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Family.swift; sourceTree = "<group>"; };
+		2EC661CD2B13152700E3EFE0 /* FamilyCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyCollection.swift; sourceTree = "<group>"; };
+		2EC661CF2B1318A500E3EFE0 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		2EC661D12B131A7E00E3EFE0 /* QuestionSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,9 +55,22 @@
 		2EC661C02B13104A00E3EFE0 /* FeudKit */ = {
 			isa = PBXGroup;
 			children = (
+				2EC661CC2B13150E00E3EFE0 /* Types */,
 				2EC661C12B13104A00E3EFE0 /* FeudKit.h */,
 			);
 			path = FeudKit;
+			sourceTree = "<group>";
+		};
+		2EC661CC2B13150E00E3EFE0 /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				2EC661CA2B13122A00E3EFE0 /* Family.swift */,
+				2EC661C82B13113E00E3EFE0 /* Answer.swift */,
+				2EC661CD2B13152700E3EFE0 /* FamilyCollection.swift */,
+				2EC661CF2B1318A500E3EFE0 /* Question.swift */,
+				2EC661D12B131A7E00E3EFE0 /* QuestionSet.swift */,
+			);
+			path = Types;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -93,6 +116,7 @@
 				TargetAttributes = {
 					2EC661BD2B13104A00E3EFE0 = {
 						CreatedOnToolsVersion = 15.0;
+						LastSwiftMigration = 1500;
 					};
 				};
 			};
@@ -129,6 +153,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EC661D22B131A7E00E3EFE0 /* QuestionSet.swift in Sources */,
+				2EC661CE2B13152700E3EFE0 /* FamilyCollection.swift in Sources */,
+				2EC661D02B1318A500E3EFE0 /* Question.swift in Sources */,
+				2EC661C92B13113E00E3EFE0 /* Answer.swift in Sources */,
+				2EC661CB2B13122A00E3EFE0 /* Family.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +287,7 @@
 		2EC661C62B13104A00E3EFE0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -288,6 +318,7 @@
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -296,6 +327,7 @@
 		2EC661C72B13104A00E3EFE0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
