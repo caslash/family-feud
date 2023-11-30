@@ -26,6 +26,8 @@ public class FFPlayStateMachine: AbstractFFStateMachine<FFPlayStateType, FFPlayS
         self.addState(name: FFPlayStateType.FAMILY_STEAL.description, state: FFPlayStateFactory.getState(type: FFPlayStateType.FAMILY_STEAL, data: nil)!)
         self.addState(name: FFPlayStateType.ALLOCATE_POINTS.description, state: FFPlayStateFactory.getState(type: FFPlayStateType.ALLOCATE_POINTS, data: families)!)
         self.addState(name: FFPlayStateType.REVEAL_ANSWERS.description, state: FFPlayStateFactory.getState(type: FFPlayStateType.REVEAL_ANSWERS, data: nil)!)
+        
+        _ = self.changeState(name: FFPlayStateType.SELECT_QUESTION.description)
     }
     
     public override func validateStateTransition(currentState: FFPlayState?, nextState: String) -> Bool {
@@ -45,8 +47,6 @@ public class FFPlayStateMachine: AbstractFFStateMachine<FFPlayStateType, FFPlayS
             case .SELECT_QUESTION:
                 return nextState == FFPlayStateType.FACE_OFF.description
             }
-        } else {
-            return true
         }
         
         return false
