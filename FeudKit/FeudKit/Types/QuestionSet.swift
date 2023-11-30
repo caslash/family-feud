@@ -24,6 +24,8 @@ public class QuestionSet {
     
     public func getSelectedQuestion() -> Question? { return self.selectedIndex < 0 ? nil : self.questions[selectedIndex] }
     
+    public func setSelectedQuestion(index: Int) { self.selectedIndex = index }
+    
     public func getQuestions() -> [Question] { return self.questions }
     
     public func size() -> Int { return self.questions.count }

@@ -13,6 +13,21 @@
 		2EC661CE2B13152700E3EFE0 /* FamilyCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661CD2B13152700E3EFE0 /* FamilyCollection.swift */; };
 		2EC661D02B1318A500E3EFE0 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661CF2B1318A500E3EFE0 /* Question.swift */; };
 		2EC661D22B131A7E00E3EFE0 /* QuestionSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661D12B131A7E00E3EFE0 /* QuestionSet.swift */; };
+		2EC661E12B14376200E3EFE0 /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661E02B14376200E3EFE0 /* StateMachine.swift */; };
+		2EC661E32B14378F00E3EFE0 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661E22B14378F00E3EFE0 /* State.swift */; };
+		2EC661E52B143F1200E3EFE0 /* FFPlayStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661E42B143F1200E3EFE0 /* FFPlayStateMachine.swift */; };
+		2EC661E92B14474E00E3EFE0 /* AbstractFFStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661E82B14474E00E3EFE0 /* AbstractFFStateMachine.swift */; };
+		2EC661EB2B14481200E3EFE0 /* FFPlayStateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661EA2B14481200E3EFE0 /* FFPlayStateType.swift */; };
+		2EC661ED2B14495200E3EFE0 /* FFPlayState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661EC2B14495200E3EFE0 /* FFPlayState.swift */; };
+		2EC661F02B144AA700E3EFE0 /* FFPlayStateFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661EF2B144AA700E3EFE0 /* FFPlayStateFactory.swift */; };
+		2EC661F22B144BB500E3EFE0 /* StateAllocatePoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661F12B144BB500E3EFE0 /* StateAllocatePoints.swift */; };
+		2EC661F42B144BBF00E3EFE0 /* StateFaceOff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661F32B144BBF00E3EFE0 /* StateFaceOff.swift */; };
+		2EC661F72B144BCB00E3EFE0 /* StateFamilyPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661F62B144BCB00E3EFE0 /* StateFamilyPlay.swift */; };
+		2EC661F92B144BD800E3EFE0 /* StateFamilySteal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661F82B144BD800E3EFE0 /* StateFamilySteal.swift */; };
+		2EC661FB2B144BE200E3EFE0 /* StateRevealAnswers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661FA2B144BE200E3EFE0 /* StateRevealAnswers.swift */; };
+		2EC661FD2B144BEE00E3EFE0 /* StateSelectQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661FC2B144BEE00E3EFE0 /* StateSelectQuestion.swift */; };
+		2EC662042B16F50900E3EFE0 /* StrikeInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662032B16F50900E3EFE0 /* StrikeInterface.swift */; };
+		2EC662062B181C3E00E3EFE0 /* FastMoney.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662052B181C3E00E3EFE0 /* FastMoney.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +38,21 @@
 		2EC661CD2B13152700E3EFE0 /* FamilyCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyCollection.swift; sourceTree = "<group>"; };
 		2EC661CF2B1318A500E3EFE0 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		2EC661D12B131A7E00E3EFE0 /* QuestionSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSet.swift; sourceTree = "<group>"; };
+		2EC661E02B14376200E3EFE0 /* StateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
+		2EC661E22B14378F00E3EFE0 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		2EC661E42B143F1200E3EFE0 /* FFPlayStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFPlayStateMachine.swift; sourceTree = "<group>"; };
+		2EC661E82B14474E00E3EFE0 /* AbstractFFStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractFFStateMachine.swift; sourceTree = "<group>"; };
+		2EC661EA2B14481200E3EFE0 /* FFPlayStateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFPlayStateType.swift; sourceTree = "<group>"; };
+		2EC661EC2B14495200E3EFE0 /* FFPlayState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFPlayState.swift; sourceTree = "<group>"; };
+		2EC661EF2B144AA700E3EFE0 /* FFPlayStateFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFPlayStateFactory.swift; sourceTree = "<group>"; };
+		2EC661F12B144BB500E3EFE0 /* StateAllocatePoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateAllocatePoints.swift; sourceTree = "<group>"; };
+		2EC661F32B144BBF00E3EFE0 /* StateFaceOff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateFaceOff.swift; sourceTree = "<group>"; };
+		2EC661F62B144BCB00E3EFE0 /* StateFamilyPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateFamilyPlay.swift; sourceTree = "<group>"; };
+		2EC661F82B144BD800E3EFE0 /* StateFamilySteal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateFamilySteal.swift; sourceTree = "<group>"; };
+		2EC661FA2B144BE200E3EFE0 /* StateRevealAnswers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateRevealAnswers.swift; sourceTree = "<group>"; };
+		2EC661FC2B144BEE00E3EFE0 /* StateSelectQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateSelectQuestion.swift; sourceTree = "<group>"; };
+		2EC662032B16F50900E3EFE0 /* StrikeInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrikeInterface.swift; sourceTree = "<group>"; };
+		2EC662052B181C3E00E3EFE0 /* FastMoney.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastMoney.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +85,10 @@
 		2EC661C02B13104A00E3EFE0 /* FeudKit */ = {
 			isa = PBXGroup;
 			children = (
+				2EC661DF2B14375300E3EFE0 /* Utility */,
+				2EC661DA2B131EF800E3EFE0 /* State */,
+				2EC661D92B131EEF00E3EFE0 /* Play */,
+				2EC661D82B131EE700E3EFE0 /* FastMoney */,
 				2EC661CC2B13150E00E3EFE0 /* Types */,
 				2EC661C12B13104A00E3EFE0 /* FeudKit.h */,
 			);
@@ -69,8 +103,51 @@
 				2EC661CD2B13152700E3EFE0 /* FamilyCollection.swift */,
 				2EC661CF2B1318A500E3EFE0 /* Question.swift */,
 				2EC661D12B131A7E00E3EFE0 /* QuestionSet.swift */,
+				2EC661E82B14474E00E3EFE0 /* AbstractFFStateMachine.swift */,
 			);
 			path = Types;
+			sourceTree = "<group>";
+		};
+		2EC661D82B131EE700E3EFE0 /* FastMoney */ = {
+			isa = PBXGroup;
+			children = (
+				2EC662052B181C3E00E3EFE0 /* FastMoney.swift */,
+			);
+			path = FastMoney;
+			sourceTree = "<group>";
+		};
+		2EC661D92B131EEF00E3EFE0 /* Play */ = {
+			isa = PBXGroup;
+			children = (
+				2EC661EC2B14495200E3EFE0 /* FFPlayState.swift */,
+				2EC661EF2B144AA700E3EFE0 /* FFPlayStateFactory.swift */,
+				2EC661E42B143F1200E3EFE0 /* FFPlayStateMachine.swift */,
+				2EC661EA2B14481200E3EFE0 /* FFPlayStateType.swift */,
+				2EC661F12B144BB500E3EFE0 /* StateAllocatePoints.swift */,
+				2EC661F32B144BBF00E3EFE0 /* StateFaceOff.swift */,
+				2EC661F62B144BCB00E3EFE0 /* StateFamilyPlay.swift */,
+				2EC661F82B144BD800E3EFE0 /* StateFamilySteal.swift */,
+				2EC661FA2B144BE200E3EFE0 /* StateRevealAnswers.swift */,
+				2EC661FC2B144BEE00E3EFE0 /* StateSelectQuestion.swift */,
+				2EC662032B16F50900E3EFE0 /* StrikeInterface.swift */,
+			);
+			path = Play;
+			sourceTree = "<group>";
+		};
+		2EC661DA2B131EF800E3EFE0 /* State */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = State;
+			sourceTree = "<group>";
+		};
+		2EC661DF2B14375300E3EFE0 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				2EC661E02B14376200E3EFE0 /* StateMachine.swift */,
+				2EC661E22B14378F00E3EFE0 /* State.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,10 +231,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EC661D22B131A7E00E3EFE0 /* QuestionSet.swift in Sources */,
+				2EC661E12B14376200E3EFE0 /* StateMachine.swift in Sources */,
 				2EC661CE2B13152700E3EFE0 /* FamilyCollection.swift in Sources */,
+				2EC661FD2B144BEE00E3EFE0 /* StateSelectQuestion.swift in Sources */,
+				2EC661F22B144BB500E3EFE0 /* StateAllocatePoints.swift in Sources */,
+				2EC661ED2B14495200E3EFE0 /* FFPlayState.swift in Sources */,
+				2EC661E92B14474E00E3EFE0 /* AbstractFFStateMachine.swift in Sources */,
+				2EC661E52B143F1200E3EFE0 /* FFPlayStateMachine.swift in Sources */,
 				2EC661D02B1318A500E3EFE0 /* Question.swift in Sources */,
+				2EC661F42B144BBF00E3EFE0 /* StateFaceOff.swift in Sources */,
+				2EC662042B16F50900E3EFE0 /* StrikeInterface.swift in Sources */,
+				2EC661F72B144BCB00E3EFE0 /* StateFamilyPlay.swift in Sources */,
 				2EC661C92B13113E00E3EFE0 /* Answer.swift in Sources */,
+				2EC661F02B144AA700E3EFE0 /* FFPlayStateFactory.swift in Sources */,
+				2EC661FB2B144BE200E3EFE0 /* StateRevealAnswers.swift in Sources */,
+				2EC661E32B14378F00E3EFE0 /* State.swift in Sources */,
+				2EC662062B181C3E00E3EFE0 /* FastMoney.swift in Sources */,
 				2EC661CB2B13122A00E3EFE0 /* Family.swift in Sources */,
+				2EC661EB2B14481200E3EFE0 /* FFPlayStateType.swift in Sources */,
+				2EC661F92B144BD800E3EFE0 /* StateFamilySteal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
