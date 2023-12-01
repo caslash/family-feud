@@ -34,6 +34,20 @@
 		2EC6620E2B18282300E3EFE0 /* FFFastMoneyStateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6620D2B18282300E3EFE0 /* FFFastMoneyStateType.swift */; };
 		2EC662102B184EE800E3EFE0 /* FFFastMoneyStateFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6620F2B184EE800E3EFE0 /* FFFastMoneyStateFactory.swift */; };
 		2EC662122B18511000E3EFE0 /* FFFastMoneyStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662112B18511000E3EFE0 /* FFFastMoneyStateMachine.swift */; };
+		2EC662142B1855AF00E3EFE0 /* FFState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662132B1855AF00E3EFE0 /* FFState.swift */; };
+		2EC662162B1855F100E3EFE0 /* FFStateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662152B1855F100E3EFE0 /* FFStateType.swift */; };
+		2EC662182B1986E000E3EFE0 /* StateEndGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662172B1986E000E3EFE0 /* StateEndGame.swift */; };
+		2EC6621A2B19870F00E3EFE0 /* FamilyFeudGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662192B19870F00E3EFE0 /* FamilyFeudGame.swift */; };
+		2EC6621D2B19874100E3EFE0 /* FFStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6621C2B19874100E3EFE0 /* FFStateMachine.swift */; };
+		2EC6621F2B198CCA00E3EFE0 /* StateAddFamily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6621E2B198CCA00E3EFE0 /* StateAddFamily.swift */; };
+		2EC662212B198E6500E3EFE0 /* StateInitializeGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662202B198E6500E3EFE0 /* StateInitializeGame.swift */; };
+		2EC662232B198EB600E3EFE0 /* StateLoadQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662222B198EB600E3EFE0 /* StateLoadQuestions.swift */; };
+		2EC662262B198F3D00E3EFE0 /* JSONQuestionSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662252B198F3D00E3EFE0 /* JSONQuestionSet.swift */; };
+		2EC662282B19909300E3EFE0 /* StateNewGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662272B19909300E3EFE0 /* StateNewGame.swift */; };
+		2EC6622A2B1990D500E3EFE0 /* StatePlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662292B1990D500E3EFE0 /* StatePlay.swift */; };
+		2EC6622C2B1992BF00E3EFE0 /* StateStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6622B2B1992BF00E3EFE0 /* StateStart.swift */; };
+		2EC6622E2B19938700E3EFE0 /* FFStateFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6622D2B19938700E3EFE0 /* FFStateFactory.swift */; };
+		2EC662302B19953F00E3EFE0 /* StateFastMoney.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6622F2B19953F00E3EFE0 /* StateFastMoney.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +79,20 @@
 		2EC6620D2B18282300E3EFE0 /* FFFastMoneyStateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFFastMoneyStateType.swift; sourceTree = "<group>"; };
 		2EC6620F2B184EE800E3EFE0 /* FFFastMoneyStateFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFFastMoneyStateFactory.swift; sourceTree = "<group>"; };
 		2EC662112B18511000E3EFE0 /* FFFastMoneyStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFFastMoneyStateMachine.swift; sourceTree = "<group>"; };
+		2EC662132B1855AF00E3EFE0 /* FFState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFState.swift; sourceTree = "<group>"; };
+		2EC662152B1855F100E3EFE0 /* FFStateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFStateType.swift; sourceTree = "<group>"; };
+		2EC662172B1986E000E3EFE0 /* StateEndGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateEndGame.swift; sourceTree = "<group>"; };
+		2EC662192B19870F00E3EFE0 /* FamilyFeudGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyFeudGame.swift; sourceTree = "<group>"; };
+		2EC6621C2B19874100E3EFE0 /* FFStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFStateMachine.swift; sourceTree = "<group>"; };
+		2EC6621E2B198CCA00E3EFE0 /* StateAddFamily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateAddFamily.swift; sourceTree = "<group>"; };
+		2EC662202B198E6500E3EFE0 /* StateInitializeGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateInitializeGame.swift; sourceTree = "<group>"; };
+		2EC662222B198EB600E3EFE0 /* StateLoadQuestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateLoadQuestions.swift; sourceTree = "<group>"; };
+		2EC662252B198F3D00E3EFE0 /* JSONQuestionSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONQuestionSet.swift; sourceTree = "<group>"; };
+		2EC662272B19909300E3EFE0 /* StateNewGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateNewGame.swift; sourceTree = "<group>"; };
+		2EC662292B1990D500E3EFE0 /* StatePlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatePlay.swift; sourceTree = "<group>"; };
+		2EC6622B2B1992BF00E3EFE0 /* StateStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateStart.swift; sourceTree = "<group>"; };
+		2EC6622D2B19938700E3EFE0 /* FFStateFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFStateFactory.swift; sourceTree = "<group>"; };
+		2EC6622F2B19953F00E3EFE0 /* StateFastMoney.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateFastMoney.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +125,7 @@
 		2EC661C02B13104A00E3EFE0 /* FeudKit */ = {
 			isa = PBXGroup;
 			children = (
+				2EC662242B198F2F00E3EFE0 /* Resources */,
 				2EC661DF2B14375300E3EFE0 /* Utility */,
 				2EC661DA2B131EF800E3EFE0 /* State */,
 				2EC661D92B131EEF00E3EFE0 /* Play */,
@@ -110,12 +139,13 @@
 		2EC661CC2B13150E00E3EFE0 /* Types */ = {
 			isa = PBXGroup;
 			children = (
-				2EC661CA2B13122A00E3EFE0 /* Family.swift */,
+				2EC661E82B14474E00E3EFE0 /* AbstractFFStateMachine.swift */,
 				2EC661C82B13113E00E3EFE0 /* Answer.swift */,
+				2EC661CA2B13122A00E3EFE0 /* Family.swift */,
 				2EC661CD2B13152700E3EFE0 /* FamilyCollection.swift */,
+				2EC662192B19870F00E3EFE0 /* FamilyFeudGame.swift */,
 				2EC661CF2B1318A500E3EFE0 /* Question.swift */,
 				2EC661D12B131A7E00E3EFE0 /* QuestionSet.swift */,
-				2EC661E82B14474E00E3EFE0 /* AbstractFFStateMachine.swift */,
 			);
 			path = Types;
 			sourceTree = "<group>";
@@ -155,6 +185,18 @@
 		2EC661DA2B131EF800E3EFE0 /* State */ = {
 			isa = PBXGroup;
 			children = (
+				2EC662132B1855AF00E3EFE0 /* FFState.swift */,
+				2EC6622D2B19938700E3EFE0 /* FFStateFactory.swift */,
+				2EC662152B1855F100E3EFE0 /* FFStateType.swift */,
+				2EC6621C2B19874100E3EFE0 /* FFStateMachine.swift */,
+				2EC6621E2B198CCA00E3EFE0 /* StateAddFamily.swift */,
+				2EC662172B1986E000E3EFE0 /* StateEndGame.swift */,
+				2EC6622F2B19953F00E3EFE0 /* StateFastMoney.swift */,
+				2EC662202B198E6500E3EFE0 /* StateInitializeGame.swift */,
+				2EC662222B198EB600E3EFE0 /* StateLoadQuestions.swift */,
+				2EC662272B19909300E3EFE0 /* StateNewGame.swift */,
+				2EC662292B1990D500E3EFE0 /* StatePlay.swift */,
+				2EC6622B2B1992BF00E3EFE0 /* StateStart.swift */,
 			);
 			path = State;
 			sourceTree = "<group>";
@@ -166,6 +208,14 @@
 				2EC661E22B14378F00E3EFE0 /* State.swift */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		2EC662242B198F2F00E3EFE0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2EC662252B198F3D00E3EFE0 /* JSONQuestionSet.swift */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,24 +304,38 @@
 				2EC661FD2B144BEE00E3EFE0 /* StateSelectQuestion.swift in Sources */,
 				2EC661F22B144BB500E3EFE0 /* StateAllocatePoints.swift in Sources */,
 				2EC661ED2B14495200E3EFE0 /* FFPlayState.swift in Sources */,
+				2EC662302B19953F00E3EFE0 /* StateFastMoney.swift in Sources */,
 				2EC661E92B14474E00E3EFE0 /* AbstractFFStateMachine.swift in Sources */,
 				2EC661E52B143F1200E3EFE0 /* FFPlayStateMachine.swift in Sources */,
+				2EC6621D2B19874100E3EFE0 /* FFStateMachine.swift in Sources */,
 				2EC661D02B1318A500E3EFE0 /* Question.swift in Sources */,
+				2EC662142B1855AF00E3EFE0 /* FFState.swift in Sources */,
 				2EC6620A2B18274000E3EFE0 /* StateAnswer.swift in Sources */,
 				2EC661F42B144BBF00E3EFE0 /* StateFaceOff.swift in Sources */,
 				2EC662042B16F50900E3EFE0 /* StrikeInterface.swift in Sources */,
 				2EC661F72B144BCB00E3EFE0 /* StateFamilyPlay.swift in Sources */,
+				2EC662232B198EB600E3EFE0 /* StateLoadQuestions.swift in Sources */,
 				2EC6620C2B18274C00E3EFE0 /* FFFastMoneyState.swift in Sources */,
+				2EC6621A2B19870F00E3EFE0 /* FamilyFeudGame.swift in Sources */,
+				2EC6622E2B19938700E3EFE0 /* FFStateFactory.swift in Sources */,
+				2EC662282B19909300E3EFE0 /* StateNewGame.swift in Sources */,
 				2EC661C92B13113E00E3EFE0 /* Answer.swift in Sources */,
 				2EC661F02B144AA700E3EFE0 /* FFPlayStateFactory.swift in Sources */,
 				2EC661FB2B144BE200E3EFE0 /* StateRevealAnswers.swift in Sources */,
+				2EC6622A2B1990D500E3EFE0 /* StatePlay.swift in Sources */,
 				2EC661E32B14378F00E3EFE0 /* State.swift in Sources */,
+				2EC662162B1855F100E3EFE0 /* FFStateType.swift in Sources */,
 				2EC6620E2B18282300E3EFE0 /* FFFastMoneyStateType.swift in Sources */,
 				2EC662062B181C3E00E3EFE0 /* FastMoney.swift in Sources */,
+				2EC662212B198E6500E3EFE0 /* StateInitializeGame.swift in Sources */,
+				2EC6622C2B1992BF00E3EFE0 /* StateStart.swift in Sources */,
 				2EC662122B18511000E3EFE0 /* FFFastMoneyStateMachine.swift in Sources */,
+				2EC662262B198F3D00E3EFE0 /* JSONQuestionSet.swift in Sources */,
 				2EC661CB2B13122A00E3EFE0 /* Family.swift in Sources */,
 				2EC661EB2B14481200E3EFE0 /* FFPlayStateType.swift in Sources */,
+				2EC6621F2B198CCA00E3EFE0 /* StateAddFamily.swift in Sources */,
 				2EC662102B184EE800E3EFE0 /* FFFastMoneyStateFactory.swift in Sources */,
+				2EC662182B1986E000E3EFE0 /* StateEndGame.swift in Sources */,
 				2EC661F92B144BD800E3EFE0 /* StateFamilySteal.swift in Sources */,
 				2EC662082B18273100E3EFE0 /* StateReveal.swift in Sources */,
 			);

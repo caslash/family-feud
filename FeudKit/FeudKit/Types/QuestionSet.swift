@@ -16,7 +16,7 @@ public class QuestionSet {
         self.questions = [Question]()
     }
     
-    public func loadFromJSON(data: Data) {
+    public func loadFromJSON(data: JSONQuestionSet) {
         //TODO: JSON deseralization
     }
     
