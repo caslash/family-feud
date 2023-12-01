@@ -125,29 +125,12 @@
 		2EC661C02B13104A00E3EFE0 /* FeudKit */ = {
 			isa = PBXGroup;
 			children = (
+				2EC662312B199D3500E3EFE0 /* Game */,
 				2EC662242B198F2F00E3EFE0 /* Resources */,
 				2EC661DF2B14375300E3EFE0 /* Utility */,
-				2EC661DA2B131EF800E3EFE0 /* State */,
-				2EC661D92B131EEF00E3EFE0 /* Play */,
-				2EC661D82B131EE700E3EFE0 /* FastMoney */,
-				2EC661CC2B13150E00E3EFE0 /* Types */,
 				2EC661C12B13104A00E3EFE0 /* FeudKit.h */,
 			);
 			path = FeudKit;
-			sourceTree = "<group>";
-		};
-		2EC661CC2B13150E00E3EFE0 /* Types */ = {
-			isa = PBXGroup;
-			children = (
-				2EC661E82B14474E00E3EFE0 /* AbstractFFStateMachine.swift */,
-				2EC661C82B13113E00E3EFE0 /* Answer.swift */,
-				2EC661CA2B13122A00E3EFE0 /* Family.swift */,
-				2EC661CD2B13152700E3EFE0 /* FamilyCollection.swift */,
-				2EC662192B19870F00E3EFE0 /* FamilyFeudGame.swift */,
-				2EC661CF2B1318A500E3EFE0 /* Question.swift */,
-				2EC661D12B131A7E00E3EFE0 /* QuestionSet.swift */,
-			);
-			path = Types;
 			sourceTree = "<group>";
 		};
 		2EC661D82B131EE700E3EFE0 /* FastMoney */ = {
@@ -216,6 +199,23 @@
 				2EC662252B198F3D00E3EFE0 /* JSONQuestionSet.swift */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		2EC662312B199D3500E3EFE0 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				2EC661D82B131EE700E3EFE0 /* FastMoney */,
+				2EC661D92B131EEF00E3EFE0 /* Play */,
+				2EC661DA2B131EF800E3EFE0 /* State */,
+				2EC661E82B14474E00E3EFE0 /* AbstractFFStateMachine.swift */,
+				2EC661C82B13113E00E3EFE0 /* Answer.swift */,
+				2EC661CA2B13122A00E3EFE0 /* Family.swift */,
+				2EC661CD2B13152700E3EFE0 /* FamilyCollection.swift */,
+				2EC662192B19870F00E3EFE0 /* FamilyFeudGame.swift */,
+				2EC661CF2B1318A500E3EFE0 /* Question.swift */,
+				2EC661D12B131A7E00E3EFE0 /* QuestionSet.swift */,
+			);
+			path = Game;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
