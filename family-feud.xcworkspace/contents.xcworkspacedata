@@ -4,4 +4,10 @@
    <FileRef
       location = "group:FeudKit/FeudKit.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:FamilyFeud-Mobile/FamilyFeud-Mobile.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:FamilyFeud-Desktop/FamilyFeud-Desktop.xcodeproj">
+   </FileRef>
 </Workspace>

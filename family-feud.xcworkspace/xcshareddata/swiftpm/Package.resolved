@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "slashkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/caslash/SlashKit",
+      "state" : {
+        "branch" : "main",
+        "revision" : "2dfed5161a0498502febe226f57aa7ff854b3c2e"
+      }
+    }
+  ],
+  "version" : 2
+}

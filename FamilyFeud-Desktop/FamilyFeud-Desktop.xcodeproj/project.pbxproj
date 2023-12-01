@@ -1,0 +1,463 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2EC6623F2B199F8B00E3EFE0 /* FamilyFeud_DesktopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6623E2B199F8B00E3EFE0 /* FamilyFeud_DesktopApp.swift */; };
+		2EC662412B199F8B00E3EFE0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662402B199F8B00E3EFE0 /* ContentView.swift */; };
+		2EC662432B199F8C00E3EFE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EC662422B199F8C00E3EFE0 /* Assets.xcassets */; };
+		2EC662462B199F8C00E3EFE0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EC662452B199F8C00E3EFE0 /* Preview Assets.xcassets */; };
+		2EC6624F2B199FD500E3EFE0 /* FeudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EC6624E2B199FD500E3EFE0 /* FeudKit.framework */; };
+		2EC662502B199FD500E3EFE0 /* FeudKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EC6624E2B199FD500E3EFE0 /* FeudKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2EC662542B19A0F000E3EFE0 /* SlashKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2EC662532B19A0F000E3EFE0 /* SlashKit */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2EC662512B199FD500E3EFE0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				2EC662502B199FD500E3EFE0 /* FeudKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		2EC6623B2B199F8B00E3EFE0 /* FamilyFeud-Desktop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FamilyFeud-Desktop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EC6623E2B199F8B00E3EFE0 /* FamilyFeud_DesktopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyFeud_DesktopApp.swift; sourceTree = "<group>"; };
+		2EC662402B199F8B00E3EFE0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2EC662422B199F8C00E3EFE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2EC662452B199F8C00E3EFE0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2EC662472B199F8C00E3EFE0 /* FamilyFeud_Desktop.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FamilyFeud_Desktop.entitlements; sourceTree = "<group>"; };
+		2EC6624E2B199FD500E3EFE0 /* FeudKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FeudKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2EC662382B199F8B00E3EFE0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EC6624F2B199FD500E3EFE0 /* FeudKit.framework in Frameworks */,
+				2EC662542B19A0F000E3EFE0 /* SlashKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2EC662322B199F8B00E3EFE0 = {
+			isa = PBXGroup;
+			children = (
+				2EC6623D2B199F8B00E3EFE0 /* FamilyFeud-Desktop */,
+				2EC6623C2B199F8B00E3EFE0 /* Products */,
+				2EC6624D2B199FD500E3EFE0 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		2EC6623C2B199F8B00E3EFE0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2EC6623B2B199F8B00E3EFE0 /* FamilyFeud-Desktop.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2EC6623D2B199F8B00E3EFE0 /* FamilyFeud-Desktop */ = {
+			isa = PBXGroup;
+			children = (
+				2EC6623E2B199F8B00E3EFE0 /* FamilyFeud_DesktopApp.swift */,
+				2EC662402B199F8B00E3EFE0 /* ContentView.swift */,
+				2EC6627D2B19A2F700E3EFE0 /* Model */,
+				2EC662782B19A2B700E3EFE0 /* Management Window */,
+				2EC662772B19A2AE00E3EFE0 /* Game Window */,
+				2EC662422B199F8C00E3EFE0 /* Assets.xcassets */,
+				2EC662472B199F8C00E3EFE0 /* FamilyFeud_Desktop.entitlements */,
+				2EC662442B199F8C00E3EFE0 /* Preview Content */,
+			);
+			path = "FamilyFeud-Desktop";
+			sourceTree = "<group>";
+		};
+		2EC662442B199F8C00E3EFE0 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				2EC662452B199F8C00E3EFE0 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2EC6624D2B199FD500E3EFE0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2EC6624E2B199FD500E3EFE0 /* FeudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2EC662772B19A2AE00E3EFE0 /* Game Window */ = {
+			isa = PBXGroup;
+			children = (
+				2EC6627B2B19A2EB00E3EFE0 /* Views */,
+				2EC6627C2B19A2EF00E3EFE0 /* ViewModels */,
+			);
+			path = "Game Window";
+			sourceTree = "<group>";
+		};
+		2EC662782B19A2B700E3EFE0 /* Management Window */ = {
+			isa = PBXGroup;
+			children = (
+				2EC662792B19A2DF00E3EFE0 /* Views */,
+				2EC6627A2B19A2E400E3EFE0 /* ViewModels */,
+			);
+			path = "Management Window";
+			sourceTree = "<group>";
+		};
+		2EC662792B19A2DF00E3EFE0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2EC6627A2B19A2E400E3EFE0 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		2EC6627B2B19A2EB00E3EFE0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2EC6627C2B19A2EF00E3EFE0 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		2EC6627D2B19A2F700E3EFE0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2EC6623A2B199F8B00E3EFE0 /* FamilyFeud-Desktop */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2EC6624A2B199F8C00E3EFE0 /* Build configuration list for PBXNativeTarget "FamilyFeud-Desktop" */;
+			buildPhases = (
+				2EC662372B199F8B00E3EFE0 /* Sources */,
+				2EC662382B199F8B00E3EFE0 /* Frameworks */,
+				2EC662392B199F8B00E3EFE0 /* Resources */,
+				2EC662512B199FD500E3EFE0 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "FamilyFeud-Desktop";
+			packageProductDependencies = (
+				2EC662532B19A0F000E3EFE0 /* SlashKit */,
+			);
+			productName = "FamilyFeud-Desktop";
+			productReference = 2EC6623B2B199F8B00E3EFE0 /* FamilyFeud-Desktop.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2EC662332B199F8B00E3EFE0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					2EC6623A2B199F8B00E3EFE0 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = 2EC662362B199F8B00E3EFE0 /* Build configuration list for PBXProject "FamilyFeud-Desktop" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2EC662322B199F8B00E3EFE0;
+			packageReferences = (
+				2EC662522B19A0F000E3EFE0 /* XCRemoteSwiftPackageReference "SlashKit" */,
+			);
+			productRefGroup = 2EC6623C2B199F8B00E3EFE0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2EC6623A2B199F8B00E3EFE0 /* FamilyFeud-Desktop */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2EC662392B199F8B00E3EFE0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EC662462B199F8C00E3EFE0 /* Preview Assets.xcassets in Resources */,
+				2EC662432B199F8C00E3EFE0 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2EC662372B199F8B00E3EFE0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EC662412B199F8B00E3EFE0 /* ContentView.swift in Sources */,
+				2EC6623F2B199F8B00E3EFE0 /* FamilyFeud_DesktopApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		2EC662482B199F8C00E3EFE0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2EC662492B199F8C00E3EFE0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		2EC6624B2B199F8C00E3EFE0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "FamilyFeud-Desktop/FamilyFeud_Desktop.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"FamilyFeud-Desktop/Preview Content\"";
+				DEVELOPMENT_TEAM = 3S8XC6A264;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Family Feud";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.family-games";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Cameron.Slash.FamilyFeud-Desktop";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		2EC6624C2B199F8C00E3EFE0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "FamilyFeud-Desktop/FamilyFeud_Desktop.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"FamilyFeud-Desktop/Preview Content\"";
+				DEVELOPMENT_TEAM = 3S8XC6A264;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Family Feud";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.family-games";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Cameron.Slash.FamilyFeud-Desktop";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2EC662362B199F8B00E3EFE0 /* Build configuration list for PBXProject "FamilyFeud-Desktop" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EC662482B199F8C00E3EFE0 /* Debug */,
+				2EC662492B199F8C00E3EFE0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2EC6624A2B199F8C00E3EFE0 /* Build configuration list for PBXNativeTarget "FamilyFeud-Desktop" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EC6624B2B199F8C00E3EFE0 /* Debug */,
+				2EC6624C2B199F8C00E3EFE0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2EC662522B19A0F000E3EFE0 /* XCRemoteSwiftPackageReference "SlashKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/caslash/SlashKit";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2EC662532B19A0F000E3EFE0 /* SlashKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2EC662522B19A0F000E3EFE0 /* XCRemoteSwiftPackageReference "SlashKit" */;
+			productName = SlashKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 2EC662332B199F8B00E3EFE0 /* Project object */;
+}
