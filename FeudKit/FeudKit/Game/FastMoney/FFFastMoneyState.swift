@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SlashKit
 
 public class FFFastMoneyState: State<FFFastMoneyStateType> {
     internal var fastmoney: FastMoney

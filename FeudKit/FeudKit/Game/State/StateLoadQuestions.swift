@@ -17,15 +17,15 @@ public class StateLoadQuestions: FFState {
         super.init(type: FFStateType.LOAD_QUESTIONS)
     }
     
-    public override func initState(data: Any) { }
+    public override func initState(data: Any?) { }
     
     public override func cleanupState() { }
     
     public override func executeAction(action: Int, data: [Any]) -> Bool {
         switch action {
         case StateLoadQuestions.ACTION_LOADQUESTIONSET:
-            if (data[0] is JSONQuestionSet) {
-                self.loadQuestionSet(data: data[0] as! JSONQuestionSet)
+            if (data is [String]) {
+                self.loadQuestionSet(data: data as! [String])
             } else {
                 //TODO: InvalidDataException
                 fatalError("InvalidDataException not implemented")
@@ -38,5 +38,5 @@ public class StateLoadQuestions: FFState {
         return false
     }
     
-    private func loadQuestionSet(data: JSONQuestionSet) { self.questions.loadFromJSON(data: data) }
+    private func loadQuestionSet(data: [String]) { self.questions.loadFromJSON(data: data) }
 }

@@ -6,7 +6,9 @@
 //
 
 import Foundation
+import Observation
 
+@Observable
 public class QuestionSet {
     private var questions: [Question]
     
@@ -16,8 +18,19 @@ public class QuestionSet {
         self.questions = [Question]()
     }
     
-    public func loadFromJSON(data: JSONQuestionSet) {
+    public func loadFromJSON(data: [String]) {
         //TODO: JSON deseralization
+        let decoder = JSONDecoder()
+        
+        for questionSet in data {
+            do {
+                let question = try decoder.decode([Question].self, from: questionSet.data(using: .utf8)!)
+                
+                self.questions.append(contentsOf: question)
+            } catch {
+                fatalError("Couldn't deserialize questions: \(error.localizedDescription)")
+            }
+        }
     }
     
     public func getQuestion(index: Int) -> Question { return self.questions[index] }

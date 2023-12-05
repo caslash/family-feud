@@ -27,7 +27,7 @@ public class StateFaceOff: FFPlayState, StrikeInterface {
         super.init(type: FFPlayStateType.FACE_OFF)
     }
     
-    public override func initState(data: Any) {
+    public override func initState(data: Any?) {
         self.selectedFamilyIndex = -1
         
         if (data is Int) {

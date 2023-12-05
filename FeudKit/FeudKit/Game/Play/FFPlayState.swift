@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SlashKit
 
 public class FFPlayState: State<FFPlayStateType> {
     internal override init(type: FFPlayStateType) {

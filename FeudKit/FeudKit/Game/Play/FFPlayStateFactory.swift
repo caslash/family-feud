@@ -62,7 +62,6 @@ public class FFPlayStateFactory {
             if (self.revealAnswers == nil) { self.createRevealAnswersState() }
             return self.revealAnswers
         }
-        return nil
     }
     
     private static func createSelectQuestionState(questions: QuestionSet) { self.selectQuestion = StateSelectQuestion(questions: questions) }

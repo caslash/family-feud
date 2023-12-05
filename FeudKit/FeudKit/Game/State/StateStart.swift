@@ -12,7 +12,7 @@ public class StateStart: FFState {
         super.init(type: FFStateType.START)
     }
     
-    public override func initState(data: Any) { }
+    public override func initState(data: Any?) { }
     
     public override func updateState(timeElapsed: Float) { }
     

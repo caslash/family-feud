@@ -26,8 +26,8 @@ public class StateFamilySteal: FFPlayState, StrikeInterface {
         super.init(type: FFPlayStateType.FAMILY_STEAL)
     }
     
-    public override func initState(data: Any) {
-        var d: [Any] = data as! [Any]
+    public override func initState(data: Any?) {
+        let d: [Any] = data as! [Any]
         self.question = d[0] as? Question
         self.selectedStealFamilyIndex = d[1] as? Int
         

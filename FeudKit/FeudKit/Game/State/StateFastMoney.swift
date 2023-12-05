@@ -19,7 +19,7 @@ public class StateFastMoney: FFState {
         super.init(type: FFStateType.FAST_MONEY)
     }
     
-    public override func initState(data: Any) {
+    public override func initState(data: Any?) {
         self.stateMachine = FFFastMoneyStateMachine(fastmoney: fastmoney)
         self.stateMachine!.initialize()
     }

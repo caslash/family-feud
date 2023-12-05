@@ -7,26 +7,25 @@
 
 import Foundation
 
-public class Question {
-    private var questionString: String
+public class Question: Codable, Identifiable, Equatable {
+    public var id = UUID()
     
-    private var answers: [Answer]
+    public var question: String
     
-    private var answered: Bool
+    public var answers: [Answer]
     
-    private var multiplier: Int = 1
+    public var answered: Bool = false
     
-    public init(questionString: String) {
-        self.questionString = questionString
-        self.answered = false
+    public var multiplier: Int = 1
+    
+    public init(question: String) {
+        self.question = question
         self.answers = [Answer]()
     }
     
-    public func addAnswer(answerString: String, value: Int) { self.answers.append(Answer(answerString: answerString, value: value)) }
-    
     public func getAnswers() -> [Answer] { return self.answers.sorted(by: <) }
     
-    public func getQuestionString() -> String { return self.questionString }
+    public func getQuestionString() -> String { return self.question }
     
     public func isAnswered() -> Bool { return self.answered }
     
@@ -35,4 +34,13 @@ public class Question {
     public func setMultiplier(multiplier: Int) { self.multiplier = multiplier }
     
     public func getMultiplier() -> Int { return self.multiplier }
+    
+    public static func == (lhs: Question, rhs: Question) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    enum CodingKeys: CodingKey {
+        case question
+        case answers
+    }
 }

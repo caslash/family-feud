@@ -7,12 +7,14 @@
 
 import Foundation
 
-public class Family: CustomStringConvertible {
+public class Family: CustomStringConvertible, Identifiable {
+    public var id = UUID()
+    
     public var description: String
     
-    private var familyName: String
+    public var familyName: String
     
-    private var points: Int
+    public var points: Int
     
     public init(_ familyName: String) {
         self.familyName = familyName

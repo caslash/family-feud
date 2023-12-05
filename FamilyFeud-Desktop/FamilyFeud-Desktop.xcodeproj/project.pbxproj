@@ -7,13 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E0AE4052B1C6BF40003D90B /* LoadQuestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0AE4042B1C6BF40003D90B /* LoadQuestionsViewModel.swift */; };
+		2EBFFDA62B1D8DEE00487152 /* QuestionSelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFFDA52B1D8DEE00487152 /* QuestionSelectorViewModel.swift */; };
+		2EBFFDA82B1D97E300487152 /* StateControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFFDA72B1D97E300487152 /* StateControlViewModel.swift */; };
 		2EC6623F2B199F8B00E3EFE0 /* FamilyFeud_DesktopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6623E2B199F8B00E3EFE0 /* FamilyFeud_DesktopApp.swift */; };
-		2EC662412B199F8B00E3EFE0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662402B199F8B00E3EFE0 /* ContentView.swift */; };
 		2EC662432B199F8C00E3EFE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EC662422B199F8C00E3EFE0 /* Assets.xcassets */; };
 		2EC662462B199F8C00E3EFE0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EC662452B199F8C00E3EFE0 /* Preview Assets.xcassets */; };
 		2EC6624F2B199FD500E3EFE0 /* FeudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EC6624E2B199FD500E3EFE0 /* FeudKit.framework */; };
 		2EC662502B199FD500E3EFE0 /* FeudKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EC6624E2B199FD500E3EFE0 /* FeudKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2EC662542B19A0F000E3EFE0 /* SlashKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2EC662532B19A0F000E3EFE0 /* SlashKit */; };
+		2EC662822B1AB3A000E3EFE0 /* ManagementWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662812B1AB3A000E3EFE0 /* ManagementWindow.swift */; };
+		2EC662842B1AB3C100E3EFE0 /* GameWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662832B1AB3C100E3EFE0 /* GameWindow.swift */; };
+		2EC662912B1AD0D200E3EFE0 /* PanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662902B1AD0D200E3EFE0 /* PanelView.swift */; };
+		2EC662952B1AD30800E3EFE0 /* WindowControlPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662942B1AD30800E3EFE0 /* WindowControlPanel.swift */; };
+		2EC662972B1AD34F00E3EFE0 /* LoadQuestionsPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662962B1AD34F00E3EFE0 /* LoadQuestionsPanel.swift */; };
+		2EC662992B1AD39D00E3EFE0 /* StateControlPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662982B1AD39D00E3EFE0 /* StateControlPanel.swift */; };
+		2EC6629B2B1AD57300E3EFE0 /* AddFamilyPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6629A2B1AD57300E3EFE0 /* AddFamilyPanel.swift */; };
+		2EC662A22B1AF78D00E3EFE0 /* QuestionSelectorPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662A12B1AF78D00E3EFE0 /* QuestionSelectorPanel.swift */; };
+		2EC662A42B1AF7CF00E3EFE0 /* FamiliesPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662A32B1AF7CF00E3EFE0 /* FamiliesPanel.swift */; };
+		2EC662A62B1AF80700E3EFE0 /* QuestionControlPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662A52B1AF80700E3EFE0 /* QuestionControlPanel.swift */; };
+		2EC662A82B1AF82000E3EFE0 /* PlayControlPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662A72B1AF82000E3EFE0 /* PlayControlPanel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,13 +44,26 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2E0AE4042B1C6BF40003D90B /* LoadQuestionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadQuestionsViewModel.swift; sourceTree = "<group>"; };
+		2EBFFDA52B1D8DEE00487152 /* QuestionSelectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSelectorViewModel.swift; sourceTree = "<group>"; };
+		2EBFFDA72B1D97E300487152 /* StateControlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateControlViewModel.swift; sourceTree = "<group>"; };
 		2EC6623B2B199F8B00E3EFE0 /* FamilyFeud-Desktop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FamilyFeud-Desktop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EC6623E2B199F8B00E3EFE0 /* FamilyFeud_DesktopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyFeud_DesktopApp.swift; sourceTree = "<group>"; };
-		2EC662402B199F8B00E3EFE0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2EC662422B199F8C00E3EFE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EC662452B199F8C00E3EFE0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2EC662472B199F8C00E3EFE0 /* FamilyFeud_Desktop.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FamilyFeud_Desktop.entitlements; sourceTree = "<group>"; };
 		2EC6624E2B199FD500E3EFE0 /* FeudKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FeudKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EC662812B1AB3A000E3EFE0 /* ManagementWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementWindow.swift; sourceTree = "<group>"; };
+		2EC662832B1AB3C100E3EFE0 /* GameWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameWindow.swift; sourceTree = "<group>"; };
+		2EC662902B1AD0D200E3EFE0 /* PanelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanelView.swift; sourceTree = "<group>"; };
+		2EC662942B1AD30800E3EFE0 /* WindowControlPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowControlPanel.swift; sourceTree = "<group>"; };
+		2EC662962B1AD34F00E3EFE0 /* LoadQuestionsPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadQuestionsPanel.swift; sourceTree = "<group>"; };
+		2EC662982B1AD39D00E3EFE0 /* StateControlPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateControlPanel.swift; sourceTree = "<group>"; };
+		2EC6629A2B1AD57300E3EFE0 /* AddFamilyPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFamilyPanel.swift; sourceTree = "<group>"; };
+		2EC662A12B1AF78D00E3EFE0 /* QuestionSelectorPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSelectorPanel.swift; sourceTree = "<group>"; };
+		2EC662A32B1AF7CF00E3EFE0 /* FamiliesPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamiliesPanel.swift; sourceTree = "<group>"; };
+		2EC662A52B1AF80700E3EFE0 /* QuestionControlPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionControlPanel.swift; sourceTree = "<group>"; };
+		2EC662A72B1AF82000E3EFE0 /* PlayControlPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayControlPanel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +79,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E275F472B1EA50D00129050 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		2EC662322B199F8B00E3EFE0 = {
 			isa = PBXGroup;
 			children = (
@@ -74,7 +107,6 @@
 			isa = PBXGroup;
 			children = (
 				2EC6623E2B199F8B00E3EFE0 /* FamilyFeud_DesktopApp.swift */,
-				2EC662402B199F8B00E3EFE0 /* ContentView.swift */,
 				2EC6627D2B19A2F700E3EFE0 /* Model */,
 				2EC662782B19A2B700E3EFE0 /* Management Window */,
 				2EC662772B19A2AE00E3EFE0 /* Game Window */,
@@ -104,6 +136,7 @@
 		2EC662772B19A2AE00E3EFE0 /* Game Window */ = {
 			isa = PBXGroup;
 			children = (
+				2EC662832B1AB3C100E3EFE0 /* GameWindow.swift */,
 				2EC6627B2B19A2EB00E3EFE0 /* Views */,
 				2EC6627C2B19A2EF00E3EFE0 /* ViewModels */,
 			);
@@ -113,6 +146,7 @@
 		2EC662782B19A2B700E3EFE0 /* Management Window */ = {
 			isa = PBXGroup;
 			children = (
+				2EC662812B1AB3A000E3EFE0 /* ManagementWindow.swift */,
 				2EC662792B19A2DF00E3EFE0 /* Views */,
 				2EC6627A2B19A2E400E3EFE0 /* ViewModels */,
 			);
@@ -122,6 +156,8 @@
 		2EC662792B19A2DF00E3EFE0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2E275F472B1EA50D00129050 /* Components */,
+				2EC662872B1ACB1000E3EFE0 /* Panels */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -129,6 +165,9 @@
 		2EC6627A2B19A2E400E3EFE0 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				2E0AE4042B1C6BF40003D90B /* LoadQuestionsViewModel.swift */,
+				2EBFFDA52B1D8DEE00487152 /* QuestionSelectorViewModel.swift */,
+				2EBFFDA72B1D97E300487152 /* StateControlViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -152,6 +191,22 @@
 			children = (
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		2EC662872B1ACB1000E3EFE0 /* Panels */ = {
+			isa = PBXGroup;
+			children = (
+				2EC662902B1AD0D200E3EFE0 /* PanelView.swift */,
+				2EC662942B1AD30800E3EFE0 /* WindowControlPanel.swift */,
+				2EC662962B1AD34F00E3EFE0 /* LoadQuestionsPanel.swift */,
+				2EC662982B1AD39D00E3EFE0 /* StateControlPanel.swift */,
+				2EC6629A2B1AD57300E3EFE0 /* AddFamilyPanel.swift */,
+				2EC662A12B1AF78D00E3EFE0 /* QuestionSelectorPanel.swift */,
+				2EC662A32B1AF7CF00E3EFE0 /* FamiliesPanel.swift */,
+				2EC662A52B1AF80700E3EFE0 /* QuestionControlPanel.swift */,
+				2EC662A72B1AF82000E3EFE0 /* PlayControlPanel.swift */,
+			);
+			path = Panels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,8 +286,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2EC662412B199F8B00E3EFE0 /* ContentView.swift in Sources */,
+				2EC662A82B1AF82000E3EFE0 /* PlayControlPanel.swift in Sources */,
+				2EC662842B1AB3C100E3EFE0 /* GameWindow.swift in Sources */,
+				2EC662912B1AD0D200E3EFE0 /* PanelView.swift in Sources */,
+				2E0AE4052B1C6BF40003D90B /* LoadQuestionsViewModel.swift in Sources */,
+				2EC662A62B1AF80700E3EFE0 /* QuestionControlPanel.swift in Sources */,
+				2EC6629B2B1AD57300E3EFE0 /* AddFamilyPanel.swift in Sources */,
+				2EC662972B1AD34F00E3EFE0 /* LoadQuestionsPanel.swift in Sources */,
 				2EC6623F2B199F8B00E3EFE0 /* FamilyFeud_DesktopApp.swift in Sources */,
+				2EC662A22B1AF78D00E3EFE0 /* QuestionSelectorPanel.swift in Sources */,
+				2EC662A42B1AF7CF00E3EFE0 /* FamiliesPanel.swift in Sources */,
+				2EBFFDA82B1D97E300487152 /* StateControlViewModel.swift in Sources */,
+				2EC662992B1AD39D00E3EFE0 /* StateControlPanel.swift in Sources */,
+				2EBFFDA62B1D8DEE00487152 /* QuestionSelectorViewModel.swift in Sources */,
+				2EC662822B1AB3A000E3EFE0 /* ManagementWindow.swift in Sources */,
+				2EC662952B1AD30800E3EFE0 /* WindowControlPanel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,7 +360,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -349,7 +417,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -378,7 +446,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Cameron.Slash.FamilyFeud-Desktop";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -408,7 +476,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Cameron.Slash.FamilyFeud-Desktop";
 				PRODUCT_NAME = "$(TARGET_NAME)";

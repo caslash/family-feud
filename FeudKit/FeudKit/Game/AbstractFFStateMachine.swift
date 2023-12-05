@@ -6,26 +6,27 @@
 //
 
 import Foundation
+import SlashKit
 
 public class AbstractFFStateMachine<U: CustomStringConvertible, T: State<U>>: StateMachine<U, T> {
     public override init(name: String) {
         super.init(name: name)
     }
     
-    override func getDebugMode() -> Bool {
+    public override func getDebugMode() -> Bool {
         //TODO: FamilyFeudTestDriver
         return false
     }
     
-    override func printLog(message: String) {
+    public override func printLog(message: String) {
         //TODO: Logger
     }
     
-    override func printTransition(message: String) {
+    public override func printTransition(message: String) {
         //TODO: Logger
     }
     
-    override func printErr(message: String) {
+    public override func printErr(message: String) {
         //TODO: Logger
     }
 }

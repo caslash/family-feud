@@ -77,7 +77,7 @@ public class FastMoney {
     public func setTimerRunning(running: Bool) { self.timerRunning = running }
     
     public func allAnswered(player: Int) -> Bool {
-        var answers: [FastMoneyAnswer] = self.answers![player]!
+        let answers: [FastMoneyAnswer] = self.answers![player]!
         for answer in answers {
             if (answer.getScore() < 0 || answer.getAnswer().caseInsensitiveCompare("") == .orderedSame) { return false }
         }

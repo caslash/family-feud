@@ -19,7 +19,7 @@ public class StateAddFamily: FFState {
         super.init(type: FFStateType.ADD_FAMILY)
     }
     
-    public override func initState(data: Any) { }
+    public override func initState(data: Any?) { }
     
     public override func cleanupState() { }
     

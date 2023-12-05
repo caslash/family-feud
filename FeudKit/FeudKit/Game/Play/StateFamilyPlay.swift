@@ -24,10 +24,10 @@ public class StateFamilyPlay: FFPlayState, StrikeInterface {
         super.init(type: FFPlayStateType.FAMILY_PLAY)
     }
     
-    public override func initState(data: Any) {
+    public override func initState(data: Any?) {
         self.strikes = 0
         
-        var d: [Any] = data as! [Any]
+        let d: [Any] = data as! [Any]
         self.question = d[0] as? Question
         self.selectedFamilyIndex = d[1] as? Int
     }

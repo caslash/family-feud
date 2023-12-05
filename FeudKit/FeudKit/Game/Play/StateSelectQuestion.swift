@@ -19,7 +19,7 @@ public class StateSelectQuestion: FFPlayState {
         super.init(type: FFPlayStateType.SELECT_QUESTION)
     }
     
-    public override func initState(data: Any) { self.selectedIndex = -1 }
+    public override func initState(data: Any?) { self.selectedIndex = -1 }
     
     public override func cleanupState() { data = selectedIndex }
     

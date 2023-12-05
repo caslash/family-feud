@@ -17,7 +17,7 @@ public class StateReveal: FFFastMoneyState {
         super.init(fastmoney: fastmoney, player: player)
     }
     
-    public override func initState(data: Any) { }
+    public override func initState(data: Any?) { }
     
     public override func cleanupState() { }
     

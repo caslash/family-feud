@@ -25,18 +25,21 @@ public class FFFastMoneyStateMachine: AbstractFFStateMachine<FFFastMoneyStateTyp
         _ = self.changeState(name: FFFastMoneyStateType.P1_ANSWER.description)
     }
     
-    public override func validateStateTransition(currentState: FFFastMoneyState, nextState: String) -> Bool {
-        switch currentState.getType() {
-        case FFFastMoneyStateType.P1_ANSWER:
-            if (self.fastmoney.allAnswered(player: 0) && nextState == FFFastMoneyStateType.P1_REVEAL.description) { return true }
-        case FFFastMoneyStateType.P1_REVEAL:
-            return nextState == FFFastMoneyStateType.P2_ANSWER.description
-        case FFFastMoneyStateType.P2_ANSWER:
-            if (self.fastmoney.allAnswered(player: 1) && nextState == FFFastMoneyStateType.P2_REVEAL.description) { return true }
-        default:
+    public override func validateStateTransition(currentState: FFFastMoneyState?, nextState: String) -> Bool {
+        if let currentState {
+            switch currentState.getType() {
+            case FFFastMoneyStateType.P1_ANSWER:
+                if (self.fastmoney.allAnswered(player: 0) && nextState == FFFastMoneyStateType.P1_REVEAL.description) { return true }
+            case FFFastMoneyStateType.P1_REVEAL:
+                return nextState == FFFastMoneyStateType.P2_ANSWER.description
+            case FFFastMoneyStateType.P2_ANSWER:
+                if (self.fastmoney.allAnswered(player: 1) && nextState == FFFastMoneyStateType.P2_REVEAL.description) { return true }
+            default:
+                return false
+            }
+            
             return false
         }
-        
         return false
     }
     

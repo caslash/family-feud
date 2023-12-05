@@ -16,7 +16,7 @@ public class StateRevealAnswers: FFPlayState {
         super.init(type: FFPlayStateType.REVEAL_ANSWERS)
     }
     
-    public override func initState(data: Any) {
+    public override func initState(data: Any?) {
         if (data is Question) {
             self.question = data as? Question
         } else {

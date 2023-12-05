@@ -6,7 +6,9 @@
 //
 
 import Foundation
+import Observation
 
+@Observable
 public class FFStateMachine: AbstractFFStateMachine<FFStateType, FFState> {
     private var game: FamilyFeudGame
     
@@ -82,8 +84,6 @@ public class FFStateMachine: AbstractFFStateMachine<FFStateType, FFState> {
         case FFStateType.FAST_MONEY:
             if (nextState == fromFastMoney!.description) { return true }
             return true
-        default:
-            return false
         }
         
         return false

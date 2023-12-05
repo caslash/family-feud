@@ -49,7 +49,7 @@ public class FFStateFactory {
                     //TODO: InvalidDataException
                     fatalError("InvalidDataException not implemented")
                 }
-                self.createLoadQuestionsState(questions: data as! QuestionSet)
+                self.createAddFamilyState(families: data as! FamilyCollection)
             }
             return self.addFamily
         case .LOAD_QUESTIONS:
@@ -93,8 +93,6 @@ public class FFStateFactory {
                 self.createFastMoneyState(fastmoney: (data as! FamilyFeudGame).getFastMoney())
             }
             return self.fastMoney
-        default:
-            return nil
         }
     }
     

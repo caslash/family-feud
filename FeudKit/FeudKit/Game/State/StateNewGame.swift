@@ -15,7 +15,7 @@ public class StateNewGame: FFState {
         super.init(type: FFStateType.NEW_GAME)
     }
     
-    public override func initState(data: Any) {
+    public override func initState(data: Any?) {
         self.game.reset()
         //TODO: Logger
     }

@@ -13,8 +13,6 @@
 		2EC661CE2B13152700E3EFE0 /* FamilyCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661CD2B13152700E3EFE0 /* FamilyCollection.swift */; };
 		2EC661D02B1318A500E3EFE0 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661CF2B1318A500E3EFE0 /* Question.swift */; };
 		2EC661D22B131A7E00E3EFE0 /* QuestionSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661D12B131A7E00E3EFE0 /* QuestionSet.swift */; };
-		2EC661E12B14376200E3EFE0 /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661E02B14376200E3EFE0 /* StateMachine.swift */; };
-		2EC661E32B14378F00E3EFE0 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661E22B14378F00E3EFE0 /* State.swift */; };
 		2EC661E52B143F1200E3EFE0 /* FFPlayStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661E42B143F1200E3EFE0 /* FFPlayStateMachine.swift */; };
 		2EC661E92B14474E00E3EFE0 /* AbstractFFStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661E82B14474E00E3EFE0 /* AbstractFFStateMachine.swift */; };
 		2EC661EB2B14481200E3EFE0 /* FFPlayStateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661EA2B14481200E3EFE0 /* FFPlayStateType.swift */; };
@@ -42,12 +40,12 @@
 		2EC6621F2B198CCA00E3EFE0 /* StateAddFamily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6621E2B198CCA00E3EFE0 /* StateAddFamily.swift */; };
 		2EC662212B198E6500E3EFE0 /* StateInitializeGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662202B198E6500E3EFE0 /* StateInitializeGame.swift */; };
 		2EC662232B198EB600E3EFE0 /* StateLoadQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662222B198EB600E3EFE0 /* StateLoadQuestions.swift */; };
-		2EC662262B198F3D00E3EFE0 /* JSONQuestionSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662252B198F3D00E3EFE0 /* JSONQuestionSet.swift */; };
 		2EC662282B19909300E3EFE0 /* StateNewGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662272B19909300E3EFE0 /* StateNewGame.swift */; };
 		2EC6622A2B1990D500E3EFE0 /* StatePlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662292B1990D500E3EFE0 /* StatePlay.swift */; };
 		2EC6622C2B1992BF00E3EFE0 /* StateStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6622B2B1992BF00E3EFE0 /* StateStart.swift */; };
 		2EC6622E2B19938700E3EFE0 /* FFStateFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6622D2B19938700E3EFE0 /* FFStateFactory.swift */; };
 		2EC662302B19953F00E3EFE0 /* StateFastMoney.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6622F2B19953F00E3EFE0 /* StateFastMoney.swift */; };
+		2EC662AB2B1C0F7400E3EFE0 /* SlashKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2EC662AA2B1C0F7400E3EFE0 /* SlashKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,8 +56,6 @@
 		2EC661CD2B13152700E3EFE0 /* FamilyCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyCollection.swift; sourceTree = "<group>"; };
 		2EC661CF2B1318A500E3EFE0 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		2EC661D12B131A7E00E3EFE0 /* QuestionSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSet.swift; sourceTree = "<group>"; };
-		2EC661E02B14376200E3EFE0 /* StateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
-		2EC661E22B14378F00E3EFE0 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		2EC661E42B143F1200E3EFE0 /* FFPlayStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFPlayStateMachine.swift; sourceTree = "<group>"; };
 		2EC661E82B14474E00E3EFE0 /* AbstractFFStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractFFStateMachine.swift; sourceTree = "<group>"; };
 		2EC661EA2B14481200E3EFE0 /* FFPlayStateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFPlayStateType.swift; sourceTree = "<group>"; };
@@ -87,7 +83,6 @@
 		2EC6621E2B198CCA00E3EFE0 /* StateAddFamily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateAddFamily.swift; sourceTree = "<group>"; };
 		2EC662202B198E6500E3EFE0 /* StateInitializeGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateInitializeGame.swift; sourceTree = "<group>"; };
 		2EC662222B198EB600E3EFE0 /* StateLoadQuestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateLoadQuestions.swift; sourceTree = "<group>"; };
-		2EC662252B198F3D00E3EFE0 /* JSONQuestionSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONQuestionSet.swift; sourceTree = "<group>"; };
 		2EC662272B19909300E3EFE0 /* StateNewGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateNewGame.swift; sourceTree = "<group>"; };
 		2EC662292B1990D500E3EFE0 /* StatePlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatePlay.swift; sourceTree = "<group>"; };
 		2EC6622B2B1992BF00E3EFE0 /* StateStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateStart.swift; sourceTree = "<group>"; };
@@ -100,6 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EC662AB2B1C0F7400E3EFE0 /* SlashKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,8 +183,6 @@
 		2EC661DF2B14375300E3EFE0 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				2EC661E02B14376200E3EFE0 /* StateMachine.swift */,
-				2EC661E22B14378F00E3EFE0 /* State.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -196,7 +190,6 @@
 		2EC662242B198F2F00E3EFE0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				2EC662252B198F3D00E3EFE0 /* JSONQuestionSet.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -246,6 +239,9 @@
 			dependencies = (
 			);
 			name = FeudKit;
+			packageProductDependencies = (
+				2EC662AA2B1C0F7400E3EFE0 /* SlashKit */,
+			);
 			productName = FeudKit;
 			productReference = 2EC661BE2B13104A00E3EFE0 /* FeudKit.framework */;
 			productType = "com.apple.product-type.framework";
@@ -274,6 +270,9 @@
 				Base,
 			);
 			mainGroup = 2EC661B42B13104A00E3EFE0;
+			packageReferences = (
+				2EC662A92B1C0F7400E3EFE0 /* XCRemoteSwiftPackageReference "SlashKit" */,
+			);
 			productRefGroup = 2EC661BF2B13104A00E3EFE0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -299,7 +298,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EC661D22B131A7E00E3EFE0 /* QuestionSet.swift in Sources */,
-				2EC661E12B14376200E3EFE0 /* StateMachine.swift in Sources */,
 				2EC661CE2B13152700E3EFE0 /* FamilyCollection.swift in Sources */,
 				2EC661FD2B144BEE00E3EFE0 /* StateSelectQuestion.swift in Sources */,
 				2EC661F22B144BB500E3EFE0 /* StateAllocatePoints.swift in Sources */,
@@ -323,14 +321,12 @@
 				2EC661F02B144AA700E3EFE0 /* FFPlayStateFactory.swift in Sources */,
 				2EC661FB2B144BE200E3EFE0 /* StateRevealAnswers.swift in Sources */,
 				2EC6622A2B1990D500E3EFE0 /* StatePlay.swift in Sources */,
-				2EC661E32B14378F00E3EFE0 /* State.swift in Sources */,
 				2EC662162B1855F100E3EFE0 /* FFStateType.swift in Sources */,
 				2EC6620E2B18282300E3EFE0 /* FFFastMoneyStateType.swift in Sources */,
 				2EC662062B181C3E00E3EFE0 /* FastMoney.swift in Sources */,
 				2EC662212B198E6500E3EFE0 /* StateInitializeGame.swift in Sources */,
 				2EC6622C2B1992BF00E3EFE0 /* StateStart.swift in Sources */,
 				2EC662122B18511000E3EFE0 /* FFFastMoneyStateMachine.swift in Sources */,
-				2EC662262B198F3D00E3EFE0 /* JSONQuestionSet.swift in Sources */,
 				2EC661CB2B13122A00E3EFE0 /* Family.swift in Sources */,
 				2EC661EB2B14481200E3EFE0 /* FFPlayStateType.swift in Sources */,
 				2EC6621F2B198CCA00E3EFE0 /* StateAddFamily.swift in Sources */,
@@ -492,7 +488,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
@@ -532,7 +528,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
@@ -569,6 +565,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2EC662A92B1C0F7400E3EFE0 /* XCRemoteSwiftPackageReference "SlashKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/caslash/SlashKit";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2EC662AA2B1C0F7400E3EFE0 /* SlashKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2EC662A92B1C0F7400E3EFE0 /* XCRemoteSwiftPackageReference "SlashKit" */;
+			productName = SlashKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2EC661B52B13104A00E3EFE0 /* Project object */;
 }

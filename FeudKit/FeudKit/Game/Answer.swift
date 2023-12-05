@@ -7,23 +7,25 @@
 
 import Foundation
 
-public class Answer: Comparable, CustomStringConvertible {
-    public var description: String
+public class Answer: Codable, Comparable, CustomStringConvertible, Identifiable {
+    public var id = UUID()
     
-    private var answerString: String
-    
-    private var value: Int
-    
-    private var revealed: Bool
-    
-    public init(answerString: String, value: Int) {
-        self.answerString = answerString
-        self.value = value
-        self.revealed = false
-        self.description = self.answerString
+    public var description: String {
+        return self.answer
     }
     
-    public func getAnswerString() -> String { return self.answerString }
+    public var answer: String
+    
+    public var value: Int
+    
+    public var revealed: Bool = false
+    
+    public init(answer: String, value: Int) {
+        self.answer = answer
+        self.value = value
+    }
+    
+    public func getAnswerString() -> String { return self.answer }
     
     public func getValue() -> Int { return self.value }
     
@@ -34,4 +36,9 @@ public class Answer: Comparable, CustomStringConvertible {
     public static func < (lhs: Answer, rhs: Answer) -> Bool { return lhs.value < rhs.value }
     
     public static func == (lhs: Answer, rhs: Answer) -> Bool { return lhs.value == rhs.value }
+    
+    enum CodingKeys: CodingKey {
+        case answer
+        case value
+    }
 }

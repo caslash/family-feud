@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SlashKit
 
 public class FFState: State<FFStateType> {
     internal override init(type: FFStateType) {

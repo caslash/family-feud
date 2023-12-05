@@ -19,7 +19,7 @@ public class StateAnswer: FFFastMoneyState {
         super.init(fastmoney: fastmoney, player: player)
     }
     
-    public override func initState(data: Any) { }
+    public override func initState(data: Any?) { }
     
     public override func cleanupState() { }
     

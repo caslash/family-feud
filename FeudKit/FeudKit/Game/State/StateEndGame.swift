@@ -15,7 +15,7 @@ public class StateEndGame: FFState {
         super.init(type: FFStateType.END_GAME)
     }
     
-    public override func initState(data: Any) {
+    public override func initState(data: Any?) {
         _ = self.game.getWinningFamily()
         //TODO: Logger
     }

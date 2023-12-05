@@ -31,7 +31,7 @@ public class StatePlay: FFState {
         super.init(type: FFStateType.PLAY)
     }
     
-    public override func initState(data: Any) {
+    public override func initState(data: Any?) {
         self.stateMachine = FFPlayStateMachine(questions: self.game.getQuestionSet(), families: self.game.getFamilyCollection())
         self.stateMachine!.initialize()
     }
