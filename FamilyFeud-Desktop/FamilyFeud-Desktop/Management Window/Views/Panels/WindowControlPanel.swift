@@ -10,11 +10,7 @@ import SwiftUI
 struct WindowControlPanel: View {
     var body: some View {
         PanelView("Window Control") {
-            VStack(spacing: 18) {
-                Button("Show Game Window") { }
-                
-                Button("Toggle Fullscreen") { }
-            }
+            Button("Show Game Window") { }
         }
         .frame(width: 200, height: 200, alignment: .center)
         .background(.thickMaterial)

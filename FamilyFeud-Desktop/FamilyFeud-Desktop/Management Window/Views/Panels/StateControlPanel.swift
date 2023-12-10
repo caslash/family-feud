@@ -15,18 +15,25 @@ struct StateControlPanel: View {
         PanelView("State Control") {
             VStack(spacing: 18) {
                 Button("New Game") { self.viewmodel.startGame() }
+                    .disabled(!self.viewmodel.viewstateservice.newGameEnabled)
                 
-                Button("Manage Families") { }
+                Button("Manage Families") { self.viewmodel.manageFamilies() }
+                    .disabled(!self.viewmodel.viewstateservice.manageFamiliesEnabled)
                 
                 Button("Load Question Set") { self.viewmodel.loadQuestions() }
+                    .disabled(!self.viewmodel.viewstateservice.loadQuestionEnabled)
                 
-                Button("Initialize Game") { }
+                Button("Initialize Game") { self.viewmodel.initializeGame() }
+                    .disabled(!self.viewmodel.viewstateservice.initializeGameEnabled)
                 
-                Button("Play Game") { }
+                Button("Play Game") { self.viewmodel.playGame() }
+                    .disabled(!self.viewmodel.viewstateservice.playGameEnabled)
                 
-                Button("End Game") { }
+                Button("End Game") { self.viewmodel.endGame() }
+                    .disabled(!self.viewmodel.viewstateservice.endGameEnabled)
                 
-                Button("Fast Money") { }
+                Button("Fast Money") { self.viewmodel.startFastMoney() }
+                    .disabled(!self.viewmodel.viewstateservice.fastMoneyEnabled)
             }
         }
         .frame(width: 200, height: 400, alignment: .center)
@@ -35,11 +42,11 @@ struct StateControlPanel: View {
         .shadow(radius: 2, x: 0, y: 2)
     }
     
-    init(game: FamilyFeudGame) {
-        self.viewmodel = StateControlViewModel(game: game)
+    init(game: FamilyFeudGame, viewstateservice: ViewStateService, windowcontroller: ManagementWindowController) {
+        self.viewmodel = StateControlViewModel(game: game, viewstateservice: viewstateservice, windowcontroller: windowcontroller)
     }
 }
 
 #Preview {
-    StateControlPanel(game: FamilyFeudGame())
+    StateControlPanel(game: FamilyFeudGame(), viewstateservice: ViewStateService(), windowcontroller: ManagementWindowController())
 }

@@ -9,20 +9,16 @@ import FeudKit
 import SwiftUI
 
 struct FamiliesPanel: View {
-    @State public var families: [Family]
+    @State private var viewmodel: FamiliesViewModel
     var body: some View {
         PanelView("Families") {
             VStack(spacing: 18) {
-                Table(families) {
+                Table(self.viewmodel.families, selection: self.$viewmodel.selectedFamilyId) {
                     TableColumn("Family", value: \.familyName)
                     TableColumn("Points", value: \.points.description)
                 }
                 
-                HStack {
-                    Button("Update") { }
-                    
-                    Button("Select") { }
-                }
+                    Button("Select") { self.viewmodel.select() }
             }
         }
         .padding()
@@ -31,8 +27,12 @@ struct FamiliesPanel: View {
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .shadow(radius: 2, x: 0, y: 2)
     }
+    
+    init(game: FamilyFeudGame, viewstateservice: ViewStateService, windowcontroller: ManagementWindowController) {
+        self.viewmodel = FamiliesViewModel(game: game, viewstateservice: viewstateservice, windowcontroller: windowcontroller)
+    }
 }
 
 #Preview {
-    FamiliesPanel(families: [])
+    FamiliesPanel(game: FamilyFeudGame(), viewstateservice: ViewStateService(), windowcontroller: ManagementWindowController())
 }

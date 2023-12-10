@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E05D4FE2B21690400BEE8D0 /* ViewStateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E05D4FD2B21690400BEE8D0 /* ViewStateService.swift */; };
+		2E05D5002B2420BA00BEE8D0 /* AddFamilyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E05D4FF2B2420BA00BEE8D0 /* AddFamilyViewModel.swift */; };
+		2E05D5022B2422E200BEE8D0 /* FamiliesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E05D5012B2422E200BEE8D0 /* FamiliesViewModel.swift */; };
+		2E05D5042B2569EC00BEE8D0 /* ManagementWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E05D5032B2569EC00BEE8D0 /* ManagementWindowController.swift */; };
+		2E05D5062B2576AD00BEE8D0 /* PlayControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E05D5052B2576AD00BEE8D0 /* PlayControlViewModel.swift */; };
+		2E05D5082B25866000BEE8D0 /* QuestionControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E05D5072B25866000BEE8D0 /* QuestionControlViewModel.swift */; };
 		2E0AE4052B1C6BF40003D90B /* LoadQuestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0AE4042B1C6BF40003D90B /* LoadQuestionsViewModel.swift */; };
 		2EBFFDA62B1D8DEE00487152 /* QuestionSelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFFDA52B1D8DEE00487152 /* QuestionSelectorViewModel.swift */; };
 		2EBFFDA82B1D97E300487152 /* StateControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFFDA72B1D97E300487152 /* StateControlViewModel.swift */; };
@@ -44,6 +50,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2E05D4FD2B21690400BEE8D0 /* ViewStateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStateService.swift; sourceTree = "<group>"; };
+		2E05D4FF2B2420BA00BEE8D0 /* AddFamilyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFamilyViewModel.swift; sourceTree = "<group>"; };
+		2E05D5012B2422E200BEE8D0 /* FamiliesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamiliesViewModel.swift; sourceTree = "<group>"; };
+		2E05D5032B2569EC00BEE8D0 /* ManagementWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementWindowController.swift; sourceTree = "<group>"; };
+		2E05D5052B2576AD00BEE8D0 /* PlayControlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayControlViewModel.swift; sourceTree = "<group>"; };
+		2E05D5072B25866000BEE8D0 /* QuestionControlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionControlViewModel.swift; sourceTree = "<group>"; };
 		2E0AE4042B1C6BF40003D90B /* LoadQuestionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadQuestionsViewModel.swift; sourceTree = "<group>"; };
 		2EBFFDA52B1D8DEE00487152 /* QuestionSelectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSelectorViewModel.swift; sourceTree = "<group>"; };
 		2EBFFDA72B1D97E300487152 /* StateControlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateControlViewModel.swift; sourceTree = "<group>"; };
@@ -168,6 +180,12 @@
 				2E0AE4042B1C6BF40003D90B /* LoadQuestionsViewModel.swift */,
 				2EBFFDA52B1D8DEE00487152 /* QuestionSelectorViewModel.swift */,
 				2EBFFDA72B1D97E300487152 /* StateControlViewModel.swift */,
+				2E05D4FD2B21690400BEE8D0 /* ViewStateService.swift */,
+				2E05D4FF2B2420BA00BEE8D0 /* AddFamilyViewModel.swift */,
+				2E05D5012B2422E200BEE8D0 /* FamiliesViewModel.swift */,
+				2E05D5032B2569EC00BEE8D0 /* ManagementWindowController.swift */,
+				2E05D5052B2576AD00BEE8D0 /* PlayControlViewModel.swift */,
+				2E05D5072B25866000BEE8D0 /* QuestionControlViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -288,18 +306,24 @@
 			files = (
 				2EC662A82B1AF82000E3EFE0 /* PlayControlPanel.swift in Sources */,
 				2EC662842B1AB3C100E3EFE0 /* GameWindow.swift in Sources */,
+				2E05D5082B25866000BEE8D0 /* QuestionControlViewModel.swift in Sources */,
 				2EC662912B1AD0D200E3EFE0 /* PanelView.swift in Sources */,
 				2E0AE4052B1C6BF40003D90B /* LoadQuestionsViewModel.swift in Sources */,
 				2EC662A62B1AF80700E3EFE0 /* QuestionControlPanel.swift in Sources */,
 				2EC6629B2B1AD57300E3EFE0 /* AddFamilyPanel.swift in Sources */,
+				2E05D5022B2422E200BEE8D0 /* FamiliesViewModel.swift in Sources */,
 				2EC662972B1AD34F00E3EFE0 /* LoadQuestionsPanel.swift in Sources */,
+				2E05D5002B2420BA00BEE8D0 /* AddFamilyViewModel.swift in Sources */,
 				2EC6623F2B199F8B00E3EFE0 /* FamilyFeud_DesktopApp.swift in Sources */,
 				2EC662A22B1AF78D00E3EFE0 /* QuestionSelectorPanel.swift in Sources */,
 				2EC662A42B1AF7CF00E3EFE0 /* FamiliesPanel.swift in Sources */,
 				2EBFFDA82B1D97E300487152 /* StateControlViewModel.swift in Sources */,
 				2EC662992B1AD39D00E3EFE0 /* StateControlPanel.swift in Sources */,
+				2E05D5042B2569EC00BEE8D0 /* ManagementWindowController.swift in Sources */,
 				2EBFFDA62B1D8DEE00487152 /* QuestionSelectorViewModel.swift in Sources */,
+				2E05D5062B2576AD00BEE8D0 /* PlayControlViewModel.swift in Sources */,
 				2EC662822B1AB3A000E3EFE0 /* ManagementWindow.swift in Sources */,
+				2E05D4FE2B21690400BEE8D0 /* ViewStateService.swift in Sources */,
 				2EC662952B1AD30800E3EFE0 /* WindowControlPanel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

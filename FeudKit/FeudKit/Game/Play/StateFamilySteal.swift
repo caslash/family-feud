@@ -82,7 +82,7 @@ public class StateFamilySteal: FFPlayState, StrikeInterface {
     
     public func openAnswer(index: Int) {
         if (self.selectedStealFamilyIndex ?? -1 > -1) {
-            if(self.question!.getAnswers()[index].isRevealed()) {
+            if(!self.question!.getAnswers()[index].isRevealed()) {
                 self.question!.getAnswers()[index].setRevealed(revealed: true)
                 //TODO: Logger
                 print("Revealed answer: \(self.question!.getAnswers()[index])")

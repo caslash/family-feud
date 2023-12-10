@@ -24,7 +24,7 @@ public class FFPlayStateFactory {
         switch type {
         case .SELECT_QUESTION:
             if (self.selectQuestion == nil) {
-                if data is QuestionSet.Type {
+                if data is QuestionSet {
                     createSelectQuestionState(questions: data as! QuestionSet)
                 } else {
                     //TODO: InvalidDataException

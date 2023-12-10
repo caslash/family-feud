@@ -86,7 +86,7 @@ public class StateFamilyPlay: FFPlayState, StrikeInterface {
             print("Strike limit reached: Other family should be given the chance to steal.")
             return false
         } else {
-            self.strikes = self.strikes ?? 0 + 1
+            self.strikes! += 1
             //TODO: Logger
             print("Family [\(self.selectedFamilyIndex!)] now has \(self.strikes!) strike(s).")
             return true
@@ -97,15 +97,15 @@ public class StateFamilyPlay: FFPlayState, StrikeInterface {
     
     private func openAnswer(index: Int) -> Bool {
         if (self.strikes ?? 0 < 3) {
-            if ((self.question!.getAnswers())[index].isRevealed()) {
-                (self.question?.getAnswers()[index])?.setRevealed(revealed: true)
+            if (!self.question!.getAnswers()[index].isRevealed()) {
+                self.question!.getAnswers()[index].setRevealed(revealed: true)
                 //TODO: Logger
                 print("Revealed answer: \(self.question!.getAnswers())")
                 return true
+            } else {
+                //TODO: Logger
+                print("Answer already revealed!")
             }
-            
-            //TODO: Logger
-            print("Answer already revealed!")
         } else {
             //TODO: Logger
             print("Strike limit reached: Cannot reveal more answers for family [\(self.selectedFamilyIndex!)]")

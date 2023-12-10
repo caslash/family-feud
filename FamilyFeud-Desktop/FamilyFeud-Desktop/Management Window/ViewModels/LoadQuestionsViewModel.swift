@@ -12,10 +12,16 @@ import SwiftUI
 
 @Observable
 class LoadQuestionsViewModel {
+    private var windowcontroller: ManagementWindowController
+    
     private var game: FamilyFeudGame
     
-    init(game: FamilyFeudGame) {
+    public var viewstateservice: ViewStateService
+    
+    init(game: FamilyFeudGame, viewstateservice: ViewStateService, windowcontroller: ManagementWindowController) {
         self.game = game
+        self.viewstateservice = viewstateservice
+        self.windowcontroller = windowcontroller
     }
     
     func getQuestions() {

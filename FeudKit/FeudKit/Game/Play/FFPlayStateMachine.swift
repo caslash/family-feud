@@ -31,6 +31,8 @@ public class FFPlayStateMachine: AbstractFFStateMachine<FFPlayStateType, FFPlayS
     }
     
     public override func validateStateTransition(currentState: FFPlayState?, nextState: String) -> Bool {
+        if (currentState == nil) { return true }
+        
         if let currentState {
             switch currentState.getType() {
             case .ALLOCATE_POINTS:

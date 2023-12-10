@@ -10,18 +10,17 @@ import SwiftUI
 
 struct QuestionSelectorPanel: View {
     @State private var viewmodel: QuestionSelectorViewModel
-    @State private var multiplier: Int = 1
     var body: some View {
         PanelView("Question Selector") {
             VStack(spacing: 18) {
-                Table(viewmodel.questions.getQuestions()) {
+                Table(viewmodel.questions.getQuestions(), selection: self.$viewmodel.selectedQuestionId) {
                     TableColumn("Done", value: \.answered.description)
                     TableColumn("#Ans", value: \.answers.count.description)
                     TableColumn("Question", value: \.question)
                 }
                 
                 HStack {
-                    Picker(selection: self.$multiplier, label: Text("MULTIPLIER")) {
+                    Picker(selection: self.$viewmodel.multiplier, label: Text("MULTIPLIER")) {
                         Text("Single").tag(1)
                         Text("Double").tag(2)
                         Text("Triple").tag(3)
@@ -31,7 +30,7 @@ struct QuestionSelectorPanel: View {
                     
                     Spacer()
                     
-                    Button("Select") { }
+                    Button("Select") { self.viewmodel.select() }
                 }
             }
         }
@@ -42,11 +41,11 @@ struct QuestionSelectorPanel: View {
         .shadow(radius: 2, x: 0, y: 2)
     }
     
-    init(game: FamilyFeudGame) {
-        self.viewmodel = QuestionSelectorViewModel(game: game)
+    init(game: FamilyFeudGame, viewstateservice: ViewStateService, windowcontroller: ManagementWindowController) {
+        self.viewmodel = QuestionSelectorViewModel(game: game, viewstateservice: viewstateservice, windowcontroller: windowcontroller)
     }
 }
 
 #Preview {
-    QuestionSelectorPanel(game: FamilyFeudGame())
+    QuestionSelectorPanel(game: FamilyFeudGame(), viewstateservice: ViewStateService(), windowcontroller: ManagementWindowController())
 }

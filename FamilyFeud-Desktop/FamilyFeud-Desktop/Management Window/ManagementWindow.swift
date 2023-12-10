@@ -10,28 +10,38 @@ import SwiftUI
 
 struct ManagementWindow: View {
     @Environment(FamilyFeudGame.self) private var game
+    @Environment(ViewStateService.self) private var viewstateservice
     @Environment(\.openWindow) private var openWindow
+    
+    @State var controller: ManagementWindowController = .init()
     var body: some View {
         NavigationStack {
             Grid(horizontalSpacing: 30, verticalSpacing: 30) {
                 GridRow {
                     WindowControlPanel()
+                        .disabled(!self.viewstateservice.windowControlPanelEnabled)
                     
-                    AddFamilyPanel()
+                    AddFamilyPanel(game: self.game, viewstateservice: self.viewstateservice, windowcontroller: self.controller)
+                        .disabled(!self.viewstateservice.addFamilyPanelEnabled)
                     
-                    LoadQuestionsPanel(game: self.game)
+                    LoadQuestionsPanel(game: self.game, viewstateservice: self.viewstateservice, windowcontroller: self.controller)
+                        .disabled(!self.viewstateservice.loadQuestionsPanelEnabled)
                     
-                    PlayControlPanel()
+                    PlayControlPanel(game: self.game, viewstateservice: self.viewstateservice, windowcontroller: self.controller)
+                        .disabled(!self.viewstateservice.playControlPanelEnabled)
                 }
                 
                 GridRow {
-                    StateControlPanel(game: self.game)
+                    StateControlPanel(game: self.game, viewstateservice: self.viewstateservice, windowcontroller: self.controller)
                     
-                    FamiliesPanel(families: [])
+                    FamiliesPanel(game: self.game, viewstateservice: self.viewstateservice, windowcontroller: self.controller)
+                        .disabled(!self.viewstateservice.familiesPanelEnabled)
                     
-                    QuestionSelectorPanel(game: self.game)
+                    QuestionSelectorPanel(game: self.game, viewstateservice: self.viewstateservice, windowcontroller: self.controller)
+                        .disabled(!self.viewstateservice.questionSelectorPanelEnabled)
                     
-                    QuestionControlPanel(answers: [])
+                    QuestionControlPanel(game: self.game, viewstateservice: self.viewstateservice, windowcontroller: self.controller)
+                        .disabled(!self.viewstateservice.questionControlPanelEnabled)
                 }
             }
         }
@@ -42,4 +52,5 @@ struct ManagementWindow: View {
 #Preview {
     ManagementWindow()
         .environment(FamilyFeudGame())
+        .environment(ViewStateService())
 }

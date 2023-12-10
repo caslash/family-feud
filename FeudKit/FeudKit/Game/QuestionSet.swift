@@ -35,6 +35,8 @@ public class QuestionSet {
     
     public func getQuestion(index: Int) -> Question { return self.questions[index] }
     
+    public func getQuestionIndex(_ id: UUID) -> Int { return self.questions.firstIndex { $0.id == id } ?? -1 }
+    
     public func getSelectedQuestion() -> Question? { return self.selectedIndex < 0 ? nil : self.questions[selectedIndex] }
     
     public func setSelectedQuestion(index: Int) { self.selectedIndex = index }

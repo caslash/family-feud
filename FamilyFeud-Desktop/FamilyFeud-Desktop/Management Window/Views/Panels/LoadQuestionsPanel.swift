@@ -21,11 +21,11 @@ struct LoadQuestionsPanel: View {
         .shadow(radius: 2, x: 0, y: 2)
     }
     
-    init(game: FamilyFeudGame) {
-        self.viewmodel = LoadQuestionsViewModel(game: game)
+    init(game: FamilyFeudGame, viewstateservice: ViewStateService, windowcontroller: ManagementWindowController) {
+        self.viewmodel = LoadQuestionsViewModel(game: game, viewstateservice: viewstateservice, windowcontroller: windowcontroller)
     }
 }
 
 #Preview {
-    LoadQuestionsPanel(game: FamilyFeudGame())
+    LoadQuestionsPanel(game: FamilyFeudGame(), viewstateservice: ViewStateService(), windowcontroller: ManagementWindowController())
 }
