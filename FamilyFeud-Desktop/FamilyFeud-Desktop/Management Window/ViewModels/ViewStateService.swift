@@ -10,8 +10,6 @@ import Observation
 
 @Observable
 class ViewStateService {
-    var windowControlPanelEnabled: Bool
-    
     var addFamilyPanelEnabled: Bool
     
     var loadQuestionsPanelEnabled: Bool
@@ -39,8 +37,6 @@ class ViewStateService {
     var fastMoneyEnabled: Bool
     
     init() {
-        self.windowControlPanelEnabled = false
-        
         self.addFamilyPanelEnabled = false
         
         self.loadQuestionsPanelEnabled = false

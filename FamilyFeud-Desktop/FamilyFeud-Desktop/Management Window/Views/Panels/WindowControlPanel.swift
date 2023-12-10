@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct WindowControlPanel: View {
+    @Environment(\.openWindow) private var openWindow
     var body: some View {
         PanelView("Window Control") {
-            Button("Show Game Window") { }
+            Button("Show Game Window") { openWindow(id: "Game") }
         }
         .frame(width: 200, height: 200, alignment: .center)
         .background(.thickMaterial)

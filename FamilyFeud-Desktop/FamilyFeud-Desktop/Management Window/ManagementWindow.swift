@@ -11,7 +11,6 @@ import SwiftUI
 struct ManagementWindow: View {
     @Environment(FamilyFeudGame.self) private var game
     @Environment(ViewStateService.self) private var viewstateservice
-    @Environment(\.openWindow) private var openWindow
     
     @State var controller: ManagementWindowController = .init()
     var body: some View {
@@ -19,7 +18,6 @@ struct ManagementWindow: View {
             Grid(horizontalSpacing: 30, verticalSpacing: 30) {
                 GridRow {
                     WindowControlPanel()
-                        .disabled(!self.viewstateservice.windowControlPanelEnabled)
                     
                     AddFamilyPanel(game: self.game, viewstateservice: self.viewstateservice, windowcontroller: self.controller)
                         .disabled(!self.viewstateservice.addFamilyPanelEnabled)

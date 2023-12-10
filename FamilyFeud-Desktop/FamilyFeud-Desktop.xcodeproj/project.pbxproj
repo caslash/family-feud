@@ -91,13 +91,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2E275F472B1EA50D00129050 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
 		2EC662322B199F8B00E3EFE0 = {
 			isa = PBXGroup;
 			children = (
@@ -168,7 +161,6 @@
 		2EC662792B19A2DF00E3EFE0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2E275F472B1EA50D00129050 /* Components */,
 				2EC662872B1ACB1000E3EFE0 /* Panels */,
 			);
 			path = Views;
