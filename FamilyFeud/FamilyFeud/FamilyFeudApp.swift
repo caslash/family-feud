@@ -9,7 +9,7 @@ import FeudKit
 import SwiftUI
 
 @main
-struct FamilyFeud_DesktopApp: App {
+struct FamilyFeudApp: App {
     @State private var game = FamilyFeudGame()
     @State private var viewstateservice = ViewStateService()
     var body: some Scene {
