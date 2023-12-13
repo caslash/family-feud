@@ -14,6 +14,10 @@
 		2E05D5062B2576AD00BEE8D0 /* PlayControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E05D5052B2576AD00BEE8D0 /* PlayControlViewModel.swift */; };
 		2E05D5082B25866000BEE8D0 /* QuestionControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E05D5072B25866000BEE8D0 /* QuestionControlViewModel.swift */; };
 		2E0AE4052B1C6BF40003D90B /* LoadQuestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0AE4042B1C6BF40003D90B /* LoadQuestionsViewModel.swift */; };
+		2E53D9072B27D3A7003107AA /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E53D9062B27D3A7003107AA /* GameKit.framework */; };
+		2E53D90D2B280F9A003107AA /* FeudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E53D9092B280A29003107AA /* FeudKit.framework */; };
+		2E53D90E2B280F9A003107AA /* FeudKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2E53D9092B280A29003107AA /* FeudKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2E53D9112B281FF1003107AA /* MultiplayerService+MatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E53D9102B281FF1003107AA /* MultiplayerService+MatchData.swift */; };
 		2EBFFDA62B1D8DEE00487152 /* QuestionSelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFFDA52B1D8DEE00487152 /* QuestionSelectorViewModel.swift */; };
 		2EBFFDA82B1D97E300487152 /* StateControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFFDA72B1D97E300487152 /* StateControlViewModel.swift */; };
 		2EC6623F2B199F8B00E3EFE0 /* FamilyFeudApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6623E2B199F8B00E3EFE0 /* FamilyFeudApp.swift */; };
@@ -33,9 +37,34 @@
 		2EC662A42B1AF7CF00E3EFE0 /* FamiliesPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662A32B1AF7CF00E3EFE0 /* FamiliesPanel.swift */; };
 		2EC662A62B1AF80700E3EFE0 /* QuestionControlPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662A52B1AF80700E3EFE0 /* QuestionControlPanel.swift */; };
 		2EC662A82B1AF82000E3EFE0 /* PlayControlPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662A72B1AF82000E3EFE0 /* PlayControlPanel.swift */; };
+		2ECE21702B268B8100A6B868 /* FamilyFeudClientApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE216F2B268B8100A6B868 /* FamilyFeudClientApp.swift */; };
+		2ECE21722B268B8100A6B868 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE21712B268B8100A6B868 /* ContentView.swift */; };
+		2ECE21742B268B8200A6B868 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ECE21732B268B8200A6B868 /* Assets.xcassets */; };
+		2ECE21772B268B8200A6B868 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ECE21762B268B8200A6B868 /* Preview Assets.xcassets */; };
+		2ECE217D2B2692EE00A6B868 /* MultiplayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE217C2B2692EE00A6B868 /* MultiplayerService.swift */; };
+		2ECE21822B2697EC00A6B868 /* MultiplayerService+Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE21812B2697EC00A6B868 /* MultiplayerService+Friends.swift */; };
+		2ECE21832B2697EC00A6B868 /* MultiplayerService+Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE21812B2697EC00A6B868 /* MultiplayerService+Friends.swift */; };
+		2ECE21852B269E9100A6B868 /* MultiplayerService+GKLocalPlayerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE21842B269E9100A6B868 /* MultiplayerService+GKLocalPlayerListener.swift */; };
+		2ECE21862B269E9100A6B868 /* MultiplayerService+GKLocalPlayerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE21842B269E9100A6B868 /* MultiplayerService+GKLocalPlayerListener.swift */; };
+		2ECE21882B269F7000A6B868 /* MultiplayerService+GKMatchmakerViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE21872B269F7000A6B868 /* MultiplayerService+GKMatchmakerViewControllerDelegate.swift */; };
+		2ECE21892B269F7000A6B868 /* MultiplayerService+GKMatchmakerViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE21872B269F7000A6B868 /* MultiplayerService+GKMatchmakerViewControllerDelegate.swift */; };
+		2ECE218B2B26A0E200A6B868 /* MultiplayerService+GKMatchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE218A2B26A0E200A6B868 /* MultiplayerService+GKMatchDelegate.swift */; };
+		2ECE218C2B26A0E200A6B868 /* MultiplayerService+GKMatchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE218A2B26A0E200A6B868 /* MultiplayerService+GKMatchDelegate.swift */; };
+		2ECE218D2B26A29400A6B868 /* MultiplayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE217C2B2692EE00A6B868 /* MultiplayerService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		2E53D90F2B280F9A003107AA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				2E53D90E2B280F9A003107AA /* FeudKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2EC662512B199FD500E3EFE0 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -57,6 +86,10 @@
 		2E05D5052B2576AD00BEE8D0 /* PlayControlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayControlViewModel.swift; sourceTree = "<group>"; };
 		2E05D5072B25866000BEE8D0 /* QuestionControlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionControlViewModel.swift; sourceTree = "<group>"; };
 		2E0AE4042B1C6BF40003D90B /* LoadQuestionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadQuestionsViewModel.swift; sourceTree = "<group>"; };
+		2E53D9062B27D3A7003107AA /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		2E53D9082B28047F003107AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		2E53D9092B280A29003107AA /* FeudKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FeudKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E53D9102B281FF1003107AA /* MultiplayerService+MatchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultiplayerService+MatchData.swift"; sourceTree = "<group>"; };
 		2EBFFDA52B1D8DEE00487152 /* QuestionSelectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSelectorViewModel.swift; sourceTree = "<group>"; };
 		2EBFFDA72B1D97E300487152 /* StateControlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateControlViewModel.swift; sourceTree = "<group>"; };
 		2EC6623B2B199F8B00E3EFE0 /* FamilyFeud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FamilyFeud.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,6 +109,17 @@
 		2EC662A32B1AF7CF00E3EFE0 /* FamiliesPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamiliesPanel.swift; sourceTree = "<group>"; };
 		2EC662A52B1AF80700E3EFE0 /* QuestionControlPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionControlPanel.swift; sourceTree = "<group>"; };
 		2EC662A72B1AF82000E3EFE0 /* PlayControlPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayControlPanel.swift; sourceTree = "<group>"; };
+		2ECE216D2B268B8100A6B868 /* FamilyFeudClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FamilyFeudClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2ECE216F2B268B8100A6B868 /* FamilyFeudClientApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyFeudClientApp.swift; sourceTree = "<group>"; };
+		2ECE21712B268B8100A6B868 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2ECE21732B268B8200A6B868 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2ECE21762B268B8200A6B868 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2ECE217C2B2692EE00A6B868 /* MultiplayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplayerService.swift; sourceTree = "<group>"; };
+		2ECE21812B2697EC00A6B868 /* MultiplayerService+Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultiplayerService+Friends.swift"; sourceTree = "<group>"; };
+		2ECE21842B269E9100A6B868 /* MultiplayerService+GKLocalPlayerListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultiplayerService+GKLocalPlayerListener.swift"; sourceTree = "<group>"; };
+		2ECE21872B269F7000A6B868 /* MultiplayerService+GKMatchmakerViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultiplayerService+GKMatchmakerViewControllerDelegate.swift"; sourceTree = "<group>"; };
+		2ECE218A2B26A0E200A6B868 /* MultiplayerService+GKMatchDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultiplayerService+GKMatchDelegate.swift"; sourceTree = "<group>"; };
+		2ECE218E2B26C26500A6B868 /* FamilyFeudClient.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FamilyFeudClient.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,8 +127,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E53D9072B27D3A7003107AA /* GameKit.framework in Frameworks */,
 				2EC6624F2B199FD500E3EFE0 /* FeudKit.framework in Frameworks */,
 				2EC662542B19A0F000E3EFE0 /* SlashKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2ECE216A2B268B8100A6B868 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2E53D90D2B280F9A003107AA /* FeudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				2EC6623D2B199F8B00E3EFE0 /* FamilyFeud */,
+				2ECE216E2B268B8100A6B868 /* FamilyFeudClient */,
 				2EC6623C2B199F8B00E3EFE0 /* Products */,
 				2EC6624D2B199FD500E3EFE0 /* Frameworks */,
 			);
@@ -104,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				2EC6623B2B199F8B00E3EFE0 /* FamilyFeud.app */,
+				2ECE216D2B268B8100A6B868 /* FamilyFeudClient.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -111,7 +166,9 @@
 		2EC6623D2B199F8B00E3EFE0 /* FamilyFeud */ = {
 			isa = PBXGroup;
 			children = (
+				2E53D9082B28047F003107AA /* Info.plist */,
 				2EC6623E2B199F8B00E3EFE0 /* FamilyFeudApp.swift */,
+				2ECE217B2B2692E000A6B868 /* Multiplayer */,
 				2EC662782B19A2B700E3EFE0 /* Management Window */,
 				2EC662772B19A2AE00E3EFE0 /* Game Window */,
 				2EC662422B199F8C00E3EFE0 /* Assets.xcassets */,
@@ -132,6 +189,8 @@
 		2EC6624D2B199FD500E3EFE0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2E53D9092B280A29003107AA /* FeudKit.framework */,
+				2E53D9062B27D3A7003107AA /* GameKit.framework */,
 				2EC6624E2B199FD500E3EFE0 /* FeudKit.framework */,
 			);
 			name = Frameworks;
@@ -211,6 +270,40 @@
 			path = Panels;
 			sourceTree = "<group>";
 		};
+		2ECE216E2B268B8100A6B868 /* FamilyFeudClient */ = {
+			isa = PBXGroup;
+			children = (
+				2ECE218E2B26C26500A6B868 /* FamilyFeudClient.entitlements */,
+				2ECE216F2B268B8100A6B868 /* FamilyFeudClientApp.swift */,
+				2ECE21712B268B8100A6B868 /* ContentView.swift */,
+				2ECE21732B268B8200A6B868 /* Assets.xcassets */,
+				2ECE21752B268B8200A6B868 /* Preview Content */,
+			);
+			path = FamilyFeudClient;
+			sourceTree = "<group>";
+		};
+		2ECE21752B268B8200A6B868 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				2ECE21762B268B8200A6B868 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2ECE217B2B2692E000A6B868 /* Multiplayer */ = {
+			isa = PBXGroup;
+			children = (
+				2ECE217C2B2692EE00A6B868 /* MultiplayerService.swift */,
+				2ECE21842B269E9100A6B868 /* MultiplayerService+GKLocalPlayerListener.swift */,
+				2ECE218A2B26A0E200A6B868 /* MultiplayerService+GKMatchDelegate.swift */,
+				2ECE21872B269F7000A6B868 /* MultiplayerService+GKMatchmakerViewControllerDelegate.swift */,
+				2ECE21812B2697EC00A6B868 /* MultiplayerService+Friends.swift */,
+				2E53D9102B281FF1003107AA /* MultiplayerService+MatchData.swift */,
+			);
+			name = Multiplayer;
+			path = ../../FeudKit/FeudKit/Multiplayer;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -235,6 +328,24 @@
 			productReference = 2EC6623B2B199F8B00E3EFE0 /* FamilyFeud.app */;
 			productType = "com.apple.product-type.application";
 		};
+		2ECE216C2B268B8100A6B868 /* FamilyFeudClient */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2ECE21782B268B8200A6B868 /* Build configuration list for PBXNativeTarget "FamilyFeudClient" */;
+			buildPhases = (
+				2ECE21692B268B8100A6B868 /* Sources */,
+				2ECE216A2B268B8100A6B868 /* Frameworks */,
+				2ECE216B2B268B8100A6B868 /* Resources */,
+				2E53D90F2B280F9A003107AA /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FamilyFeudClient;
+			productName = FamilyFeudClient;
+			productReference = 2ECE216D2B268B8100A6B868 /* FamilyFeudClient.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -247,6 +358,9 @@
 				TargetAttributes = {
 					2EC6623A2B199F8B00E3EFE0 = {
 						CreatedOnToolsVersion = 15.0;
+					};
+					2ECE216C2B268B8100A6B868 = {
+						CreatedOnToolsVersion = 15.0.1;
 					};
 				};
 			};
@@ -267,6 +381,7 @@
 			projectRoot = "";
 			targets = (
 				2EC6623A2B199F8B00E3EFE0 /* FamilyFeud */,
+				2ECE216C2B268B8100A6B868 /* FamilyFeudClient */,
 			);
 		};
 /* End PBXProject section */
@@ -281,6 +396,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2ECE216B2B268B8100A6B868 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2ECE21772B268B8200A6B868 /* Preview Assets.xcassets in Resources */,
+				2ECE21742B268B8200A6B868 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -288,8 +412,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ECE217D2B2692EE00A6B868 /* MultiplayerService.swift in Sources */,
 				2EC662A82B1AF82000E3EFE0 /* PlayControlPanel.swift in Sources */,
 				2EC662842B1AB3C100E3EFE0 /* GameWindow.swift in Sources */,
+				2ECE21882B269F7000A6B868 /* MultiplayerService+GKMatchmakerViewControllerDelegate.swift in Sources */,
 				2E05D5082B25866000BEE8D0 /* QuestionControlViewModel.swift in Sources */,
 				2EC662912B1AD0D200E3EFE0 /* PanelView.swift in Sources */,
 				2E0AE4052B1C6BF40003D90B /* LoadQuestionsViewModel.swift in Sources */,
@@ -306,9 +432,27 @@
 				2E05D5042B2569EC00BEE8D0 /* ManagementWindowController.swift in Sources */,
 				2EBFFDA62B1D8DEE00487152 /* QuestionSelectorViewModel.swift in Sources */,
 				2E05D5062B2576AD00BEE8D0 /* PlayControlViewModel.swift in Sources */,
+				2E53D9112B281FF1003107AA /* MultiplayerService+MatchData.swift in Sources */,
+				2ECE21822B2697EC00A6B868 /* MultiplayerService+Friends.swift in Sources */,
 				2EC662822B1AB3A000E3EFE0 /* ManagementWindow.swift in Sources */,
+				2ECE21852B269E9100A6B868 /* MultiplayerService+GKLocalPlayerListener.swift in Sources */,
+				2ECE218B2B26A0E200A6B868 /* MultiplayerService+GKMatchDelegate.swift in Sources */,
 				2E05D4FE2B21690400BEE8D0 /* ViewStateService.swift in Sources */,
 				2EC662952B1AD30800E3EFE0 /* WindowControlPanel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2ECE21692B268B8100A6B868 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2ECE21722B268B8100A6B868 /* ContentView.swift in Sources */,
+				2ECE218D2B26A29400A6B868 /* MultiplayerService.swift in Sources */,
+				2ECE218C2B26A0E200A6B868 /* MultiplayerService+GKMatchDelegate.swift in Sources */,
+				2ECE21702B268B8100A6B868 /* FamilyFeudClientApp.swift in Sources */,
+				2ECE21892B269F7000A6B868 /* MultiplayerService+GKMatchmakerViewControllerDelegate.swift in Sources */,
+				2ECE21862B269E9100A6B868 /* MultiplayerService+GKLocalPlayerListener.swift in Sources */,
+				2ECE21832B2697EC00A6B868 /* MultiplayerService+Friends.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +511,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -424,6 +569,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -448,16 +594,19 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FamilyFeud/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Family Feud";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.family-games";
+				INFOPLIST_KEY_NSGKFriendListUsageDescription = "Accessing your friends to identify them during gameplay.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = gamekit;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Cameron.Slash.FamilyFeud;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Cameron.Slash.DomesticDuel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -479,19 +628,93 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FamilyFeud/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Family Feud";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.family-games";
+				INFOPLIST_KEY_NSGKFriendListUsageDescription = "Accessing your friends to identify them during gameplay.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = gamekit;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Cameron.Slash.FamilyFeud;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Cameron.Slash.DomesticDuel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		2ECE21792B268B8200A6B868 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FamilyFeudClient/FamilyFeudClient.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"FamilyFeudClient/Preview Content\"";
+				DEVELOPMENT_TEAM = 3S8XC6A264;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Cameron.Slash.FamilyFeudClient;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2ECE217A2B268B8200A6B868 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FamilyFeudClient/FamilyFeudClient.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"FamilyFeudClient/Preview Content\"";
+				DEVELOPMENT_TEAM = 3S8XC6A264;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Cameron.Slash.FamilyFeudClient;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -512,6 +735,15 @@
 			buildConfigurations = (
 				2EC6624B2B199F8C00E3EFE0 /* Debug */,
 				2EC6624C2B199F8C00E3EFE0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2ECE21782B268B8200A6B868 /* Build configuration list for PBXNativeTarget "FamilyFeudClient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2ECE21792B268B8200A6B868 /* Debug */,
+				2ECE217A2B268B8200A6B868 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

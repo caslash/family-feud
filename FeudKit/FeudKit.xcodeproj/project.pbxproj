@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E53D9192B294E45003107AA /* MultiplayerService+GKMatchmakerViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E53D9152B294D5F003107AA /* MultiplayerService+GKMatchmakerViewControllerDelegate.swift */; };
+		2E53D91A2B294E45003107AA /* MultiplayerService+Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E53D9162B294D5F003107AA /* MultiplayerService+Friends.swift */; };
+		2E53D91B2B294E45003107AA /* MultiplayerService+GKLocalPlayerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E53D9132B294D5F003107AA /* MultiplayerService+GKLocalPlayerListener.swift */; };
+		2E53D91C2B294E45003107AA /* MultiplayerService+GKMatchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E53D9142B294D5F003107AA /* MultiplayerService+GKMatchDelegate.swift */; };
+		2E53D91D2B294E45003107AA /* MultiplayerService+MatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E53D9172B294D5F003107AA /* MultiplayerService+MatchData.swift */; };
+		2E53D91E2B294E45003107AA /* MultiplayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E53D9122B294D5F003107AA /* MultiplayerService.swift */; };
 		2EC661C22B13104A00E3EFE0 /* FeudKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EC661C12B13104A00E3EFE0 /* FeudKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2EC661C92B13113E00E3EFE0 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661C82B13113E00E3EFE0 /* Answer.swift */; };
 		2EC661CB2B13122A00E3EFE0 /* Family.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661CA2B13122A00E3EFE0 /* Family.swift */; };
@@ -49,6 +55,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2E53D9122B294D5F003107AA /* MultiplayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplayerService.swift; sourceTree = "<group>"; };
+		2E53D9132B294D5F003107AA /* MultiplayerService+GKLocalPlayerListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultiplayerService+GKLocalPlayerListener.swift"; sourceTree = "<group>"; };
+		2E53D9142B294D5F003107AA /* MultiplayerService+GKMatchDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultiplayerService+GKMatchDelegate.swift"; sourceTree = "<group>"; };
+		2E53D9152B294D5F003107AA /* MultiplayerService+GKMatchmakerViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultiplayerService+GKMatchmakerViewControllerDelegate.swift"; sourceTree = "<group>"; };
+		2E53D9162B294D5F003107AA /* MultiplayerService+Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultiplayerService+Friends.swift"; sourceTree = "<group>"; };
+		2E53D9172B294D5F003107AA /* MultiplayerService+MatchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultiplayerService+MatchData.swift"; sourceTree = "<group>"; };
 		2EC661BE2B13104A00E3EFE0 /* FeudKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FeudKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EC661C12B13104A00E3EFE0 /* FeudKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeudKit.h; sourceTree = "<group>"; };
 		2EC661C82B13113E00E3EFE0 /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
@@ -102,6 +114,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E53D9182B294D5F003107AA /* Multiplayer */ = {
+			isa = PBXGroup;
+			children = (
+				2E53D9122B294D5F003107AA /* MultiplayerService.swift */,
+				2E53D9132B294D5F003107AA /* MultiplayerService+GKLocalPlayerListener.swift */,
+				2E53D9142B294D5F003107AA /* MultiplayerService+GKMatchDelegate.swift */,
+				2E53D9152B294D5F003107AA /* MultiplayerService+GKMatchmakerViewControllerDelegate.swift */,
+				2E53D9162B294D5F003107AA /* MultiplayerService+Friends.swift */,
+				2E53D9172B294D5F003107AA /* MultiplayerService+MatchData.swift */,
+			);
+			path = Multiplayer;
+			sourceTree = "<group>";
+		};
 		2EC661B42B13104A00E3EFE0 = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +146,7 @@
 		2EC661C02B13104A00E3EFE0 /* FeudKit */ = {
 			isa = PBXGroup;
 			children = (
+				2E53D9182B294D5F003107AA /* Multiplayer */,
 				2EC662312B199D3500E3EFE0 /* Game */,
 				2EC662242B198F2F00E3EFE0 /* Resources */,
 				2EC661DF2B14375300E3EFE0 /* Utility */,
@@ -310,10 +336,13 @@
 				2EC662142B1855AF00E3EFE0 /* FFState.swift in Sources */,
 				2EC6620A2B18274000E3EFE0 /* StateAnswer.swift in Sources */,
 				2EC661F42B144BBF00E3EFE0 /* StateFaceOff.swift in Sources */,
+				2E53D91B2B294E45003107AA /* MultiplayerService+GKLocalPlayerListener.swift in Sources */,
 				2EC662042B16F50900E3EFE0 /* StrikeInterface.swift in Sources */,
 				2EC661F72B144BCB00E3EFE0 /* StateFamilyPlay.swift in Sources */,
+				2E53D91A2B294E45003107AA /* MultiplayerService+Friends.swift in Sources */,
 				2EC662232B198EB600E3EFE0 /* StateLoadQuestions.swift in Sources */,
 				2EC6620C2B18274C00E3EFE0 /* FFFastMoneyState.swift in Sources */,
+				2E53D9192B294E45003107AA /* MultiplayerService+GKMatchmakerViewControllerDelegate.swift in Sources */,
 				2EC6621A2B19870F00E3EFE0 /* FamilyFeudGame.swift in Sources */,
 				2EC6622E2B19938700E3EFE0 /* FFStateFactory.swift in Sources */,
 				2EC662282B19909300E3EFE0 /* StateNewGame.swift in Sources */,
@@ -324,13 +353,16 @@
 				2EC662162B1855F100E3EFE0 /* FFStateType.swift in Sources */,
 				2EC6620E2B18282300E3EFE0 /* FFFastMoneyStateType.swift in Sources */,
 				2EC662062B181C3E00E3EFE0 /* FastMoney.swift in Sources */,
+				2E53D91C2B294E45003107AA /* MultiplayerService+GKMatchDelegate.swift in Sources */,
 				2EC662212B198E6500E3EFE0 /* StateInitializeGame.swift in Sources */,
 				2EC6622C2B1992BF00E3EFE0 /* StateStart.swift in Sources */,
+				2E53D91E2B294E45003107AA /* MultiplayerService.swift in Sources */,
 				2EC662122B18511000E3EFE0 /* FFFastMoneyStateMachine.swift in Sources */,
 				2EC661CB2B13122A00E3EFE0 /* Family.swift in Sources */,
 				2EC661EB2B14481200E3EFE0 /* FFPlayStateType.swift in Sources */,
 				2EC6621F2B198CCA00E3EFE0 /* StateAddFamily.swift in Sources */,
 				2EC662102B184EE800E3EFE0 /* FFFastMoneyStateFactory.swift in Sources */,
+				2E53D91D2B294E45003107AA /* MultiplayerService+MatchData.swift in Sources */,
 				2EC662182B1986E000E3EFE0 /* StateEndGame.swift in Sources */,
 				2EC661F92B144BD800E3EFE0 /* StateFamilySteal.swift in Sources */,
 				2EC662082B18273100E3EFE0 /* StateReveal.swift in Sources */,
@@ -393,7 +425,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -453,7 +485,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -479,7 +511,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
@@ -519,7 +551,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",

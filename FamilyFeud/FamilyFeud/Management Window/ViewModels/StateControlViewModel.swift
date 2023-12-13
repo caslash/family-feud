@@ -11,28 +11,35 @@ import Observation
 
 @Observable
 class StateControlViewModel {
+    private var multiplayerservice: MultiplayerService
+    
     private var windowcontroller: ManagementWindowController
     
     private var game: FamilyFeudGame
     
     public var viewstateservice: ViewStateService
     
-    init(game: FamilyFeudGame, viewstateservice: ViewStateService, windowcontroller: ManagementWindowController) {
+    init(game: FamilyFeudGame, viewstateservice: ViewStateService, windowcontroller: ManagementWindowController, multiplayerservice: MultiplayerService) {
+        self.multiplayerservice = multiplayerservice
         self.game = game
         self.windowcontroller = windowcontroller
         self.viewstateservice = viewstateservice
         self.viewstateservice.newGameEnabled = true
     }
     
-    func startGame() {
-        _ = game.changeState(type: FFStateType.NEW_GAME)
-        self.viewstateservice.manageFamiliesEnabled = true
-        self.viewstateservice.loadQuestionEnabled = true
-        self.viewstateservice.initializeGameEnabled = true
-        self.viewstateservice.newGameEnabled = false
-        self.viewstateservice.fastMoneyEnabled = false
-        self.viewstateservice.addFamilyPanelEnabled = false
-        self.viewstateservice.familiesPanelEnabled = false
+    func startGame() async {
+        if let match = await self.multiplayerservice.match {
+            _ = game.changeState(type: FFStateType.NEW_GAME)
+            self.viewstateservice.manageFamiliesEnabled = true
+            self.viewstateservice.loadQuestionEnabled = true
+            self.viewstateservice.initializeGameEnabled = true
+            self.viewstateservice.newGameEnabled = false
+            self.viewstateservice.fastMoneyEnabled = false
+            self.viewstateservice.addFamilyPanelEnabled = false
+            self.viewstateservice.familiesPanelEnabled = false
+        } else {
+            await self.multiplayerservice.choosePlayer()
+        }
     }
     
     func manageFamilies() {
