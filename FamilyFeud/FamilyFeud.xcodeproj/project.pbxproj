@@ -17,7 +17,6 @@
 		2E53D9072B27D3A7003107AA /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E53D9062B27D3A7003107AA /* GameKit.framework */; };
 		2E53D90D2B280F9A003107AA /* FeudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E53D9092B280A29003107AA /* FeudKit.framework */; };
 		2E53D90E2B280F9A003107AA /* FeudKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2E53D9092B280A29003107AA /* FeudKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		2E53D9112B281FF1003107AA /* MultiplayerService+MatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E53D9102B281FF1003107AA /* MultiplayerService+MatchData.swift */; };
 		2EBFFDA62B1D8DEE00487152 /* QuestionSelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFFDA52B1D8DEE00487152 /* QuestionSelectorViewModel.swift */; };
 		2EBFFDA82B1D97E300487152 /* StateControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFFDA72B1D97E300487152 /* StateControlViewModel.swift */; };
 		2EC6623F2B199F8B00E3EFE0 /* FamilyFeudApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6623E2B199F8B00E3EFE0 /* FamilyFeudApp.swift */; };
@@ -41,16 +40,6 @@
 		2ECE21722B268B8100A6B868 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE21712B268B8100A6B868 /* ContentView.swift */; };
 		2ECE21742B268B8200A6B868 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ECE21732B268B8200A6B868 /* Assets.xcassets */; };
 		2ECE21772B268B8200A6B868 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ECE21762B268B8200A6B868 /* Preview Assets.xcassets */; };
-		2ECE217D2B2692EE00A6B868 /* MultiplayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE217C2B2692EE00A6B868 /* MultiplayerService.swift */; };
-		2ECE21822B2697EC00A6B868 /* MultiplayerService+Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE21812B2697EC00A6B868 /* MultiplayerService+Friends.swift */; };
-		2ECE21832B2697EC00A6B868 /* MultiplayerService+Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE21812B2697EC00A6B868 /* MultiplayerService+Friends.swift */; };
-		2ECE21852B269E9100A6B868 /* MultiplayerService+GKLocalPlayerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE21842B269E9100A6B868 /* MultiplayerService+GKLocalPlayerListener.swift */; };
-		2ECE21862B269E9100A6B868 /* MultiplayerService+GKLocalPlayerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE21842B269E9100A6B868 /* MultiplayerService+GKLocalPlayerListener.swift */; };
-		2ECE21882B269F7000A6B868 /* MultiplayerService+GKMatchmakerViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE21872B269F7000A6B868 /* MultiplayerService+GKMatchmakerViewControllerDelegate.swift */; };
-		2ECE21892B269F7000A6B868 /* MultiplayerService+GKMatchmakerViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE21872B269F7000A6B868 /* MultiplayerService+GKMatchmakerViewControllerDelegate.swift */; };
-		2ECE218B2B26A0E200A6B868 /* MultiplayerService+GKMatchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE218A2B26A0E200A6B868 /* MultiplayerService+GKMatchDelegate.swift */; };
-		2ECE218C2B26A0E200A6B868 /* MultiplayerService+GKMatchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE218A2B26A0E200A6B868 /* MultiplayerService+GKMatchDelegate.swift */; };
-		2ECE218D2B26A29400A6B868 /* MultiplayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE217C2B2692EE00A6B868 /* MultiplayerService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -89,7 +78,6 @@
 		2E53D9062B27D3A7003107AA /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		2E53D9082B28047F003107AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2E53D9092B280A29003107AA /* FeudKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FeudKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2E53D9102B281FF1003107AA /* MultiplayerService+MatchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultiplayerService+MatchData.swift"; sourceTree = "<group>"; };
 		2EBFFDA52B1D8DEE00487152 /* QuestionSelectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSelectorViewModel.swift; sourceTree = "<group>"; };
 		2EBFFDA72B1D97E300487152 /* StateControlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateControlViewModel.swift; sourceTree = "<group>"; };
 		2EC6623B2B199F8B00E3EFE0 /* FamilyFeud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FamilyFeud.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,11 +102,6 @@
 		2ECE21712B268B8100A6B868 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2ECE21732B268B8200A6B868 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2ECE21762B268B8200A6B868 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		2ECE217C2B2692EE00A6B868 /* MultiplayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplayerService.swift; sourceTree = "<group>"; };
-		2ECE21812B2697EC00A6B868 /* MultiplayerService+Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultiplayerService+Friends.swift"; sourceTree = "<group>"; };
-		2ECE21842B269E9100A6B868 /* MultiplayerService+GKLocalPlayerListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultiplayerService+GKLocalPlayerListener.swift"; sourceTree = "<group>"; };
-		2ECE21872B269F7000A6B868 /* MultiplayerService+GKMatchmakerViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultiplayerService+GKMatchmakerViewControllerDelegate.swift"; sourceTree = "<group>"; };
-		2ECE218A2B26A0E200A6B868 /* MultiplayerService+GKMatchDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultiplayerService+GKMatchDelegate.swift"; sourceTree = "<group>"; };
 		2ECE218E2B26C26500A6B868 /* FamilyFeudClient.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FamilyFeudClient.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -168,7 +151,6 @@
 			children = (
 				2E53D9082B28047F003107AA /* Info.plist */,
 				2EC6623E2B199F8B00E3EFE0 /* FamilyFeudApp.swift */,
-				2ECE217B2B2692E000A6B868 /* Multiplayer */,
 				2EC662782B19A2B700E3EFE0 /* Management Window */,
 				2EC662772B19A2AE00E3EFE0 /* Game Window */,
 				2EC662422B199F8C00E3EFE0 /* Assets.xcassets */,
@@ -290,20 +272,6 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		2ECE217B2B2692E000A6B868 /* Multiplayer */ = {
-			isa = PBXGroup;
-			children = (
-				2ECE217C2B2692EE00A6B868 /* MultiplayerService.swift */,
-				2ECE21842B269E9100A6B868 /* MultiplayerService+GKLocalPlayerListener.swift */,
-				2ECE218A2B26A0E200A6B868 /* MultiplayerService+GKMatchDelegate.swift */,
-				2ECE21872B269F7000A6B868 /* MultiplayerService+GKMatchmakerViewControllerDelegate.swift */,
-				2ECE21812B2697EC00A6B868 /* MultiplayerService+Friends.swift */,
-				2E53D9102B281FF1003107AA /* MultiplayerService+MatchData.swift */,
-			);
-			name = Multiplayer;
-			path = ../../FeudKit/FeudKit/Multiplayer;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -412,10 +380,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2ECE217D2B2692EE00A6B868 /* MultiplayerService.swift in Sources */,
 				2EC662A82B1AF82000E3EFE0 /* PlayControlPanel.swift in Sources */,
 				2EC662842B1AB3C100E3EFE0 /* GameWindow.swift in Sources */,
-				2ECE21882B269F7000A6B868 /* MultiplayerService+GKMatchmakerViewControllerDelegate.swift in Sources */,
 				2E05D5082B25866000BEE8D0 /* QuestionControlViewModel.swift in Sources */,
 				2EC662912B1AD0D200E3EFE0 /* PanelView.swift in Sources */,
 				2E0AE4052B1C6BF40003D90B /* LoadQuestionsViewModel.swift in Sources */,
@@ -432,11 +398,7 @@
 				2E05D5042B2569EC00BEE8D0 /* ManagementWindowController.swift in Sources */,
 				2EBFFDA62B1D8DEE00487152 /* QuestionSelectorViewModel.swift in Sources */,
 				2E05D5062B2576AD00BEE8D0 /* PlayControlViewModel.swift in Sources */,
-				2E53D9112B281FF1003107AA /* MultiplayerService+MatchData.swift in Sources */,
-				2ECE21822B2697EC00A6B868 /* MultiplayerService+Friends.swift in Sources */,
 				2EC662822B1AB3A000E3EFE0 /* ManagementWindow.swift in Sources */,
-				2ECE21852B269E9100A6B868 /* MultiplayerService+GKLocalPlayerListener.swift in Sources */,
-				2ECE218B2B26A0E200A6B868 /* MultiplayerService+GKMatchDelegate.swift in Sources */,
 				2E05D4FE2B21690400BEE8D0 /* ViewStateService.swift in Sources */,
 				2EC662952B1AD30800E3EFE0 /* WindowControlPanel.swift in Sources */,
 			);
@@ -447,12 +409,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2ECE21722B268B8100A6B868 /* ContentView.swift in Sources */,
-				2ECE218D2B26A29400A6B868 /* MultiplayerService.swift in Sources */,
-				2ECE218C2B26A0E200A6B868 /* MultiplayerService+GKMatchDelegate.swift in Sources */,
 				2ECE21702B268B8100A6B868 /* FamilyFeudClientApp.swift in Sources */,
-				2ECE21892B269F7000A6B868 /* MultiplayerService+GKMatchmakerViewControllerDelegate.swift in Sources */,
-				2ECE21862B269E9100A6B868 /* MultiplayerService+GKLocalPlayerListener.swift in Sources */,
-				2ECE21832B2697EC00A6B868 /* MultiplayerService+Friends.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
