@@ -11,33 +11,33 @@ import SwiftUI
 
 @MainActor
 @Observable
-class MultiplayerService: NSObject, GKGameCenterControllerDelegate {
-    var friends: [Friend] = []
+public class MultiplayerService: NSObject, GKGameCenterControllerDelegate {
+    public var friends: [Friend] = []
     
-    var matchAvailable = false
-    var playingGame = false
-    var match: GKMatch? = nil
-    var automatch = false
+    public var matchAvailable = false
+    public var playingGame = false
+    public var match: GKMatch? = nil
+    public var automatch = false
     
-    var player1Avatar = Image(systemName: "person.crop.circle")
-    var player2Avatar = Image(systemName: "person.crop.circle")
-    var player1: GKPlayer? = nil
-    var player2: GKPlayer? = nil
+    public var player1Avatar = Image(systemName: "person.crop.circle")
+    public var player2Avatar = Image(systemName: "person.crop.circle")
+    public var player1: GKPlayer? = nil
+    public var player2: GKPlayer? = nil
     
     #if os(iOS)
-    var rootViewController: UIViewController? {
+    public var rootViewController: UIViewController? {
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         return windowScene?.windows.first?.rootViewController
     }
     #else
-    var rootViewController: NSViewController? {
+    public var rootViewController: NSViewController? {
         return NSApplication.shared.mainWindow!.contentViewController
     }
     #endif
     
-    nonisolated override init() { }
+    public nonisolated override init() { }
     
-    func authenticatePlayer() {
+    public func authenticatePlayer() {
         GKLocalPlayer.local.authenticateHandler = { viewController, error in
             if let viewController {
                 #if os(iOS)
@@ -62,7 +62,7 @@ class MultiplayerService: NSObject, GKGameCenterControllerDelegate {
         }
     }
     
-    func findPlayer() async {
+    public func findPlayer() async {
         let request = GKMatchRequest()
         request.minPlayers = 3
         request.maxPlayers = 3
@@ -83,7 +83,7 @@ class MultiplayerService: NSObject, GKGameCenterControllerDelegate {
         self.automatch = false
     }
     
-    func choosePlayer() {
+    public func choosePlayer() {
         let request = GKMatchRequest()
         request.minPlayers = 3
         request.maxPlayers = 3
@@ -98,7 +98,7 @@ class MultiplayerService: NSObject, GKGameCenterControllerDelegate {
         }
     }
     
-    func startMatchWith(match: GKMatch) {
+    public func startMatchWith(match: GKMatch) {
         GKAccessPoint.shared.isActive = false
         self.playingGame = true
         self.match = match
@@ -136,11 +136,11 @@ class MultiplayerService: NSObject, GKGameCenterControllerDelegate {
         }
     }
     
-    func endMatch() {
+    public func endMatch() {
         
     }
     
-    func resetMatch() {
+    public func resetMatch() {
         // Reset the game data.
         playingGame = false
         self.match?.disconnect()
@@ -153,7 +153,7 @@ class MultiplayerService: NSObject, GKGameCenterControllerDelegate {
         GKAccessPoint.shared.isActive = true
     }
     
-    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+    public func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
         #if os(iOS)
         gameCenterViewController.dismiss(animated: true)
         #else

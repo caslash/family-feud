@@ -5,6 +5,7 @@
 //  Created by Cameron Slash on 12/10/23.
 //
 
+import FeudKit
 import GameKit
 import SwiftUI
 import Observation
@@ -12,7 +13,7 @@ import Observation
 struct ContentView: View {
     @State private var game = MultiplayerService()
     var body: some View {
-        VStack {
+        Form {
             Button("Choose Player") {
                 if self.game.automatch {
                     GKMatchmaker.shared().cancel()

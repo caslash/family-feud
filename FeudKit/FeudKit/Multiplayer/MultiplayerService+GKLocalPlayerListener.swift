@@ -10,11 +10,11 @@ import GameKit
 import SwiftUI
 
 extension MultiplayerService: GKLocalPlayerListener {
-    func player(_ player: GKPlayer, didRequestMatchWithRecipients recipientPlayers: [GKPlayer]) {
+    public func player(_ player: GKPlayer, didRequestMatchWithRecipients recipientPlayers: [GKPlayer]) {
         print("\n\nSending invites to other players.")
     }
     
-    func player(_ player: GKPlayer, didAccept invite: GKInvite) {
+    public func player(_ player: GKPlayer, didAccept invite: GKInvite) {
         if let viewController = GKMatchmakerViewController(invite: invite) {
             viewController.matchmakerDelegate = self
             #if os(iOS)

@@ -11,7 +11,7 @@ import GameKit
 import SwiftUI
 
 extension MultiplayerService: GKMatchDelegate {
-    func match(_ match: GKMatch, player: GKPlayer, didChange state: GKPlayerConnectionState) {
+    public func match(_ match: GKMatch, player: GKPlayer, didChange state: GKPlayerConnectionState) {
         switch state {
         case .connected:
             print("\(player.displayName) Connected")
@@ -52,11 +52,11 @@ extension MultiplayerService: GKMatchDelegate {
         }
     }
     
-    func match(_ match: GKMatch, shouldReinviteDisconnectedPlayer player: GKPlayer) -> Bool {
+    public func match(_ match: GKMatch, shouldReinviteDisconnectedPlayer player: GKPlayer) -> Bool {
         return true
     }
     
-    func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
+    public func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
         let gameData = self.decode(matchData: data)
     }
 }

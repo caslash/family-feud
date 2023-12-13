@@ -15,15 +15,11 @@
 		2E05D5082B25866000BEE8D0 /* QuestionControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E05D5072B25866000BEE8D0 /* QuestionControlViewModel.swift */; };
 		2E0AE4052B1C6BF40003D90B /* LoadQuestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0AE4042B1C6BF40003D90B /* LoadQuestionsViewModel.swift */; };
 		2E53D9072B27D3A7003107AA /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E53D9062B27D3A7003107AA /* GameKit.framework */; };
-		2E53D90D2B280F9A003107AA /* FeudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E53D9092B280A29003107AA /* FeudKit.framework */; };
-		2E53D90E2B280F9A003107AA /* FeudKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2E53D9092B280A29003107AA /* FeudKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2EBFFDA62B1D8DEE00487152 /* QuestionSelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFFDA52B1D8DEE00487152 /* QuestionSelectorViewModel.swift */; };
 		2EBFFDA82B1D97E300487152 /* StateControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFFDA72B1D97E300487152 /* StateControlViewModel.swift */; };
 		2EC6623F2B199F8B00E3EFE0 /* FamilyFeudApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6623E2B199F8B00E3EFE0 /* FamilyFeudApp.swift */; };
 		2EC662432B199F8C00E3EFE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EC662422B199F8C00E3EFE0 /* Assets.xcassets */; };
 		2EC662462B199F8C00E3EFE0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EC662452B199F8C00E3EFE0 /* Preview Assets.xcassets */; };
-		2EC6624F2B199FD500E3EFE0 /* FeudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EC6624E2B199FD500E3EFE0 /* FeudKit.framework */; };
-		2EC662502B199FD500E3EFE0 /* FeudKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EC6624E2B199FD500E3EFE0 /* FeudKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2EC662542B19A0F000E3EFE0 /* SlashKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2EC662532B19A0F000E3EFE0 /* SlashKit */; };
 		2EC662822B1AB3A000E3EFE0 /* ManagementWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662812B1AB3A000E3EFE0 /* ManagementWindow.swift */; };
 		2EC662842B1AB3C100E3EFE0 /* GameWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662832B1AB3C100E3EFE0 /* GameWindow.swift */; };
@@ -36,6 +32,10 @@
 		2EC662A42B1AF7CF00E3EFE0 /* FamiliesPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662A32B1AF7CF00E3EFE0 /* FamiliesPanel.swift */; };
 		2EC662A62B1AF80700E3EFE0 /* QuestionControlPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662A52B1AF80700E3EFE0 /* QuestionControlPanel.swift */; };
 		2EC662A82B1AF82000E3EFE0 /* PlayControlPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC662A72B1AF82000E3EFE0 /* PlayControlPanel.swift */; };
+		2EC66F5E2B295DD300352EA4 /* FeudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EC6624E2B199FD500E3EFE0 /* FeudKit.framework */; };
+		2EC66F5F2B295DD300352EA4 /* FeudKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EC6624E2B199FD500E3EFE0 /* FeudKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2EC66F622B295DE100352EA4 /* FeudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EC6624E2B199FD500E3EFE0 /* FeudKit.framework */; };
+		2EC66F632B295DE100352EA4 /* FeudKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EC6624E2B199FD500E3EFE0 /* FeudKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2ECE21702B268B8100A6B868 /* FamilyFeudClientApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE216F2B268B8100A6B868 /* FamilyFeudClientApp.swift */; };
 		2ECE21722B268B8100A6B868 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE21712B268B8100A6B868 /* ContentView.swift */; };
 		2ECE21742B268B8200A6B868 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ECE21732B268B8200A6B868 /* Assets.xcassets */; };
@@ -43,24 +43,24 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		2E53D90F2B280F9A003107AA /* Embed Frameworks */ = {
+		2EC66F602B295DD300352EA4 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				2E53D90E2B280F9A003107AA /* FeudKit.framework in Embed Frameworks */,
+				2EC66F5F2B295DD300352EA4 /* FeudKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2EC662512B199FD500E3EFE0 /* Embed Frameworks */ = {
+		2EC66F642B295DE100352EA4 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				2EC662502B199FD500E3EFE0 /* FeudKit.framework in Embed Frameworks */,
+				2EC66F632B295DE100352EA4 /* FeudKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -97,6 +97,7 @@
 		2EC662A32B1AF7CF00E3EFE0 /* FamiliesPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamiliesPanel.swift; sourceTree = "<group>"; };
 		2EC662A52B1AF80700E3EFE0 /* QuestionControlPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionControlPanel.swift; sourceTree = "<group>"; };
 		2EC662A72B1AF82000E3EFE0 /* PlayControlPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayControlPanel.swift; sourceTree = "<group>"; };
+		2EC66F612B295DDA00352EA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2ECE216D2B268B8100A6B868 /* FamilyFeudClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FamilyFeudClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ECE216F2B268B8100A6B868 /* FamilyFeudClientApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyFeudClientApp.swift; sourceTree = "<group>"; };
 		2ECE21712B268B8100A6B868 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -110,8 +111,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EC66F5E2B295DD300352EA4 /* FeudKit.framework in Frameworks */,
 				2E53D9072B27D3A7003107AA /* GameKit.framework in Frameworks */,
-				2EC6624F2B199FD500E3EFE0 /* FeudKit.framework in Frameworks */,
 				2EC662542B19A0F000E3EFE0 /* SlashKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -120,7 +121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E53D90D2B280F9A003107AA /* FeudKit.framework in Frameworks */,
+				2EC66F622B295DE100352EA4 /* FeudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +256,7 @@
 		2ECE216E2B268B8100A6B868 /* FamilyFeudClient */ = {
 			isa = PBXGroup;
 			children = (
+				2EC66F612B295DDA00352EA4 /* Info.plist */,
 				2ECE218E2B26C26500A6B868 /* FamilyFeudClient.entitlements */,
 				2ECE216F2B268B8100A6B868 /* FamilyFeudClientApp.swift */,
 				2ECE21712B268B8100A6B868 /* ContentView.swift */,
@@ -282,7 +284,7 @@
 				2EC662372B199F8B00E3EFE0 /* Sources */,
 				2EC662382B199F8B00E3EFE0 /* Frameworks */,
 				2EC662392B199F8B00E3EFE0 /* Resources */,
-				2EC662512B199FD500E3EFE0 /* Embed Frameworks */,
+				2EC66F602B295DD300352EA4 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -303,7 +305,7 @@
 				2ECE21692B268B8100A6B868 /* Sources */,
 				2ECE216A2B268B8100A6B868 /* Frameworks */,
 				2ECE216B2B268B8100A6B868 /* Resources */,
-				2E53D90F2B280F9A003107AA /* Embed Frameworks */,
+				2EC66F642B295DE100352EA4 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -616,6 +618,7 @@
 				DEVELOPMENT_TEAM = 3S8XC6A264;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FamilyFeudClient/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -651,6 +654,7 @@
 				DEVELOPMENT_TEAM = 3S8XC6A264;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FamilyFeudClient/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

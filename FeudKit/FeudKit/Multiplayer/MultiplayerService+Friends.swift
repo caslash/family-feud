@@ -8,12 +8,12 @@
 import Foundation
 import GameKit
 
-struct Friend: Identifiable {
-    var id = UUID()
-    var player: GKPlayer
+public struct Friend: Identifiable {
+    public var id = UUID()
+    public var player: GKPlayer
 }
 
-extension MultiplayerService {
+public extension MultiplayerService {
     func addFriends() {
         
     }

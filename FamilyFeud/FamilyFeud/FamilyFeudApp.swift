@@ -1,6 +1,6 @@
 //
-//  FamilyFeud_DesktopApp.swift
-//  FamilyFeud-Desktop
+//  FamilyFeudApp.swift
+//  FamilyFeud
 //
 //  Created by Cameron Slash on 11/30/23.
 //

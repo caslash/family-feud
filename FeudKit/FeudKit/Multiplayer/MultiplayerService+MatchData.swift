@@ -9,12 +9,12 @@ import Foundation
 import GameKit
 import SwiftUI
 
-struct GameData: Codable {
-    var matchName: String
-    var playerName: String
+public struct GameData: Codable {
+    public var matchName: String
+    public var playerName: String
 }
 
-extension MultiplayerService {
+public extension MultiplayerService {
     func encode(gameData: GameData) -> Data? {
         let encoder = PropertyListEncoder()
         encoder.outputFormat = .xml
