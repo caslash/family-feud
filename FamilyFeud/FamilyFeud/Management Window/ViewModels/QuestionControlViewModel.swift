@@ -7,48 +7,54 @@
 
 import FeudKit
 import Foundation
-import Observation
+import SwiftUI
 
-@Observable
-class QuestionControlViewModel {
-    private var game: FamilyFeudGame
-    
-    private var viewstateservice: ViewStateService
-    
-    private var windowcontroller: ManagementWindowController
+class QuestionControlViewModel: ObservableObject {
+    @ObservedObject public var matchmanager: MatchManager
+    @ObservedObject public var windowcontroller: ManagementWindowController
+    @ObservedObject public var viewstateservice: ViewStateService
     
     public var answers: [Answer] {
-        self.game.getQuestionSet().getSelectedQuestion()?.getAnswers() ?? []
+        if let game = self.matchmanager.game {
+            return game.getQuestionSet().getSelectedQuestion()?.getAnswers() ?? []
+        } else {
+            return []
+        }
     }
     
     public var selectedAnswerId: Answer.ID?
     
-    init(game: FamilyFeudGame, viewstateservice: ViewStateService, windowcontroller: ManagementWindowController) {
-        self.game = game
-        self.viewstateservice = viewstateservice
+    
+    init(matchmanager: MatchManager, windowcontroller: ManagementWindowController, viewstateservice: ViewStateService) {
+        self.matchmanager = matchmanager
         self.windowcontroller = windowcontroller
+        self.viewstateservice = viewstateservice
     }
     
     public func reveal() {
-        if let selectedAnswerId {
-            if let selectedAnswer = self.game.getQuestionSet().getSelectedQuestion()!.getAnswers().first(where: { $0.id == selectedAnswerId }) {
-                if (!selectedAnswer.isRevealed()) {
-                    _ = self.game.getState().executeAction(action: StatePlay.ACTION_EXECUTEPLAYACTION, data: [
-                        StateFamilyPlay.ACTION_OPENANSWER,
-                        self.game.getQuestionSet().getSelectedQuestion()!.getAnswers().firstIndex { $0.id == self.selectedAnswerId! } ?? -1
-                    ])
-                    self.selectedAnswerId = nil
-                } else {
-                    _ = self.game.getState().executeAction(action: StatePlay.ACTION_EXECUTEPLAYACTION, data: [
-                        StateFamilyPlay.ACTION_OPENANSWER,
-                        self.game.getQuestionSet().getSelectedQuestion()?.getAnswers().firstIndex { $0.id == self.selectedAnswerId } ?? -1
-                    ])
+        if let game = self.matchmanager.game {
+            if let selectedAnswerId {
+                if let selectedAnswer = game.getQuestionSet().getSelectedQuestion()!.getAnswers().first(where: { $0.id == selectedAnswerId }) {
+                    if (!selectedAnswer.isRevealed()) {
+                        _ = game.getState().executeAction(action: StatePlay.ACTION_EXECUTEPLAYACTION, data: [
+                            StateFamilyPlay.ACTION_OPENANSWER,
+                            game.getQuestionSet().getSelectedQuestion()!.getAnswers().firstIndex { $0.id == self.selectedAnswerId! } ?? -1
+                        ])
+                        self.selectedAnswerId = nil
+                    } else {
+                        _ = game.getState().executeAction(action: StatePlay.ACTION_EXECUTEPLAYACTION, data: [
+                            StateFamilyPlay.ACTION_OPENANSWER,
+                            game.getQuestionSet().getSelectedQuestion()?.getAnswers().firstIndex { $0.id == self.selectedAnswerId } ?? -1
+                        ])
+                    }
                 }
             }
         }
     }
     
     public func strike() {
-        _ = self.game.getState().executeAction(action: StatePlay.ACTION_EXECUTEPLAYACTION, data: [StateFamilyPlay.ACTION_STRIKE])
+        if let game = self.matchmanager.game {
+            _ = game.getState().executeAction(action: StatePlay.ACTION_EXECUTEPLAYACTION, data: [StateFamilyPlay.ACTION_STRIKE])
+        }
     }
 }

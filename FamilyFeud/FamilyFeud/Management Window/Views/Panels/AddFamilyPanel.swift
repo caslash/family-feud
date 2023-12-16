@@ -9,20 +9,35 @@ import FeudKit
 import SwiftUI
 
 struct AddFamilyPanel: View {
-    @State private var viewmodel: AddFamilyViewModel
+    @ObservedObject private var viewmodel: AddFamilyViewModel
+    
     var body: some View {
         PanelView("Add New Family") {
             VStack {
                 HStack {
-                    PlayerView("Player 1") {
-                        Image(systemName: "person.circle.fill")
-                            .imageScale(.large)
+                    Button {
+                        self.viewmodel.familyName = self.viewmodel.matchmanager.player1?.displayName ?? "Team 1"
+                    } label: {
+                        PlayerView(self.viewmodel.matchmanager.player1?.displayName) {
+                            self.viewmodel.matchmanager.player1Image
+                                .resizable()
+                                .scaledToFit()
+                        }
                     }
+                    .buttonStyle(.plain)
+                    .border(self.viewmodel.familyName == (self.viewmodel.matchmanager.player1?.displayName ?? "Team 1") ? .blue : .clear)
                     
-                    PlayerView("Player 2") {
-                        Image(systemName: "person.circle")
-                            .imageScale(.large)
+                    Button {
+                        self.viewmodel.familyName = self.viewmodel.matchmanager.player2?.displayName ?? "Team 2"
+                    } label: {
+                        PlayerView(self.viewmodel.matchmanager.player2?.displayName) {
+                            self.viewmodel.matchmanager.player2Image
+                                .resizable()
+                                .scaledToFit()
+                        }
                     }
+                    .buttonStyle(.plain)
+                    .border(self.viewmodel.familyName == (self.viewmodel.matchmanager.player2?.displayName ?? "Team 2") ? .blue : .clear)
                 }
                 
                 HStack {
@@ -38,12 +53,12 @@ struct AddFamilyPanel: View {
         .shadow(radius: 2)
     }
     
-    init(game: FamilyFeudGame, viewstateservice: ViewStateService, windowcontroller: ManagementWindowController) {
-        self.viewmodel = AddFamilyViewModel(game: game, viewstateservice: viewstateservice, windowcontroller: windowcontroller)
+    init(matchmanager: MatchManager, viewstateservice: ViewStateService, windowcontroller: ManagementWindowController) {
+        self.viewmodel = AddFamilyViewModel(matchmanager: matchmanager, windowcontroller: windowcontroller, viewstateservice: viewstateservice)
     }
 }
 
 #Preview {
-    AddFamilyPanel(game: FamilyFeudGame(), viewstateservice: ViewStateService(), windowcontroller: ManagementWindowController())
+    AddFamilyPanel(matchmanager: MatchManager(), viewstateservice: ViewStateService(), windowcontroller: ManagementWindowController())
         .padding()
 }

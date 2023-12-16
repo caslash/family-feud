@@ -9,7 +9,8 @@ import FeudKit
 import SwiftUI
 
 struct FamiliesPanel: View {
-    @State private var viewmodel: FamiliesViewModel
+    @ObservedObject private var viewmodel: FamiliesViewModel
+    
     var body: some View {
         PanelView("Families") {
             VStack(spacing: 18) {
@@ -28,11 +29,11 @@ struct FamiliesPanel: View {
         .shadow(radius: 2, x: 0, y: 2)
     }
     
-    init(game: FamilyFeudGame, viewstateservice: ViewStateService, windowcontroller: ManagementWindowController) {
-        self.viewmodel = FamiliesViewModel(game: game, viewstateservice: viewstateservice, windowcontroller: windowcontroller)
+    init(matchmanager: MatchManager, viewstateservice: ViewStateService, windowcontroller: ManagementWindowController) {
+        self.viewmodel = FamiliesViewModel(matchmanager: matchmanager, windowcontroller: windowcontroller, viewstateservice: viewstateservice)
     }
 }
 
 #Preview {
-    FamiliesPanel(game: FamilyFeudGame(), viewstateservice: ViewStateService(), windowcontroller: ManagementWindowController())
+    FamiliesPanel(matchmanager: MatchManager(), viewstateservice: ViewStateService(), windowcontroller: ManagementWindowController())
 }

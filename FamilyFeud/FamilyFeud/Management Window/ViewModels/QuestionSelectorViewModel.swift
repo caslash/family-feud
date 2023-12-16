@@ -7,38 +7,41 @@
 
 import FeudKit
 import Foundation
-import Observation
+import SwiftUI
 
-@Observable
-class QuestionSelectorViewModel {
-    private var windowcontroller: ManagementWindowController
-    
-    private var game: FamilyFeudGame
-    
-    public var viewstateservice: ViewStateService
+class QuestionSelectorViewModel: ObservableObject {
+    @ObservedObject public var matchmanager: MatchManager
+    @ObservedObject public var windowcontroller: ManagementWindowController
+    @ObservedObject public var viewstateservice: ViewStateService
     
     public var questions: QuestionSet {
-        self.game.getQuestionSet()
+        if let game = self.matchmanager.game {
+            return game.getQuestionSet()
+        } else {
+            return QuestionSet()
+        }
     }
     
     public var multiplier: Int = 1
     
     public var selectedQuestionId: Question.ID?
     
-    init(game: FamilyFeudGame, viewstateservice: ViewStateService, windowcontroller: ManagementWindowController) {
-        self.game = game
-        self.viewstateservice = viewstateservice
+    init(matchmanager: MatchManager, windowcontroller: ManagementWindowController, viewstateservice: ViewStateService) {
+        self.matchmanager = matchmanager
         self.windowcontroller = windowcontroller
+        self.viewstateservice = viewstateservice
     }
     
     public func select() {
-        if let selectedQuestionId {
-            if (self.game.getState().executeAction(action: StatePlay.ACTION_EXECUTEPLAYACTION, data: [
-                StateSelectQuestion.ACTION_SELECTQUESTION,
-                self.questions.getQuestionIndex(selectedQuestionId),
-                self.multiplier
-            ])) {
-                self.selectedQuestionId = nil
+        if let game = self.matchmanager.game {
+            if let selectedQuestionId {
+                if (game.getState().executeAction(action: StatePlay.ACTION_EXECUTEPLAYACTION, data: [
+                    StateSelectQuestion.ACTION_SELECTQUESTION,
+                    self.questions.getQuestionIndex(selectedQuestionId),
+                    self.multiplier
+                ])) {
+                    self.selectedQuestionId = nil
+                }
             }
         }
     }

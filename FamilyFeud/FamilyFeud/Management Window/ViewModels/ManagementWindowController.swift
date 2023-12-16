@@ -6,11 +6,11 @@
 //
 
 import Foundation
-import Observation
 
-@Observable
-class ManagementWindowController {
-    public private(set) var chooseFamilyCommand: Int?
+class ManagementWindowController: ObservableObject {
+    public static var shared = ManagementWindowController()
+    
+    @Published public private(set) var chooseFamilyCommand: Int?
     
     init() { }
     

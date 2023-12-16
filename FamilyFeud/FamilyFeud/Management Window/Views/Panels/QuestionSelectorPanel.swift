@@ -9,7 +9,7 @@ import FeudKit
 import SwiftUI
 
 struct QuestionSelectorPanel: View {
-    @State private var viewmodel: QuestionSelectorViewModel
+    @ObservedObject private var viewmodel: QuestionSelectorViewModel
     var body: some View {
         PanelView("Question Selector") {
             VStack(spacing: 18) {
@@ -41,11 +41,11 @@ struct QuestionSelectorPanel: View {
         .shadow(radius: 2, x: 0, y: 2)
     }
     
-    init(game: FamilyFeudGame, viewstateservice: ViewStateService, windowcontroller: ManagementWindowController) {
-        self.viewmodel = QuestionSelectorViewModel(game: game, viewstateservice: viewstateservice, windowcontroller: windowcontroller)
+    init(matchmanager: MatchManager, viewstateservice: ViewStateService, windowcontroller: ManagementWindowController) {
+        self.viewmodel = QuestionSelectorViewModel(matchmanager: matchmanager, windowcontroller: windowcontroller, viewstateservice: viewstateservice)
     }
 }
 
 #Preview {
-    QuestionSelectorPanel(game: FamilyFeudGame(), viewstateservice: ViewStateService(), windowcontroller: ManagementWindowController())
+    QuestionSelectorPanel(matchmanager: MatchManager(), viewstateservice: ViewStateService(), windowcontroller: ManagementWindowController())
 }

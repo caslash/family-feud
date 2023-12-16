@@ -7,90 +7,93 @@
 
 import FeudKit
 import Foundation
-import Observation
+import SwiftUI
 
-@Observable
-class StateControlViewModel {
-    private var windowcontroller: ManagementWindowController
+class StateControlViewModel: ObservableObject {
+    @ObservedObject public var matchmanager: MatchManager
+    @ObservedObject public var windowcontroller: ManagementWindowController
+    @ObservedObject public var viewstateservice: ViewStateService
     
-    private var game: FamilyFeudGame
-    
-    public var viewstateservice: ViewStateService
-    
-    init(game: FamilyFeudGame, viewstateservice: ViewStateService, windowcontroller: ManagementWindowController) {
-        self.game = game
+    init(matchmanager: MatchManager, windowcontroller: ManagementWindowController, viewstateservice: ViewStateService) {
+        self.matchmanager = matchmanager
         self.windowcontroller = windowcontroller
         self.viewstateservice = viewstateservice
-        self.viewstateservice.newGameEnabled = true
     }
     
     func startGame() {
-        _ = game.changeState(type: FFStateType.NEW_GAME)
-        self.viewstateservice.manageFamiliesEnabled = true
-        self.viewstateservice.loadQuestionEnabled = true
-        self.viewstateservice.initializeGameEnabled = true
-        self.viewstateservice.newGameEnabled = false
-        self.viewstateservice.fastMoneyEnabled = false
-        self.viewstateservice.addFamilyPanelEnabled = false
-        self.viewstateservice.familiesPanelEnabled = false
+        self.matchmanager.startMatchmaking()
     }
     
     func manageFamilies() {
-        if (self.game.changeState(type: FFStateType.ADD_FAMILY)) {
-            self.viewstateservice.addFamilyPanelEnabled = true
-            self.viewstateservice.loadQuestionsPanelEnabled = false
+        if let game = self.matchmanager.game {
+            if (game.changeState(type: FFStateType.ADD_FAMILY)) {
+                self.viewstateservice.addFamilyPanelEnabled = true
+                self.viewstateservice.loadQuestionsPanelEnabled = false
+            }
         }
     }
     
     func loadQuestions() {
-        _ = game.changeState(type: FFStateType.LOAD_QUESTIONS)
-        self.viewstateservice.addFamilyPanelEnabled = false
-        self.viewstateservice.loadQuestionsPanelEnabled = true
+        if let game = self.matchmanager.game {
+            _ = game.changeState(type: FFStateType.LOAD_QUESTIONS)
+            self.viewstateservice.addFamilyPanelEnabled = false
+            self.viewstateservice.loadQuestionsPanelEnabled = true
+        }
     }
     
     func initializeGame() {
-        if (self.game.changeState(type: FFStateType.INITIALIZE_GAME)) {
-            self.viewstateservice.initializeGameEnabled = false
-            self.viewstateservice.newGameEnabled = false
-            self.viewstateservice.manageFamiliesEnabled = false
-            self.viewstateservice.loadQuestionEnabled = false
-            self.viewstateservice.addFamilyPanelEnabled = false
-            self.viewstateservice.loadQuestionsPanelEnabled = false
-            self.viewstateservice.playGameEnabled = true
+        if let game = self.matchmanager.game {
+            if (game.changeState(type: FFStateType.INITIALIZE_GAME)) {
+                self.viewstateservice.initializeGameEnabled = false
+                self.viewstateservice.newGameEnabled = false
+                self.viewstateservice.manageFamiliesEnabled = false
+                self.viewstateservice.loadQuestionEnabled = false
+                self.viewstateservice.addFamilyPanelEnabled = false
+                self.viewstateservice.loadQuestionsPanelEnabled = false
+                self.viewstateservice.playGameEnabled = true
+            }
         }
     }
     
     func playGame() {
-        if (game.changeState(type: FFStateType.PLAY)) {
-            self.viewstateservice.playGameEnabled = false
-            self.viewstateservice.initializeGameEnabled = false
-            self.viewstateservice.fastMoneyEnabled = true
-            self.viewstateservice.endGameEnabled = true
-            self.viewstateservice.questionSelectorPanelEnabled = true
-            self.viewstateservice.playControlPanelEnabled = true
+        if let game = self.matchmanager.game {
+            if (game.changeState(type: FFStateType.PLAY)) {
+                self.viewstateservice.playGameEnabled = false
+                self.viewstateservice.initializeGameEnabled = false
+                self.viewstateservice.fastMoneyEnabled = true
+                self.viewstateservice.endGameEnabled = true
+                self.viewstateservice.questionSelectorPanelEnabled = true
+                self.viewstateservice.playControlPanelEnabled = true
+            }
         }
     }
     
     func endGame() {
-        //TODO: End Game Confirmation
-        if (self.game.changeState(type: FFStateType.END_GAME)) {
-            self.viewstateservice.playGameEnabled = false
-            self.viewstateservice.endGameEnabled = false
-            self.viewstateservice.newGameEnabled = true
-            self.viewstateservice.fastMoneyEnabled = true
-            self.viewstateservice.questionSelectorPanelEnabled = false
-            self.viewstateservice.playControlPanelEnabled = false
-            self.viewstateservice.questionControlPanelEnabled = false
+        if let game = self.matchmanager.game {
+            //TODO: End Game Confirmation
+            if (game.changeState(type: FFStateType.END_GAME)) {
+                self.viewstateservice.playGameEnabled = false
+                self.viewstateservice.endGameEnabled = false
+                self.viewstateservice.newGameEnabled = true
+                self.viewstateservice.fastMoneyEnabled = true
+                self.viewstateservice.questionSelectorPanelEnabled = false
+                self.viewstateservice.playControlPanelEnabled = false
+                self.viewstateservice.questionControlPanelEnabled = false
+            }
         }
+        
+        self.matchmanager.gameOver()
     }
     
     func startFastMoney() {
-        if (self.game.changeState(type: FFStateType.FAST_MONEY)) {
-            self.viewstateservice.fastMoneyEnabled = false
-            self.viewstateservice.questionSelectorPanelEnabled = false
-            self.viewstateservice.questionControlPanelEnabled = false
-            if (!self.game.finished()) { self.viewstateservice.playGameEnabled = true }
-            self.viewstateservice.endGameEnabled = true
+        if let game = self.matchmanager.game {
+            if (game.changeState(type: FFStateType.FAST_MONEY)) {
+                self.viewstateservice.fastMoneyEnabled = false
+                self.viewstateservice.questionSelectorPanelEnabled = false
+                self.viewstateservice.questionControlPanelEnabled = false
+                if (!game.finished()) { self.viewstateservice.playGameEnabled = true }
+                self.viewstateservice.endGameEnabled = true
+            }
         }
     }
 }

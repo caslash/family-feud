@@ -7,44 +7,42 @@
 
 import FeudKit
 import Foundation
-import Observation
 import SwiftUI
 
-@Observable
-class LoadQuestionsViewModel {
-    private var windowcontroller: ManagementWindowController
+class LoadQuestionsViewModel: ObservableObject {
+    @ObservedObject public var matchmanager: MatchManager
+    @ObservedObject public var windowcontroller: ManagementWindowController
+    @ObservedObject public var viewstateservice: ViewStateService
     
-    private var game: FamilyFeudGame
-    
-    public var viewstateservice: ViewStateService
-    
-    init(game: FamilyFeudGame, viewstateservice: ViewStateService, windowcontroller: ManagementWindowController) {
-        self.game = game
-        self.viewstateservice = viewstateservice
+    init(matchmanager: MatchManager, windowcontroller: ManagementWindowController, viewstateservice: ViewStateService) {
+        self.matchmanager = matchmanager
         self.windowcontroller = windowcontroller
+        self.viewstateservice = viewstateservice
     }
     
     func getQuestions() {
-        var fileContents: [String] = []
-        
-        let openPanel = NSOpenPanel()
-        openPanel.allowedContentTypes = [.json]
-        openPanel.allowsMultipleSelection = true
-        openPanel.canChooseDirectories = false
-        openPanel.canChooseFiles = true
-        let response = openPanel.runModal()
-        
-        if (response == .OK) {
-            do {
-                for url in openPanel.urls {
-                    let contents = try String(contentsOf: url)
+        if let game = self.matchmanager.game {
+            var fileContents: [String] = []
+            
+            let openPanel = NSOpenPanel()
+            openPanel.allowedContentTypes = [.json]
+            openPanel.allowsMultipleSelection = true
+            openPanel.canChooseDirectories = false
+            openPanel.canChooseFiles = true
+            let response = openPanel.runModal()
+            
+            if (response == .OK) {
+                do {
+                    for url in openPanel.urls {
+                        let contents = try String(contentsOf: url)
+                        
+                        fileContents.append(contents)
+                    }
                     
-                    fileContents.append(contents)
+                    _ = game.getState().executeAction(action: StateLoadQuestions.ACTION_LOADQUESTIONSET, data: fileContents)
+                } catch {
+                    fatalError()
                 }
-                
-                _ = self.game.getState().executeAction(action: StateLoadQuestions.ACTION_LOADQUESTIONSET, data: fileContents)
-            } catch {
-                fatalError()
             }
         }
     }

@@ -6,21 +6,19 @@
 //
 
 import Foundation
-import Observation
 
-@Observable
-public class FamilyFeudGame {
+public class FamilyFeudGame: ObservableObject {
     public static var STRIKE_LIMIT: Int = 3
     
-    public var stateMachine: FFStateMachine?
+    @Published public var stateMachine: FFStateMachine?
     
-    private var families: FamilyCollection
+    @Published public var families: FamilyCollection
     
-    private var questions: QuestionSet
+    @Published public var questions: QuestionSet
     
-    private var fastmoney: FastMoney
+    @Published public var fastmoney: FastMoney
     
-    private var winner: Family?
+    @Published public var winner: Family?
     
     public init() {
         self.families = FamilyCollection()

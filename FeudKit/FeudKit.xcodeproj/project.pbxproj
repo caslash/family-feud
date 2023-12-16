@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2EAE3AA52B2D6E0500007D2E /* MatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAE3AA42B2D6E0500007D2E /* MatchManager.swift */; };
+		2EAE3AA72B2D718900007D2E /* MatchManager+GKMatchmakerViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAE3AA62B2D718900007D2E /* MatchManager+GKMatchmakerViewControllerDelegate.swift */; };
+		2EAE3AA92B2D737B00007D2E /* MatchManager+GKMatchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAE3AA82B2D737B00007D2E /* MatchManager+GKMatchDelegate.swift */; };
+		2EAE3AAB2B2D840900007D2E /* Notification+Names.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAE3AAA2B2D840900007D2E /* Notification+Names.swift */; };
+		2EAE3AAF2B2DA63700007D2E /* MatchManager+GKLocalPlayerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAE3AAE2B2DA63700007D2E /* MatchManager+GKLocalPlayerListener.swift */; };
 		2EC661C22B13104A00E3EFE0 /* FeudKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EC661C12B13104A00E3EFE0 /* FeudKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2EC661C92B13113E00E3EFE0 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661C82B13113E00E3EFE0 /* Answer.swift */; };
 		2EC661CB2B13122A00E3EFE0 /* Family.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC661CA2B13122A00E3EFE0 /* Family.swift */; };
@@ -49,6 +54,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2EAE3AA42B2D6E0500007D2E /* MatchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchManager.swift; sourceTree = "<group>"; };
+		2EAE3AA62B2D718900007D2E /* MatchManager+GKMatchmakerViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MatchManager+GKMatchmakerViewControllerDelegate.swift"; sourceTree = "<group>"; };
+		2EAE3AA82B2D737B00007D2E /* MatchManager+GKMatchDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MatchManager+GKMatchDelegate.swift"; sourceTree = "<group>"; };
+		2EAE3AAA2B2D840900007D2E /* Notification+Names.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Names.swift"; sourceTree = "<group>"; };
+		2EAE3AAE2B2DA63700007D2E /* MatchManager+GKLocalPlayerListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MatchManager+GKLocalPlayerListener.swift"; sourceTree = "<group>"; };
 		2EC661BE2B13104A00E3EFE0 /* FeudKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FeudKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EC661C12B13104A00E3EFE0 /* FeudKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeudKit.h; sourceTree = "<group>"; };
 		2EC661C82B13113E00E3EFE0 /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
@@ -102,6 +112,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2EAE3AA32B2D6DDE00007D2E /* Multiplayer */ = {
+			isa = PBXGroup;
+			children = (
+				2EAE3AA42B2D6E0500007D2E /* MatchManager.swift */,
+				2EAE3AA62B2D718900007D2E /* MatchManager+GKMatchmakerViewControllerDelegate.swift */,
+				2EAE3AA82B2D737B00007D2E /* MatchManager+GKMatchDelegate.swift */,
+				2EAE3AAE2B2DA63700007D2E /* MatchManager+GKLocalPlayerListener.swift */,
+			);
+			path = Multiplayer;
+			sourceTree = "<group>";
+		};
 		2EC661B42B13104A00E3EFE0 = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +142,7 @@
 		2EC661C02B13104A00E3EFE0 /* FeudKit */ = {
 			isa = PBXGroup;
 			children = (
+				2EAE3AA32B2D6DDE00007D2E /* Multiplayer */,
 				2EC662312B199D3500E3EFE0 /* Game */,
 				2EC662242B198F2F00E3EFE0 /* Resources */,
 				2EC661DF2B14375300E3EFE0 /* Utility */,
@@ -183,6 +205,7 @@
 		2EC661DF2B14375300E3EFE0 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				2EAE3AAA2B2D840900007D2E /* Notification+Names.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -297,8 +320,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EAE3AAB2B2D840900007D2E /* Notification+Names.swift in Sources */,
 				2EC661D22B131A7E00E3EFE0 /* QuestionSet.swift in Sources */,
 				2EC661CE2B13152700E3EFE0 /* FamilyCollection.swift in Sources */,
+				2EAE3AA92B2D737B00007D2E /* MatchManager+GKMatchDelegate.swift in Sources */,
 				2EC661FD2B144BEE00E3EFE0 /* StateSelectQuestion.swift in Sources */,
 				2EC661F22B144BB500E3EFE0 /* StateAllocatePoints.swift in Sources */,
 				2EC661ED2B14495200E3EFE0 /* FFPlayState.swift in Sources */,
@@ -308,6 +333,7 @@
 				2EC6621D2B19874100E3EFE0 /* FFStateMachine.swift in Sources */,
 				2EC661D02B1318A500E3EFE0 /* Question.swift in Sources */,
 				2EC662142B1855AF00E3EFE0 /* FFState.swift in Sources */,
+				2EAE3AA52B2D6E0500007D2E /* MatchManager.swift in Sources */,
 				2EC6620A2B18274000E3EFE0 /* StateAnswer.swift in Sources */,
 				2EC661F42B144BBF00E3EFE0 /* StateFaceOff.swift in Sources */,
 				2EC662042B16F50900E3EFE0 /* StrikeInterface.swift in Sources */,
@@ -325,6 +351,8 @@
 				2EC6620E2B18282300E3EFE0 /* FFFastMoneyStateType.swift in Sources */,
 				2EC662062B181C3E00E3EFE0 /* FastMoney.swift in Sources */,
 				2EC662212B198E6500E3EFE0 /* StateInitializeGame.swift in Sources */,
+				2EAE3AA72B2D718900007D2E /* MatchManager+GKMatchmakerViewControllerDelegate.swift in Sources */,
+				2EAE3AAF2B2DA63700007D2E /* MatchManager+GKLocalPlayerListener.swift in Sources */,
 				2EC6622C2B1992BF00E3EFE0 /* StateStart.swift in Sources */,
 				2EC662122B18511000E3EFE0 /* FFFastMoneyStateMachine.swift in Sources */,
 				2EC661CB2B13122A00E3EFE0 /* Family.swift in Sources */,
@@ -393,7 +421,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -453,7 +481,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -479,7 +507,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
@@ -519,7 +547,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",

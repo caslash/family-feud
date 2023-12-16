@@ -7,34 +7,38 @@
 
 import FeudKit
 import Foundation
-import Observation
+import SwiftUI
 
-class FamiliesViewModel {
-    private var windowcontroller: ManagementWindowController
-    
-    private var game: FamilyFeudGame
-    
-    public var viewstateservice: ViewStateService
+class FamiliesViewModel: ObservableObject {
+    @ObservedObject public var matchmanager: MatchManager
+    @ObservedObject public var windowcontroller: ManagementWindowController
+    @ObservedObject public var viewstateservice: ViewStateService
     
     public var families: [Family] {
-        self.game.getFamilies()
+        if let game = self.matchmanager.game {
+            return game.getFamilies()
+        } else {
+            return []
+        }
     }
     
     public var selectedFamilyId: Family.ID?
     
-    init(game: FamilyFeudGame, viewstateservice: ViewStateService, windowcontroller: ManagementWindowController) {
-        self.game = game
-        self.viewstateservice = viewstateservice
+    init(matchmanager: MatchManager, windowcontroller: ManagementWindowController, viewstateservice: ViewStateService) {
+        self.matchmanager = matchmanager
         self.windowcontroller = windowcontroller
+        self.viewstateservice = viewstateservice
     }
     
     public func select() {
-        if let selectedFamilyId {
-            if let command = self.windowcontroller.chooseFamilyCommand {
-                _ = self.game.getState().executeAction(action: StatePlay.ACTION_EXECUTEPLAYACTION, data: [
-                    command,
-                    families.firstIndex { $0.id == selectedFamilyId } ?? -1
-                ])
+        if let game = self.matchmanager.game {
+            if let selectedFamilyId {
+                if let command = self.windowcontroller.chooseFamilyCommand {
+                    _ = game.getState().executeAction(action: StatePlay.ACTION_EXECUTEPLAYACTION, data: [
+                        command,
+                        families.firstIndex { $0.id == selectedFamilyId } ?? -1
+                    ])
+                }
             }
         }
     }

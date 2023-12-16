@@ -16,6 +16,7 @@
 		2E0AE4052B1C6BF40003D90B /* LoadQuestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0AE4042B1C6BF40003D90B /* LoadQuestionsViewModel.swift */; };
 		2E53D9072B27D3A7003107AA /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E53D9062B27D3A7003107AA /* GameKit.framework */; };
 		2E54A7842B2C067A0059B4D9 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E54A7832B2C067A0059B4D9 /* PlayerView.swift */; };
+		2EAE3AAD2B2D959100007D2E /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAE3AAC2B2D959100007D2E /* MenuView.swift */; };
 		2EBFFDA62B1D8DEE00487152 /* QuestionSelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFFDA52B1D8DEE00487152 /* QuestionSelectorViewModel.swift */; };
 		2EBFFDA82B1D97E300487152 /* StateControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFFDA72B1D97E300487152 /* StateControlViewModel.swift */; };
 		2EC6623F2B199F8B00E3EFE0 /* FamilyFeudApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6623E2B199F8B00E3EFE0 /* FamilyFeudApp.swift */; };
@@ -80,6 +81,7 @@
 		2E53D9082B28047F003107AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2E53D9092B280A29003107AA /* FeudKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FeudKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E54A7832B2C067A0059B4D9 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		2EAE3AAC2B2D959100007D2E /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		2EBFFDA52B1D8DEE00487152 /* QuestionSelectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSelectorViewModel.swift; sourceTree = "<group>"; };
 		2EBFFDA72B1D97E300487152 /* StateControlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateControlViewModel.swift; sourceTree = "<group>"; };
 		2EC6623B2B199F8B00E3EFE0 /* FamilyFeud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FamilyFeud.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -194,8 +196,6 @@
 			isa = PBXGroup;
 			children = (
 				2EC662832B1AB3C100E3EFE0 /* GameWindow.swift */,
-				2EC6627B2B19A2EB00E3EFE0 /* Views */,
-				2EC6627C2B19A2EF00E3EFE0 /* ViewModels */,
 			);
 			path = "Game Window";
 			sourceTree = "<group>";
@@ -235,20 +235,6 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		2EC6627B2B19A2EB00E3EFE0 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		2EC6627C2B19A2EF00E3EFE0 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		2EC662872B1ACB1000E3EFE0 /* Panels */ = {
 			isa = PBXGroup;
 			children = (
@@ -271,6 +257,7 @@
 				2ECE218E2B26C26500A6B868 /* FamilyFeudClient.entitlements */,
 				2ECE216F2B268B8100A6B868 /* FamilyFeudClientApp.swift */,
 				2ECE21712B268B8100A6B868 /* ContentView.swift */,
+				2EAE3AAC2B2D959100007D2E /* MenuView.swift */,
 				2ECE21732B268B8200A6B868 /* Assets.xcassets */,
 				2ECE21752B268B8200A6B868 /* Preview Content */,
 			);
@@ -423,6 +410,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2ECE21722B268B8100A6B868 /* ContentView.swift in Sources */,
+				2EAE3AAD2B2D959100007D2E /* MenuView.swift in Sources */,
 				2ECE21702B268B8100A6B868 /* FamilyFeudClientApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -482,7 +470,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -540,7 +528,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -636,7 +624,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -672,7 +660,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

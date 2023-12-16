@@ -6,13 +6,11 @@
 //
 
 import Foundation
-import Observation
 
-@Observable
-public class QuestionSet {
-    private var questions: [Question]
+public class QuestionSet: ObservableObject {
+    @Published public var questions: [Question]
     
-    private var selectedIndex: Int = -1
+    @Published public var selectedIndex: Int = -1
     
     public init() {
         self.questions = [Question]()

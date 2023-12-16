@@ -8,37 +8,17 @@
 import FeudKit
 import GameKit
 import SwiftUI
-import Observation
 
 struct ContentView: View {
-    @StateObject private var game = MultiplayerService()
+    @StateObject private var matchmanager = MatchManager.shared
+    
     var body: some View {
-        Form {
-            Button("Choose Player") {
-                if self.game.automatch {
-                    GKMatchmaker.shared().cancel()
-                    self.game.automatch = false
-                }
-                self.game.choosePlayer()
-            }
-            
-            Toggle("Automatch", isOn: self.$game.automatch)
-                .foregroundStyle(.blue)
-                .tint(.blue)
-                .onChange(of: self.game.automatch) {
-                    if self.game.automatch {
-                        Task {
-                            await game.findPlayer()
-                        }
-                    } else {
-                        GKMatchmaker.shared().cancel()
-                    }
-                }
-        }
+        MenuView(matchmanager: self.matchmanager)
         .onAppear {
-            if !self.game.playingGame {
-                self.game.authenticatePlayer()
-            }
+            self.matchmanager.authenticateUser()
+        }
+        .fullScreenCover(isPresented: self.$matchmanager.inGame) {
+            Text("GAME VIEW")
         }
     }
 }

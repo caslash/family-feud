@@ -9,8 +9,8 @@ import FeudKit
 import SwiftUI
 
 struct PlayControlPanel: View {
-    @State private var viewmodel: PlayControlViewModel
-    @State private var viewstateservice: ViewStateService
+    @ObservedObject private var viewmodel: PlayControlViewModel
+    
     var body: some View {
         PanelView("Play Control") {
             VStack {
@@ -41,16 +41,16 @@ struct PlayControlPanel: View {
         .background(.thickMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .shadow(radius: 2, x: 0, y: 2)
-        .onChange(of: self.viewstateservice.playControlPanelEnabled) {
-            self.viewmodel.enableButtons() }
+        .onChange(of: self.viewmodel.viewstateservice.playControlPanelEnabled) {
+            self.viewmodel.enableButtons()
+        }
     }
     
-    init(game: FamilyFeudGame, viewstateservice: ViewStateService, windowcontroller: ManagementWindowController) {
-        self.viewmodel = PlayControlViewModel(windowcontroller: windowcontroller, game: game, viewstateservice: viewstateservice)
-        self.viewstateservice = viewstateservice
+    init(matchmanager: MatchManager, viewstateservice: ViewStateService, windowcontroller: ManagementWindowController) {
+        self.viewmodel = PlayControlViewModel(matchmanager: matchmanager, windowcontroller: windowcontroller, viewstateservice: viewstateservice)
     }
 }
 
 #Preview {
-    PlayControlPanel(game: FamilyFeudGame(), viewstateservice: ViewStateService(), windowcontroller: ManagementWindowController())
+    PlayControlPanel(matchmanager: MatchManager(), viewstateservice: ViewStateService(), windowcontroller: ManagementWindowController())
 }

@@ -9,46 +9,47 @@ import FeudKit
 import SwiftUI
 
 struct ManagementWindow: View {
-    @Environment(FamilyFeudGame.self) private var game
-    @Environment(ViewStateService.self) private var viewstateservice
+    @StateObject private var matchmanager = MatchManager.shared
+    @StateObject private var viewstateservice = ViewStateService.shared
+    @StateObject private var windowcontroller = ManagementWindowController.shared
     
-    @State var controller: ManagementWindowController = .init()
     var body: some View {
         NavigationStack {
             Grid(horizontalSpacing: 30, verticalSpacing: 30) {
                 GridRow {
                     WindowControlPanel()
                     
-                    AddFamilyPanel(game: self.game, viewstateservice: self.viewstateservice, windowcontroller: self.controller)
+                    AddFamilyPanel(matchmanager: self.matchmanager, viewstateservice: self.viewstateservice, windowcontroller: self.windowcontroller)
                         .disabled(!self.viewstateservice.addFamilyPanelEnabled)
                     
-                    LoadQuestionsPanel(game: self.game, viewstateservice: self.viewstateservice, windowcontroller: self.controller)
+                    LoadQuestionsPanel(matchmanager: self.matchmanager, viewstateservice: self.viewstateservice, windowcontroller: self.windowcontroller)
                         .disabled(!self.viewstateservice.loadQuestionsPanelEnabled)
                     
-                    PlayControlPanel(game: self.game, viewstateservice: self.viewstateservice, windowcontroller: self.controller)
+                    PlayControlPanel(matchmanager: self.matchmanager, viewstateservice: self.viewstateservice, windowcontroller: self.windowcontroller)
                         .disabled(!self.viewstateservice.playControlPanelEnabled)
                 }
                 
                 GridRow {
-                    StateControlPanel(game: self.game, viewstateservice: self.viewstateservice, windowcontroller: self.controller)
+                    StateControlPanel(matchmanager: self.matchmanager, viewstateservice: self.viewstateservice, windowcontroller: self.windowcontroller)
                     
-                    FamiliesPanel(game: self.game, viewstateservice: self.viewstateservice, windowcontroller: self.controller)
+                    FamiliesPanel(matchmanager: self.matchmanager, viewstateservice: self.viewstateservice, windowcontroller: self.windowcontroller)
                         .disabled(!self.viewstateservice.familiesPanelEnabled)
                     
-                    QuestionSelectorPanel(game: self.game, viewstateservice: self.viewstateservice, windowcontroller: self.controller)
+                    QuestionSelectorPanel(matchmanager: self.matchmanager, viewstateservice: self.viewstateservice, windowcontroller: self.windowcontroller)
                         .disabled(!self.viewstateservice.questionSelectorPanelEnabled)
                     
-                    QuestionControlPanel(game: self.game, viewstateservice: self.viewstateservice, windowcontroller: self.controller)
+                    QuestionControlPanel(matchmanager: self.matchmanager, viewstateservice: self.viewstateservice, windowcontroller: self.windowcontroller)
                         .disabled(!self.viewstateservice.questionControlPanelEnabled)
                 }
             }
         }
         .padding()
+        .onAppear {
+            self.matchmanager.authenticateUser()
+        }
     }
 }
 
 #Preview {
     ManagementWindow()
-        .environment(FamilyFeudGame())
-        .environment(ViewStateService())
 }

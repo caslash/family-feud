@@ -11,10 +11,8 @@ struct PlayerView<Content: View>: View {
     private var displayName: String?
     private var playerAvatar: Content
     var body: some View {
-        VStack {
+        VStack(spacing: 10) {
             playerAvatar
-                .padding(.vertical)
-                .scaledToFit()
             
             Text(displayName ?? "Invitation Pending")
                 .multilineTextAlignment(.center)
@@ -35,7 +33,8 @@ struct PlayerView<Content: View>: View {
 #Preview {
     PlayerView() {
         Image(systemName: "person.crop.circle")
-            .imageScale(.large)
+            .resizable()
+            .scaledToFit()
     }
     .padding()
 }

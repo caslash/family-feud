@@ -6,17 +6,15 @@
 //
 
 import Foundation
-import Observation
 
-@Observable
-public class FFStateMachine: AbstractFFStateMachine<FFStateType, FFState> {
-    private var game: FamilyFeudGame
+public class FFStateMachine: AbstractFFStateMachine<FFStateType, FFState>, ObservableObject {
+    @Published public var game: FamilyFeudGame
     
-    private var families: FamilyCollection
+    @Published public var families: FamilyCollection
     
-    private var questions: QuestionSet
+    @Published public var questions: QuestionSet
     
-    private var fromFastMoney: FFStateType? = nil
+    @Published public var fromFastMoney: FFStateType? = nil
     
     public init(game: FamilyFeudGame, families: FamilyCollection, questions: QuestionSet) {
         self.game = game
