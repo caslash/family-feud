@@ -11,7 +11,7 @@ import SwiftUI
 import Observation
 
 struct ContentView: View {
-    @State private var game = MultiplayerService()
+    @StateObject private var game = MultiplayerService()
     var body: some View {
         Form {
             Button("Choose Player") {

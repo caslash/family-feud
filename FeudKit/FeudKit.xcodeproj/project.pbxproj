@@ -46,12 +46,6 @@
 		2EC6622E2B19938700E3EFE0 /* FFStateFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6622D2B19938700E3EFE0 /* FFStateFactory.swift */; };
 		2EC662302B19953F00E3EFE0 /* StateFastMoney.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6622F2B19953F00E3EFE0 /* StateFastMoney.swift */; };
 		2EC662AB2B1C0F7400E3EFE0 /* SlashKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2EC662AA2B1C0F7400E3EFE0 /* SlashKit */; };
-		2EC66F572B295BC200352EA4 /* MultiplayerService+GKLocalPlayerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC66F512B295BC200352EA4 /* MultiplayerService+GKLocalPlayerListener.swift */; };
-		2EC66F582B295BC200352EA4 /* MultiplayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC66F522B295BC200352EA4 /* MultiplayerService.swift */; };
-		2EC66F592B295BC200352EA4 /* MultiplayerService+GKMatchmakerViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC66F532B295BC200352EA4 /* MultiplayerService+GKMatchmakerViewControllerDelegate.swift */; };
-		2EC66F5A2B295BC200352EA4 /* MultiplayerService+GKMatchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC66F542B295BC200352EA4 /* MultiplayerService+GKMatchDelegate.swift */; };
-		2EC66F5B2B295BC200352EA4 /* MultiplayerService+Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC66F552B295BC200352EA4 /* MultiplayerService+Friends.swift */; };
-		2EC66F5C2B295BC200352EA4 /* MultiplayerService+MatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC66F562B295BC200352EA4 /* MultiplayerService+MatchData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,12 +88,6 @@
 		2EC6622B2B1992BF00E3EFE0 /* StateStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateStart.swift; sourceTree = "<group>"; };
 		2EC6622D2B19938700E3EFE0 /* FFStateFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFStateFactory.swift; sourceTree = "<group>"; };
 		2EC6622F2B19953F00E3EFE0 /* StateFastMoney.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateFastMoney.swift; sourceTree = "<group>"; };
-		2EC66F512B295BC200352EA4 /* MultiplayerService+GKLocalPlayerListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MultiplayerService+GKLocalPlayerListener.swift"; sourceTree = "<group>"; };
-		2EC66F522B295BC200352EA4 /* MultiplayerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplayerService.swift; sourceTree = "<group>"; };
-		2EC66F532B295BC200352EA4 /* MultiplayerService+GKMatchmakerViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MultiplayerService+GKMatchmakerViewControllerDelegate.swift"; sourceTree = "<group>"; };
-		2EC66F542B295BC200352EA4 /* MultiplayerService+GKMatchDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MultiplayerService+GKMatchDelegate.swift"; sourceTree = "<group>"; };
-		2EC66F552B295BC200352EA4 /* MultiplayerService+Friends.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MultiplayerService+Friends.swift"; sourceTree = "<group>"; };
-		2EC66F562B295BC200352EA4 /* MultiplayerService+MatchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MultiplayerService+MatchData.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,7 +121,6 @@
 		2EC661C02B13104A00E3EFE0 /* FeudKit */ = {
 			isa = PBXGroup;
 			children = (
-				2EC66F5D2B295BD100352EA4 /* Multiplayer */,
 				2EC662312B199D3500E3EFE0 /* Game */,
 				2EC662242B198F2F00E3EFE0 /* Resources */,
 				2EC661DF2B14375300E3EFE0 /* Utility */,
@@ -224,19 +211,6 @@
 			path = Game;
 			sourceTree = "<group>";
 		};
-		2EC66F5D2B295BD100352EA4 /* Multiplayer */ = {
-			isa = PBXGroup;
-			children = (
-				2EC66F522B295BC200352EA4 /* MultiplayerService.swift */,
-				2EC66F552B295BC200352EA4 /* MultiplayerService+Friends.swift */,
-				2EC66F512B295BC200352EA4 /* MultiplayerService+GKLocalPlayerListener.swift */,
-				2EC66F542B295BC200352EA4 /* MultiplayerService+GKMatchDelegate.swift */,
-				2EC66F532B295BC200352EA4 /* MultiplayerService+GKMatchmakerViewControllerDelegate.swift */,
-				2EC66F562B295BC200352EA4 /* MultiplayerService+MatchData.swift */,
-			);
-			path = Multiplayer;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -323,11 +297,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2EC66F5B2B295BC200352EA4 /* MultiplayerService+Friends.swift in Sources */,
 				2EC661D22B131A7E00E3EFE0 /* QuestionSet.swift in Sources */,
 				2EC661CE2B13152700E3EFE0 /* FamilyCollection.swift in Sources */,
 				2EC661FD2B144BEE00E3EFE0 /* StateSelectQuestion.swift in Sources */,
-				2EC66F592B295BC200352EA4 /* MultiplayerService+GKMatchmakerViewControllerDelegate.swift in Sources */,
 				2EC661F22B144BB500E3EFE0 /* StateAllocatePoints.swift in Sources */,
 				2EC661ED2B14495200E3EFE0 /* FFPlayState.swift in Sources */,
 				2EC662302B19953F00E3EFE0 /* StateFastMoney.swift in Sources */,
@@ -341,7 +313,6 @@
 				2EC662042B16F50900E3EFE0 /* StrikeInterface.swift in Sources */,
 				2EC661F72B144BCB00E3EFE0 /* StateFamilyPlay.swift in Sources */,
 				2EC662232B198EB600E3EFE0 /* StateLoadQuestions.swift in Sources */,
-				2EC66F582B295BC200352EA4 /* MultiplayerService.swift in Sources */,
 				2EC6620C2B18274C00E3EFE0 /* FFFastMoneyState.swift in Sources */,
 				2EC6621A2B19870F00E3EFE0 /* FamilyFeudGame.swift in Sources */,
 				2EC6622E2B19938700E3EFE0 /* FFStateFactory.swift in Sources */,
@@ -351,17 +322,14 @@
 				2EC661FB2B144BE200E3EFE0 /* StateRevealAnswers.swift in Sources */,
 				2EC6622A2B1990D500E3EFE0 /* StatePlay.swift in Sources */,
 				2EC662162B1855F100E3EFE0 /* FFStateType.swift in Sources */,
-				2EC66F5C2B295BC200352EA4 /* MultiplayerService+MatchData.swift in Sources */,
 				2EC6620E2B18282300E3EFE0 /* FFFastMoneyStateType.swift in Sources */,
 				2EC662062B181C3E00E3EFE0 /* FastMoney.swift in Sources */,
 				2EC662212B198E6500E3EFE0 /* StateInitializeGame.swift in Sources */,
-				2EC66F5A2B295BC200352EA4 /* MultiplayerService+GKMatchDelegate.swift in Sources */,
 				2EC6622C2B1992BF00E3EFE0 /* StateStart.swift in Sources */,
 				2EC662122B18511000E3EFE0 /* FFFastMoneyStateMachine.swift in Sources */,
 				2EC661CB2B13122A00E3EFE0 /* Family.swift in Sources */,
 				2EC661EB2B14481200E3EFE0 /* FFPlayStateType.swift in Sources */,
 				2EC6621F2B198CCA00E3EFE0 /* StateAddFamily.swift in Sources */,
-				2EC66F572B295BC200352EA4 /* MultiplayerService+GKLocalPlayerListener.swift in Sources */,
 				2EC662102B184EE800E3EFE0 /* FFFastMoneyStateFactory.swift in Sources */,
 				2EC662182B1986E000E3EFE0 /* StateEndGame.swift in Sources */,
 				2EC661F92B144BD800E3EFE0 /* StateFamilySteal.swift in Sources */,

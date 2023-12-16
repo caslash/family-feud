@@ -13,9 +13,17 @@ struct AddFamilyPanel: View {
     var body: some View {
         PanelView("Add New Family") {
             VStack {
-                TextField("Family Name", text: self.$viewmodel.familyName)
-                    .multilineTextAlignment(.center)
-                    .frame(width: 300)
+                HStack {
+                    PlayerView("Player 1") {
+                        Image(systemName: "person.circle.fill")
+                            .imageScale(.large)
+                    }
+                    
+                    PlayerView("Player 2") {
+                        Image(systemName: "person.circle")
+                            .imageScale(.large)
+                    }
+                }
                 
                 HStack {
                     Button("Add") { self.viewmodel.addFamily() }
@@ -27,7 +35,7 @@ struct AddFamilyPanel: View {
         .frame(width: 400, height: 200, alignment: .center)
         .background(.thickMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 20))
-        .shadow(radius: 2, x: 0, y: 2)
+        .shadow(radius: 2)
     }
     
     init(game: FamilyFeudGame, viewstateservice: ViewStateService, windowcontroller: ManagementWindowController) {
@@ -37,4 +45,5 @@ struct AddFamilyPanel: View {
 
 #Preview {
     AddFamilyPanel(game: FamilyFeudGame(), viewstateservice: ViewStateService(), windowcontroller: ManagementWindowController())
+        .padding()
 }

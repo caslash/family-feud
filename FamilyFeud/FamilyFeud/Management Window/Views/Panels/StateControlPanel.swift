@@ -14,7 +14,7 @@ struct StateControlPanel: View {
     var body: some View {
         PanelView("State Control") {
             VStack(spacing: 18) {
-                Button("New Game") { Task { await self.viewmodel.startGame() } }
+                Button("New Game") { self.viewmodel.startGame() }
                     .disabled(!self.viewmodel.viewstateservice.newGameEnabled)
                 
                 Button("Manage Families") { self.viewmodel.manageFamilies() }
@@ -42,11 +42,11 @@ struct StateControlPanel: View {
         .shadow(radius: 2, x: 0, y: 2)
     }
     
-    init(game: FamilyFeudGame, viewstateservice: ViewStateService, windowcontroller: ManagementWindowController, multiplayerservice: MultiplayerService) {
-        self.viewmodel = StateControlViewModel(game: game, viewstateservice: viewstateservice, windowcontroller: windowcontroller, multiplayerservice: multiplayerservice)
+    init(game: FamilyFeudGame, viewstateservice: ViewStateService, windowcontroller: ManagementWindowController) {
+        self.viewmodel = StateControlViewModel(game: game, viewstateservice: viewstateservice, windowcontroller: windowcontroller)
     }
 }
 
 #Preview {
-    StateControlPanel(game: FamilyFeudGame(), viewstateservice: ViewStateService(), windowcontroller: ManagementWindowController(), multiplayerservice: MultiplayerService())
+    StateControlPanel(game: FamilyFeudGame(), viewstateservice: ViewStateService(), windowcontroller: ManagementWindowController())
 }

@@ -12,13 +12,11 @@ import SwiftUI
 struct FamilyFeudApp: App {
     @State private var game = FamilyFeudGame()
     @State private var viewstateservice = ViewStateService()
-    @State private var multiplayerservice = MultiplayerService()
     var body: some Scene {
         WindowGroup(id: "Management") {
             ManagementWindow()
                 .environment(game)
                 .environment(viewstateservice)
-                .environment(multiplayerservice)
         }
         .windowResizability(.contentSize)
         

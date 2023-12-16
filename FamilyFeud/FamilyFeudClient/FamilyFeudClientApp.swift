@@ -10,15 +10,9 @@ import SwiftUI
 
 @main
 struct FamilyFeudClientApp: App {
-    @State private var match: MultiplayerService
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(match)
         }
-    }
-    
-    init() {
-        self.match = MultiplayerService()
     }
 }

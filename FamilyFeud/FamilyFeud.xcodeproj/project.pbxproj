@@ -15,6 +15,7 @@
 		2E05D5082B25866000BEE8D0 /* QuestionControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E05D5072B25866000BEE8D0 /* QuestionControlViewModel.swift */; };
 		2E0AE4052B1C6BF40003D90B /* LoadQuestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0AE4042B1C6BF40003D90B /* LoadQuestionsViewModel.swift */; };
 		2E53D9072B27D3A7003107AA /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E53D9062B27D3A7003107AA /* GameKit.framework */; };
+		2E54A7842B2C067A0059B4D9 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E54A7832B2C067A0059B4D9 /* PlayerView.swift */; };
 		2EBFFDA62B1D8DEE00487152 /* QuestionSelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFFDA52B1D8DEE00487152 /* QuestionSelectorViewModel.swift */; };
 		2EBFFDA82B1D97E300487152 /* StateControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFFDA72B1D97E300487152 /* StateControlViewModel.swift */; };
 		2EC6623F2B199F8B00E3EFE0 /* FamilyFeudApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6623E2B199F8B00E3EFE0 /* FamilyFeudApp.swift */; };
@@ -78,6 +79,7 @@
 		2E53D9062B27D3A7003107AA /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		2E53D9082B28047F003107AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2E53D9092B280A29003107AA /* FeudKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FeudKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E54A7832B2C067A0059B4D9 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		2EBFFDA52B1D8DEE00487152 /* QuestionSelectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSelectorViewModel.swift; sourceTree = "<group>"; };
 		2EBFFDA72B1D97E300487152 /* StateControlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateControlViewModel.swift; sourceTree = "<group>"; };
 		2EC6623B2B199F8B00E3EFE0 /* FamilyFeud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FamilyFeud.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,6 +130,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E54A7822B2C06290059B4D9 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2EC662902B1AD0D200E3EFE0 /* PanelView.swift */,
+				2E54A7832B2C067A0059B4D9 /* PlayerView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		2EC662322B199F8B00E3EFE0 = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +213,7 @@
 		2EC662792B19A2DF00E3EFE0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2E54A7822B2C06290059B4D9 /* Components */,
 				2EC662872B1ACB1000E3EFE0 /* Panels */,
 			);
 			path = Views;
@@ -240,7 +252,6 @@
 		2EC662872B1ACB1000E3EFE0 /* Panels */ = {
 			isa = PBXGroup;
 			children = (
-				2EC662902B1AD0D200E3EFE0 /* PanelView.swift */,
 				2EC662942B1AD30800E3EFE0 /* WindowControlPanel.swift */,
 				2EC662962B1AD34F00E3EFE0 /* LoadQuestionsPanel.swift */,
 				2EC662982B1AD39D00E3EFE0 /* StateControlPanel.swift */,
@@ -385,6 +396,7 @@
 				2EC662A82B1AF82000E3EFE0 /* PlayControlPanel.swift in Sources */,
 				2EC662842B1AB3C100E3EFE0 /* GameWindow.swift in Sources */,
 				2E05D5082B25866000BEE8D0 /* QuestionControlViewModel.swift in Sources */,
+				2E54A7842B2C067A0059B4D9 /* PlayerView.swift in Sources */,
 				2EC662912B1AD0D200E3EFE0 /* PanelView.swift in Sources */,
 				2E0AE4052B1C6BF40003D90B /* LoadQuestionsViewModel.swift in Sources */,
 				2EC662A62B1AF80700E3EFE0 /* QuestionControlPanel.swift in Sources */,
