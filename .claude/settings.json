@@ -1,0 +1,52 @@
+{
+    "env": {
+        "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+    },
+    "permissions": {
+        "allow": [
+            "Bash(gh auth status:*)",
+            "Bash(gh repo view:*)",
+            "Bash(gh repo list:*)",
+            "Bash(gh pr view:*)",
+            "Bash(gh pr list:*)",
+            "Bash(gh pr diff:*)",
+            "Bash(gh pr checks:*)",
+            "Bash(gh pr status:*)",
+            "Bash(gh issue view:*)",
+            "Bash(gh issue list:*)",
+            "Bash(gh issue status:*)",
+            "Bash(gh release view:*)",
+            "Bash(gh release list:*)",
+            "Bash(gh run view:*)",
+            "Bash(gh run list:*)",
+            "Bash(gh workflow view:*)",
+            "Bash(gh workflow list:*)",
+            "Bash(gh label list:*)",
+            "Bash(gh ruleset list:*)",
+            "Bash(gh ruleset view:*)",
+            "Bash(gh browse:*)"
+        ],
+        "ask": [
+            "Bash(gh api:*)",
+            "Bash(gh pr create:*)",
+            "Bash(gh pr merge:*)",
+            "Bash(gh pr close:*)",
+            "Bash(gh pr edit:*)",
+            "Bash(gh pr review:*)",
+            "Bash(gh issue create:*)",
+            "Bash(gh issue close:*)",
+            "Bash(gh repo create:*)",
+            "Bash(gh repo edit:*)",
+            "Bash(gh release create:*)",
+            "Bash(gh ruleset create:*)",
+            "Bash(gh ruleset edit:*)",
+            "Bash(gh workflow run:*)",
+            "Bash(gh run rerun:*)"
+        ],
+        "deny": [
+            "Bash(gh repo delete:*)",
+            "Bash(gh ruleset delete:*)",
+            "Bash(gh pr delete:*)"
+        ]
+    }
+}
