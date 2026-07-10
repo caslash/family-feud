@@ -49,6 +49,15 @@ packages/
    version ranges.
 4. Run `npm install` from the repo root to link the new workspace.
 
+## Repository
+
+- **Remote**: [`caslash/family-feud`](https://github.com/caslash/family-feud)
+  (`origin`), public.
+- **Default branch**: `main`.
+- **Code owners**: `.github/CODEOWNERS` assigns `@caslash` as the owner of
+  everything, so their review is required on every pull request into a
+  protected branch.
+
 ## Git branching
 
 - `main` — always deployable. Releases are cut by merging `develop` into
@@ -56,3 +65,18 @@ packages/
 - `develop` — permanent integration branch. All feature work branches off
   `develop` and merges back into `develop` when complete.
 - Work branches are short-lived and branch from `develop`, not `main`.
+
+### Branch protection
+
+Both `main` and `develop` are protected by repository rulesets:
+
+- Neither branch can be deleted or force-pushed.
+- Direct pushes are blocked — all changes must land through a pull request
+  with at least one approving review from a code owner (`@caslash`).
+- Repo admins may merge their own PRs without a second approver, but the
+  bypass applies only within a PR; direct pushes and deletion remain blocked
+  for everyone.
+- **`develop`** additionally requires a **linear history** and restricts the
+  merge method to **squash only**.
+- **`main`** allows merge commits, since releases are integrated by merging
+  `develop` into `main`.
