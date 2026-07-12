@@ -228,6 +228,32 @@ const setWinner = gameAssign(({ context }) => {
   return { winner };
 });
 
+const recordFaceoffAnswer = gameAssign(({ context, event }) => {
+  assertEvent(event, 'HOST_MARK_CORRECT');
+  if (context.answeringTeam === null || !context.currentQuestion) return {};
+  const answer = context.currentQuestion.answers[event.slotIndex];
+  if (!answer) return {};
+  return {
+    faceoffPoints: {
+      ...context.faceoffPoints,
+      [context.answeringTeam]: answer.points,
+    },
+  };
+});
+
+const giveControlToOther = gameAssign(({ context }) => {
+  return {
+    controllingTeam: context.answeringTeam
+      ? otherTeam(context.answeringTeam)
+      : null,
+  };
+});
+
+const awardBuzz = gameAssign(({ event }) => {
+  assertEvent(event, 'HOST_AWARD_BUZZ');
+  return { answeringTeam: event.teamId };
+});
+
 export const actions = {
   setPresence,
   clearPresence,
@@ -239,6 +265,9 @@ export const actions = {
   revealSlotAndBank,
   takeControl,
   flipControl,
+  recordFaceoffAnswer,
+  giveControlToOther,
+  awardBuzz,
   incrementStrike,
   resetStrikes,
   commitBankToController,

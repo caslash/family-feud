@@ -55,13 +55,75 @@ export function createGameMachine(roomCode: string) {
               },
               buzzerOpen: {
                 on: {
-                  BUZZ: {
-                    actions: 'setAnsweringTeam',
-                    target: 'answerPending',
+                  BUZZ: { actions: 'setAnsweringTeam', target: 'firstAnswer' },
+                  HOST_AWARD_BUZZ: {
+                    actions: 'awardBuzz',
+                    target: 'firstAnswer',
                   },
                 },
               },
-              answerPending: {
+              firstAnswer: {
+                on: {
+                  HOST_MARK_CORRECT: [
+                    {
+                      guard: 'isTopAnswer',
+                      actions: [
+                        'revealSlotAndBank',
+                        'recordFaceoffAnswer',
+                        'takeControl',
+                      ],
+                      target: 'controlDecision',
+                    },
+                    {
+                      actions: [
+                        'revealSlotAndBank',
+                        'recordFaceoffAnswer',
+                        'flipAnsweringTeam',
+                      ],
+                      target: 'secondAnswer',
+                    },
+                  ],
+                  HOST_MARK_WRONG: {
+                    actions: 'flipAnsweringTeam',
+                    target: 'secondAnswer',
+                  },
+                },
+              },
+              secondAnswer: {
+                on: {
+                  HOST_MARK_CORRECT: [
+                    {
+                      guard: 'secondBeatsFirst',
+                      actions: [
+                        'revealSlotAndBank',
+                        'recordFaceoffAnswer',
+                        'takeControl',
+                      ],
+                      target: 'controlDecision',
+                    },
+                    {
+                      actions: [
+                        'revealSlotAndBank',
+                        'recordFaceoffAnswer',
+                        'giveControlToOther',
+                      ],
+                      target: 'controlDecision',
+                    },
+                  ],
+                  HOST_MARK_WRONG: [
+                    {
+                      guard: 'firstTeamHasAnswer',
+                      actions: 'giveControlToOther',
+                      target: 'controlDecision',
+                    },
+                    {
+                      actions: 'flipAnsweringTeam',
+                      target: 'bounceBack',
+                    },
+                  ],
+                },
+              },
+              bounceBack: {
                 on: {
                   HOST_MARK_CORRECT: {
                     actions: ['revealSlotAndBank', 'takeControl'],

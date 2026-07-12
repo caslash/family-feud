@@ -15,5 +15,6 @@ export type GameEvent =
   | { type: 'HOST_CANCEL_STEAL' }
   | { type: 'HOST_NEXT_ROUND'; question: Question }
   | { type: 'BUZZ'; teamId: TeamId }
+  | { type: 'HOST_AWARD_BUZZ'; teamId: TeamId }
   | { type: 'PLAY'; teamId: TeamId }
   | { type: 'PASS'; teamId: TeamId };

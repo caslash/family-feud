@@ -52,6 +52,32 @@ const isUnrevealedSlot = ({ context, event }: GameGuardArgs): boolean => {
   return !!answer && !answer.revealed;
 };
 
+const isTopAnswer = ({ context, event }: GameGuardArgs): boolean => {
+  assertEvent(event, 'HOST_MARK_CORRECT');
+  const question = context.currentQuestion;
+  if (!question) return false;
+  const answer = question.answers[event.slotIndex];
+  if (!answer) return false;
+  const maxPoints = Math.max(...question.answers.map((a) => a.points));
+  return answer.points === maxPoints;
+};
+
+const secondBeatsFirst = ({ context, event }: GameGuardArgs): boolean => {
+  assertEvent(event, 'HOST_MARK_CORRECT');
+  const question = context.currentQuestion;
+  if (!question || context.answeringTeam === null) return false;
+  const secondPoints = question.answers[event.slotIndex]?.points ?? 0;
+  const firstTeam = context.answeringTeam === 'home' ? 'away' : 'home';
+  const firstPoints = context.faceoffPoints[firstTeam];
+  return firstPoints === null || secondPoints > firstPoints;
+};
+
+const firstTeamHasAnswer = ({ context }: GameGuardArgs): boolean => {
+  if (context.answeringTeam === null) return false;
+  const firstTeam = context.answeringTeam === 'home' ? 'away' : 'home';
+  return context.faceoffPoints[firstTeam] !== null;
+};
+
 export const guards = {
   canStartGame,
   isDecidingTeam,
@@ -60,4 +86,7 @@ export const guards = {
   reachedMaxStrikes,
   targetReached,
   isUnrevealedSlot,
+  isTopAnswer,
+  secondBeatsFirst,
+  firstTeamHasAnswer,
 };

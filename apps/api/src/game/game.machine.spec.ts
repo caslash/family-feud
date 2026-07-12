@@ -104,32 +104,31 @@ describe('game machine', () => {
       actor.send({ type: 'BUZZ', teamId: 'away' });
       expect(actor.getSnapshot().context.answeringTeam).toBe('away');
       expect(actor.getSnapshot().value).toEqual({
-        roundActive: { faceoff: 'answerPending' },
+        roundActive: { faceoff: 'firstAnswer' },
       });
 
       actor.send({ type: 'BUZZ', teamId: 'home' });
       expect(actor.getSnapshot().context.answeringTeam).toBe('away');
     });
 
-    it('HOST_MARK_CORRECT reveals the slot, banks points, and hands control to the answering team', () => {
+    it('the #1 answer wins control automatically for the buzz-winner', () => {
       const actor = makeActor();
       connectEveryone(actor);
       setUpTeams(actor);
       actor.send({ type: 'HOST_START_GAME', question: makeQuestion() });
       actor.send({ type: 'HOST_OPEN_BUZZER' });
       actor.send({ type: 'BUZZ', teamId: 'away' });
-      actor.send({ type: 'HOST_MARK_CORRECT', slotIndex: 1 });
+      actor.send({ type: 'HOST_MARK_CORRECT', slotIndex: 0 }); // 30 = top answer
 
       const snapshot = actor.getSnapshot();
       expect(snapshot.value).toEqual({
         roundActive: { faceoff: 'controlDecision' },
       });
       expect(snapshot.context.controllingTeam).toBe('away');
-      expect(snapshot.context.boardBank).toBe(20);
-      expect(snapshot.context.currentQuestion?.answers[1].revealed).toBe(true);
+      expect(snapshot.context.boardBank).toBe(30);
     });
 
-    it('HOST_MARK_WRONG bounces the answer back and forth until someone is correct', () => {
+    it('both teams strike then bounce back until someone is correct', () => {
       const actor = makeActor();
       connectEveryone(actor);
       setUpTeams(actor);
@@ -137,16 +136,16 @@ describe('game machine', () => {
       actor.send({ type: 'HOST_OPEN_BUZZER' });
       actor.send({ type: 'BUZZ', teamId: 'home' });
 
-      actor.send({ type: 'HOST_MARK_WRONG' });
+      actor.send({ type: 'HOST_MARK_WRONG' }); // home strikes -> away's turn
       expect(actor.getSnapshot().context.answeringTeam).toBe('away');
       expect(actor.getSnapshot().value).toEqual({
-        roundActive: { faceoff: 'answerPending' },
+        roundActive: { faceoff: 'secondAnswer' },
       });
 
-      actor.send({ type: 'HOST_MARK_WRONG' });
+      actor.send({ type: 'HOST_MARK_WRONG' }); // away strikes too -> bounceBack
       expect(actor.getSnapshot().context.answeringTeam).toBe('home');
       expect(actor.getSnapshot().value).toEqual({
-        roundActive: { faceoff: 'answerPending' },
+        roundActive: { faceoff: 'bounceBack' },
       });
 
       actor.send({ type: 'HOST_MARK_CORRECT', slotIndex: 2 });
@@ -154,6 +153,63 @@ describe('game machine', () => {
       expect(actor.getSnapshot().value).toEqual({
         roundActive: { faceoff: 'controlDecision' },
       });
+    });
+
+    it('a lower first answer is beaten by a higher second answer', () => {
+      const actor = makeActor();
+      connectEveryone(actor);
+      setUpTeams(actor);
+      actor.send({ type: 'HOST_START_GAME', question: makeQuestion() });
+      actor.send({ type: 'HOST_OPEN_BUZZER' });
+      actor.send({ type: 'BUZZ', teamId: 'home' });
+      actor.send({ type: 'HOST_MARK_CORRECT', slotIndex: 2 }); // home: 10, not #1
+
+      expect(actor.getSnapshot().value).toEqual({
+        roundActive: { faceoff: 'secondAnswer' },
+      });
+      expect(actor.getSnapshot().context.answeringTeam).toBe('away');
+
+      actor.send({ type: 'HOST_MARK_CORRECT', slotIndex: 1 }); // away: 20 > 10
+      const snapshot = actor.getSnapshot();
+      expect(snapshot.value).toEqual({
+        roundActive: { faceoff: 'controlDecision' },
+      });
+      expect(snapshot.context.controllingTeam).toBe('away');
+      expect(snapshot.context.boardBank).toBe(30); // both face-off answers banked
+    });
+
+    it('a lower second answer leaves control with the first team', () => {
+      const actor = makeActor();
+      connectEveryone(actor);
+      setUpTeams(actor);
+      actor.send({ type: 'HOST_START_GAME', question: makeQuestion() });
+      actor.send({ type: 'HOST_OPEN_BUZZER' });
+      actor.send({ type: 'BUZZ', teamId: 'home' });
+      actor.send({ type: 'HOST_MARK_CORRECT', slotIndex: 1 }); // home: 20, not #1
+      actor.send({ type: 'HOST_MARK_CORRECT', slotIndex: 2 }); // away: 10 < 20
+
+      const snapshot = actor.getSnapshot();
+      expect(snapshot.value).toEqual({
+        roundActive: { faceoff: 'controlDecision' },
+      });
+      expect(snapshot.context.controllingTeam).toBe('home');
+    });
+
+    it('if the buzz-winner strikes, a correct second answer takes control', () => {
+      const actor = makeActor();
+      connectEveryone(actor);
+      setUpTeams(actor);
+      actor.send({ type: 'HOST_START_GAME', question: makeQuestion() });
+      actor.send({ type: 'HOST_OPEN_BUZZER' });
+      actor.send({ type: 'BUZZ', teamId: 'home' });
+      actor.send({ type: 'HOST_MARK_WRONG' }); // home strikes
+      actor.send({ type: 'HOST_MARK_CORRECT', slotIndex: 1 }); // away answers
+
+      const snapshot = actor.getSnapshot();
+      expect(snapshot.value).toEqual({
+        roundActive: { faceoff: 'controlDecision' },
+      });
+      expect(snapshot.context.controllingTeam).toBe('away');
     });
 
     it('controlDecision: only the deciding team may PLAY or PASS', () => {
