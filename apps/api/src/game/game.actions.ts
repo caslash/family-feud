@@ -143,18 +143,52 @@ const commitBankToController = gameAssign(({ context }) => {
   };
 });
 
-const commitBankToStealer = gameAssign(({ context }) => {
-  if (!context.controllingTeam) return { boardBank: 0 };
+const stageStealReveal = gameAssign(({ context, event }) => {
+  assertEvent(event, 'HOST_REVEAL_ANSWER');
+  if (!context.currentQuestion) return {};
+  const answer = context.currentQuestion.answers[event.slotIndex];
+  if (!answer || answer.revealed) return {};
+  const answers = context.currentQuestion.answers.map((a, index) =>
+    index === event.slotIndex ? { ...a, revealed: true } : a,
+  );
+  return {
+    currentQuestion: { ...context.currentQuestion, answers },
+    pendingStealSlot: event.slotIndex,
+  };
+});
+
+const commitSteal = gameAssign(({ context }) => {
+  if (context.controllingTeam === null || context.pendingStealSlot === null) {
+    return { boardBank: 0, pendingStealSlot: null };
+  }
   const stealer = otherTeam(context.controllingTeam);
+  const stolen = context.currentQuestion?.answers[context.pendingStealSlot];
+  const stolenPoints = stolen ? stolen.points : 0;
+  const award =
+    (context.boardBank + stolenPoints) * roundMultiplier(context.roundNumber);
   return {
     teams: {
       ...context.teams,
       [stealer]: {
         ...context.teams[stealer],
-        score: context.teams[stealer].score + context.boardBank,
+        score: context.teams[stealer].score + award,
       },
     },
     boardBank: 0,
+    pendingStealSlot: null,
+  };
+});
+
+const cancelStealReveal = gameAssign(({ context }) => {
+  if (!context.currentQuestion || context.pendingStealSlot === null) {
+    return { pendingStealSlot: null };
+  }
+  const answers = context.currentQuestion.answers.map((a, index) =>
+    index === context.pendingStealSlot ? { ...a, revealed: false } : a,
+  );
+  return {
+    currentQuestion: { ...context.currentQuestion, answers },
+    pendingStealSlot: null,
   };
 });
 
@@ -208,7 +242,9 @@ export const actions = {
   incrementStrike,
   resetStrikes,
   commitBankToController,
-  commitBankToStealer,
+  stageStealReveal,
+  commitSteal,
+  cancelStealReveal,
   revealSlotOnly,
   startNextRound,
   setWinner,

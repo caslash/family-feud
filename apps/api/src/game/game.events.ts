@@ -11,6 +11,8 @@ export type GameEvent =
   | { type: 'HOST_MARK_WRONG' }
   | { type: 'HOST_REVEAL_ANSWER'; slotIndex: number }
   | { type: 'HOST_STRIKE' }
+  | { type: 'HOST_CONFIRM_STEAL' }
+  | { type: 'HOST_CANCEL_STEAL' }
   | { type: 'HOST_NEXT_ROUND'; question: Question }
   | { type: 'BUZZ'; teamId: TeamId }
   | { type: 'PLAY'; teamId: TeamId }

@@ -114,14 +114,32 @@ export function createGameMachine(roomCode: string) {
                 ],
               },
               steal: {
-                on: {
-                  HOST_REVEAL_ANSWER: {
-                    actions: ['revealSlotAndBank', 'commitBankToStealer'],
-                    target: '#game.roundEnd',
+                initial: 'awaitingStealGuess',
+                states: {
+                  awaitingStealGuess: {
+                    on: {
+                      HOST_REVEAL_ANSWER: {
+                        guard: 'isUnrevealedSlot',
+                        actions: 'stageStealReveal',
+                        target: 'confirmingSteal',
+                      },
+                      HOST_STRIKE: {
+                        actions: 'commitBankToController',
+                        target: '#game.roundEnd',
+                      },
+                    },
                   },
-                  HOST_STRIKE: {
-                    actions: 'commitBankToController',
-                    target: '#game.roundEnd',
+                  confirmingSteal: {
+                    on: {
+                      HOST_CONFIRM_STEAL: {
+                        actions: 'commitSteal',
+                        target: '#game.roundEnd',
+                      },
+                      HOST_CANCEL_STEAL: {
+                        actions: 'cancelStealReveal',
+                        target: 'awaitingStealGuess',
+                      },
+                    },
                   },
                 },
               },

@@ -222,29 +222,68 @@ describe('game machine', () => {
 
       actor.send({ type: 'HOST_STRIKE' });
       expect(actor.getSnapshot().value).toEqual({
-        roundActive: { play: 'steal' },
+        roundActive: { play: { steal: 'awaitingStealGuess' } },
       });
       expect(actor.getSnapshot().context.strikes).toBe(3);
     });
 
-    it('a successful steal awards the whole bank to the stealing team', () => {
+    it('a successful steal banks on confirm and awards the whole bank', () => {
       const actor = makeActor();
-      startAndReachPlay(actor); // home controls, boardBank=30 from the face-off answer
+      startAndReachPlay(actor); // home controls, boardBank=30 from the face-off
 
       actor.send({ type: 'HOST_STRIKE' });
       actor.send({ type: 'HOST_STRIKE' });
       actor.send({ type: 'HOST_STRIKE' });
       expect(actor.getSnapshot().value).toEqual({
-        roundActive: { play: 'steal' },
+        roundActive: { play: { steal: 'awaitingStealGuess' } },
       });
 
-      actor.send({ type: 'HOST_REVEAL_ANSWER', slotIndex: 1 }); // away steals: +20 => bank 50
+      actor.send({ type: 'HOST_REVEAL_ANSWER', slotIndex: 1 }); // stage away's steal
+      expect(actor.getSnapshot().value).toEqual({
+        roundActive: { play: { steal: 'confirmingSteal' } },
+      });
+      expect(actor.getSnapshot().context.teams.away.score).toBe(0); // not yet banked
 
+      actor.send({ type: 'HOST_CONFIRM_STEAL' });
       const snapshot = actor.getSnapshot();
       expect(snapshot.value).toEqual({ roundEnd: 'revealingBoard' });
-      expect(snapshot.context.teams.away.score).toBe(50);
+      expect(snapshot.context.teams.away.score).toBe(50); // (30 + 20) * 1
       expect(snapshot.context.teams.home.score).toBe(0);
       expect(snapshot.context.boardBank).toBe(0);
+    });
+
+    it('cancelling a staged steal rolls back the reveal and keeps the bank', () => {
+      const actor = makeActor();
+      startAndReachPlay(actor);
+
+      actor.send({ type: 'HOST_STRIKE' });
+      actor.send({ type: 'HOST_STRIKE' });
+      actor.send({ type: 'HOST_STRIKE' });
+      actor.send({ type: 'HOST_REVEAL_ANSWER', slotIndex: 1 });
+      actor.send({ type: 'HOST_CANCEL_STEAL' });
+
+      const snapshot = actor.getSnapshot();
+      expect(snapshot.value).toEqual({
+        roundActive: { play: { steal: 'awaitingStealGuess' } },
+      });
+      expect(snapshot.context.currentQuestion?.answers[1].revealed).toBe(false);
+      expect(snapshot.context.teams.away.score).toBe(0);
+    });
+
+    it('clicking an already-revealed slot during the steal does nothing', () => {
+      const actor = makeActor();
+      startAndReachPlay(actor); // slot 0 already revealed from the face-off
+
+      actor.send({ type: 'HOST_STRIKE' });
+      actor.send({ type: 'HOST_STRIKE' });
+      actor.send({ type: 'HOST_STRIKE' });
+
+      actor.send({ type: 'HOST_REVEAL_ANSWER', slotIndex: 0 }); // already revealed
+      const snapshot = actor.getSnapshot();
+      expect(snapshot.value).toEqual({
+        roundActive: { play: { steal: 'awaitingStealGuess' } },
+      });
+      expect(snapshot.context.teams.away.score).toBe(0);
     });
 
     it('a failed steal leaves the bank with the controlling team', () => {
@@ -254,7 +293,7 @@ describe('game machine', () => {
       actor.send({ type: 'HOST_STRIKE' });
       actor.send({ type: 'HOST_STRIKE' });
       actor.send({ type: 'HOST_STRIKE' });
-      actor.send({ type: 'HOST_STRIKE' }); // away's steal attempt misses
+      actor.send({ type: 'HOST_STRIKE' }); // steal attempt misses
 
       const snapshot = actor.getSnapshot();
       expect(snapshot.value).toEqual({ roundEnd: 'revealingBoard' });
