@@ -8,6 +8,9 @@ const gameAssign = assign<GameContext, GameEvent, undefined, GameEvent, never>;
 const otherTeam = (teamId: TeamId): TeamId =>
   teamId === 'home' ? 'away' : 'home';
 
+const roundMultiplier = (roundNumber: number): number =>
+  roundNumber <= 2 ? 1 : roundNumber === 3 ? 2 : 3;
+
 // A question always enters the machine with every answer unrevealed,
 // regardless of what the caller supplied.
 const normalizeQuestion = (question: Question): Question => ({
@@ -127,12 +130,13 @@ const resetStrikes = gameAssign(() => {
 const commitBankToController = gameAssign(({ context }) => {
   if (!context.controllingTeam) return { boardBank: 0 };
   const team = context.controllingTeam;
+  const award = context.boardBank * roundMultiplier(context.roundNumber);
   return {
     teams: {
       ...context.teams,
       [team]: {
         ...context.teams[team],
-        score: context.teams[team].score + context.boardBank,
+        score: context.teams[team].score + award,
       },
     },
     boardBank: 0,

@@ -334,6 +334,41 @@ describe('game machine', () => {
     });
   });
 
+  describe('point multipliers', () => {
+    function clearBoardAsHome(actor: Actor<ReturnType<typeof createGameMachine>>) {
+      actor.send({ type: 'HOST_OPEN_BUZZER' });
+      actor.send({ type: 'BUZZ', teamId: 'home' });
+      actor.send({ type: 'HOST_MARK_CORRECT', slotIndex: 0 }); // #1 answer -> control
+      actor.send({ type: 'PLAY', teamId: 'home' });
+      actor.send({ type: 'HOST_REVEAL_ANSWER', slotIndex: 1 });
+      actor.send({ type: 'HOST_REVEAL_ANSWER', slotIndex: 2 }); // board complete
+    }
+
+    it('doubles in round 3 and triples in round 4', () => {
+      const actor = makeActor();
+      connectEveryone(actor);
+      actor.send({ type: 'HOST_SET_TEAM_NAME', teamId: 'home', name: 'Home' });
+      actor.send({ type: 'HOST_SET_TEAM_NAME', teamId: 'away', name: 'Away' });
+      actor.send({ type: 'HOST_SET_TARGET_SCORE', targetScore: 100000 });
+      actor.send({ type: 'HOST_START_GAME', question: makeQuestion() });
+
+      clearBoardAsHome(actor); // round 1: 60 * 1
+      expect(actor.getSnapshot().context.teams.home.score).toBe(60);
+
+      actor.send({ type: 'HOST_NEXT_ROUND', question: makeQuestion() });
+      clearBoardAsHome(actor); // round 2: +60 * 1 => 120
+      expect(actor.getSnapshot().context.teams.home.score).toBe(120);
+
+      actor.send({ type: 'HOST_NEXT_ROUND', question: makeQuestion() });
+      clearBoardAsHome(actor); // round 3: +60 * 2 => 240
+      expect(actor.getSnapshot().context.teams.home.score).toBe(240);
+
+      actor.send({ type: 'HOST_NEXT_ROUND', question: makeQuestion() });
+      clearBoardAsHome(actor); // round 4: +60 * 3 => 420
+      expect(actor.getSnapshot().context.teams.home.score).toBe(420);
+    });
+  });
+
   describe('host disconnect', () => {
     it('tears the room down from any state', () => {
       const actor = makeActor();
