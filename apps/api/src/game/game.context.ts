@@ -1,5 +1,13 @@
 import type { Question, Team, TeamId } from './game.types';
 
+export interface FastMoneyState {
+  questions: Question[];
+  player1: (number | null)[];
+  player2: (number | null)[];
+  total: number;
+  won: boolean | null;
+}
+
 export interface GameContext {
   roomCode: string;
   targetScore: number | null;
@@ -18,6 +26,7 @@ export interface GameContext {
   faceoffPoints: Record<TeamId, number | null>;
   pendingStealSlot: number | null;
   winner: TeamId | null;
+  fastMoney: FastMoneyState | null;
 }
 
 export function initialGameContext(roomCode: string): GameContext {
@@ -42,5 +51,6 @@ export function initialGameContext(roomCode: string): GameContext {
     faceoffPoints: { home: null, away: null },
     pendingStealSlot: null,
     winner: null,
+    fastMoney: null,
   };
 }

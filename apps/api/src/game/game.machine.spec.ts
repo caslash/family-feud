@@ -42,6 +42,38 @@ function startAndReachPlay(actor: Actor<ReturnType<typeof createGameMachine>>) {
   actor.send({ type: 'PLAY', teamId: 'home' });
 }
 
+/** Five Fast Money questions, each with answers worth 40 / 30 / 20. */
+function fmQuestions(): Question[] {
+  return [0, 1, 2, 3, 4].map((n) => ({
+    prompt: `FM${n}`,
+    answers: [
+      { text: 'a', points: 40, revealed: false },
+      { text: 'b', points: 30, revealed: false },
+      { text: 'c', points: 20, revealed: false },
+    ],
+  }));
+}
+
+/** Drives a fresh actor to `fastMoney.setup` with `away` as the winning team. */
+function reachFastMoney(actor: Actor<ReturnType<typeof createGameMachine>>) {
+  connectEveryone(actor);
+  actor.send({ type: 'HOST_SET_TEAM_NAME', teamId: 'home', name: 'Home' });
+  actor.send({ type: 'HOST_SET_TEAM_NAME', teamId: 'away', name: 'Away' });
+  actor.send({ type: 'HOST_SET_TARGET_SCORE', targetScore: 100 });
+  actor.send({
+    type: 'HOST_START_GAME',
+    question: {
+      prompt: 'Big points',
+      answers: [{ text: 'huge', points: 150, revealed: false }],
+    },
+  });
+  actor.send({ type: 'HOST_OPEN_BUZZER' });
+  actor.send({ type: 'BUZZ', teamId: 'away' });
+  actor.send({ type: 'HOST_MARK_CORRECT', slotIndex: 0 }); // #1 -> control
+  actor.send({ type: 'PLAY', teamId: 'away' });
+  actor.send({ type: 'HOST_STRIKE' }); // single-answer board already complete
+}
+
 describe('game machine', () => {
   describe('lobby', () => {
     it('rejects HOST_START_GAME until everyone is connected, teams named, and target set', () => {
@@ -399,9 +431,11 @@ describe('game machine', () => {
       actor.send({ type: 'HOST_STRIKE' }); // board is already fully revealed (1 answer)
 
       // With a single-answer board, the face-off reveal already clears it —
-      // control should have gone straight to roundEnd. Confirm winner + game over.
+      // control should have gone straight to roundEnd. Confirm winner and
+      // routing into fast money (Task 1 retargets the win branch away from
+      // gameOver).
       const snapshot = actor.getSnapshot();
-      expect(snapshot.value).toBe('gameOver');
+      expect(snapshot.value).toEqual({ fastMoney: 'setup' });
       expect(snapshot.context.winner).toBe('away');
       expect(snapshot.context.teams.away.score).toBe(150);
     });
@@ -539,6 +573,87 @@ describe('game machine', () => {
         roundActive: { play: 'awaitingGuess' },
       });
       expect(actor.getSnapshot().context.controllingTeam).toBe('away');
+    });
+  });
+
+  describe('fast money', () => {
+    it('reaching the target routes into fast money, not straight to game over', () => {
+      const actor = makeActor();
+      reachFastMoney(actor);
+
+      expect(actor.getSnapshot().value).toEqual({ fastMoney: 'setup' });
+      expect(actor.getSnapshot().context.winner).toBe('away');
+    });
+
+    it('runs both players and wins on a combined total >= 200', () => {
+      const actor = makeActor();
+      reachFastMoney(actor);
+      actor.send({ type: 'HOST_START_FAST_MONEY', questions: fmQuestions() });
+      expect(actor.getSnapshot().value).toEqual({
+        fastMoney: { player1: 'answering' },
+      });
+
+      actor.send({ type: 'HOST_FM_END_ANSWERING' });
+      actor.send({ type: 'HOST_FM_SUBMIT_ANSWERS', slots: [0, 0, 0, 0, 0] }); // 40*5 = 200
+      expect(actor.getSnapshot().value).toEqual({
+        fastMoney: { player1: 'reveal' },
+      });
+
+      actor.send({ type: 'HOST_FM_CONTINUE' });
+      expect(actor.getSnapshot().value).toEqual({
+        fastMoney: { player2: 'answering' },
+      });
+
+      actor.send({ type: 'HOST_FM_END_ANSWERING' });
+      actor.send({ type: 'HOST_FM_SUBMIT_ANSWERS', slots: [1, 1, 1, 1, 1] }); // 30*5 = 150
+
+      const snapshot = actor.getSnapshot();
+      expect(snapshot.value).toBe('gameOver');
+      expect(snapshot.context.fastMoney?.total).toBe(350);
+      expect(snapshot.context.fastMoney?.won).toBe(true);
+    });
+
+    it('loses when the combined total is under 200', () => {
+      const actor = makeActor();
+      reachFastMoney(actor);
+      actor.send({ type: 'HOST_START_FAST_MONEY', questions: fmQuestions() });
+      actor.send({ type: 'HOST_FM_END_ANSWERING' });
+      actor.send({
+        type: 'HOST_FM_SUBMIT_ANSWERS',
+        slots: [2, 2, null, null, null],
+      }); // 20 + 20 = 40
+      actor.send({ type: 'HOST_FM_CONTINUE' });
+      actor.send({ type: 'HOST_FM_END_ANSWERING' });
+      actor.send({
+        type: 'HOST_FM_SUBMIT_ANSWERS',
+        slots: [1, null, null, null, null],
+      }); // 30
+
+      const snapshot = actor.getSnapshot();
+      expect(snapshot.value).toBe('gameOver');
+      expect(snapshot.context.fastMoney?.total).toBe(70);
+      expect(snapshot.context.fastMoney?.won).toBe(false);
+    });
+
+    it('scores a duplicate player-2 answer as zero', () => {
+      const actor = makeActor();
+      reachFastMoney(actor);
+      actor.send({ type: 'HOST_START_FAST_MONEY', questions: fmQuestions() });
+      actor.send({ type: 'HOST_FM_END_ANSWERING' });
+      actor.send({
+        type: 'HOST_FM_SUBMIT_ANSWERS',
+        slots: [0, null, null, null, null],
+      }); // 40
+      actor.send({ type: 'HOST_FM_CONTINUE' });
+      actor.send({ type: 'HOST_FM_END_ANSWERING' });
+      actor.send({
+        type: 'HOST_FM_SUBMIT_ANSWERS',
+        slots: [0, null, null, null, null],
+      }); // duplicate of player-1 -> 0
+
+      const snapshot = actor.getSnapshot();
+      expect(snapshot.context.fastMoney?.total).toBe(40);
+      expect(snapshot.context.fastMoney?.won).toBe(false);
     });
   });
 });

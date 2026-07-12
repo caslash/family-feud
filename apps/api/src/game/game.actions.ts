@@ -254,6 +254,49 @@ const awardBuzz = gameAssign(({ event }) => {
   return { answeringTeam: event.teamId };
 });
 
+const startFastMoney = gameAssign(({ event }) => {
+  assertEvent(event, 'HOST_START_FAST_MONEY');
+  return {
+    fastMoney: {
+      questions: event.questions,
+      player1: [],
+      player2: [],
+      total: 0,
+      won: null,
+    },
+  };
+});
+
+const submitPlayer1 = gameAssign(({ context, event }) => {
+  assertEvent(event, 'HOST_FM_SUBMIT_ANSWERS');
+  if (!context.fastMoney) return {};
+  return { fastMoney: { ...context.fastMoney, player1: event.slots } };
+});
+
+const submitPlayer2 = gameAssign(({ context, event }) => {
+  assertEvent(event, 'HOST_FM_SUBMIT_ANSWERS');
+  if (!context.fastMoney) return {};
+  return { fastMoney: { ...context.fastMoney, player2: event.slots } };
+});
+
+const tallyFastMoney = gameAssign(({ context }) => {
+  const fm = context.fastMoney;
+  if (!fm) return {};
+  const pointsFor = (questionIndex: number, slot: number | null): number => {
+    if (slot === null) return 0;
+    return fm.questions[questionIndex]?.answers[slot]?.points ?? 0;
+  };
+  let total = 0;
+  fm.player1.forEach((slot, index) => {
+    total += pointsFor(index, slot);
+  });
+  fm.player2.forEach((slot, index) => {
+    if (slot !== null && slot === fm.player1[index]) return; // duplicate scores 0
+    total += pointsFor(index, slot);
+  });
+  return { fastMoney: { ...fm, total, won: total >= 200 } };
+});
+
 export const actions = {
   setPresence,
   clearPresence,
@@ -277,4 +320,8 @@ export const actions = {
   revealSlotOnly,
   startNextRound,
   setWinner,
+  startFastMoney,
+  submitPlayer1,
+  submitPlayer2,
+  tallyFastMoney,
 };

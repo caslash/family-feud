@@ -19,4 +19,8 @@ export type GameEvent =
   | { type: 'PLAY'; teamId: TeamId }
   | { type: 'PASS'; teamId: TeamId }
   | { type: 'HOST_PLAY' }
-  | { type: 'HOST_PASS' };
+  | { type: 'HOST_PASS' }
+  | { type: 'HOST_START_FAST_MONEY'; questions: Question[] }
+  | { type: 'HOST_FM_END_ANSWERING' }
+  | { type: 'HOST_FM_SUBMIT_ANSWERS'; slots: (number | null)[] }
+  | { type: 'HOST_FM_CONTINUE' };

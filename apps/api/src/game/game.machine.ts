@@ -232,7 +232,7 @@ export function createGameMachine(roomCode: string) {
               {
                 guard: 'targetReached',
                 actions: 'setWinner',
-                target: '#game.gameOver',
+                target: '#game.fastMoney',
               },
               { target: 'awaitingNextRound' },
             ],
@@ -244,6 +244,59 @@ export function createGameMachine(roomCode: string) {
                 target: '#game.roundActive',
               },
             },
+          },
+        },
+      },
+
+      fastMoney: {
+        initial: 'setup',
+        states: {
+          setup: {
+            on: {
+              HOST_START_FAST_MONEY: {
+                actions: 'startFastMoney',
+                target: 'player1',
+              },
+            },
+          },
+          player1: {
+            initial: 'answering',
+            states: {
+              answering: {
+                on: { HOST_FM_END_ANSWERING: 'entry' },
+              },
+              entry: {
+                on: {
+                  HOST_FM_SUBMIT_ANSWERS: {
+                    actions: 'submitPlayer1',
+                    target: 'reveal',
+                  },
+                },
+              },
+              reveal: {
+                on: { HOST_FM_CONTINUE: '#game.fastMoney.player2' },
+              },
+            },
+          },
+          player2: {
+            initial: 'answering',
+            states: {
+              answering: {
+                on: { HOST_FM_END_ANSWERING: 'entry' },
+              },
+              entry: {
+                on: {
+                  HOST_FM_SUBMIT_ANSWERS: {
+                    actions: 'submitPlayer2',
+                    target: '#game.fastMoney.tally',
+                  },
+                },
+              },
+            },
+          },
+          tally: {
+            entry: 'tallyFastMoney',
+            always: '#game.gameOver',
           },
         },
       },
