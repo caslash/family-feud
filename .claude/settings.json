@@ -24,7 +24,12 @@
             "Bash(gh label list:*)",
             "Bash(gh ruleset list:*)",
             "Bash(gh ruleset view:*)",
-            "Bash(gh browse:*)"
+            "Bash(gh browse:*)",
+            "Bash(git add *)",
+            "Bash(git commit -m ' *)",
+            "Bash(git branch *)",
+            "Bash(git checkout *)",
+            "Bash(git reset *)"
         ],
         "ask": [
             "Bash(gh api:*)",

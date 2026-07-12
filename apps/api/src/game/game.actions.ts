@@ -1,0 +1,327 @@
+import { assertEvent, assign } from 'xstate';
+import type { GameContext } from './game.context';
+import type { GameEvent } from './game.events';
+import type { Question, TeamId } from './game.types';
+
+const gameAssign = assign<GameContext, GameEvent, undefined, GameEvent, never>;
+
+const otherTeam = (teamId: TeamId): TeamId =>
+  teamId === 'home' ? 'away' : 'home';
+
+const roundMultiplier = (roundNumber: number): number =>
+  roundNumber <= 2 ? 1 : roundNumber === 3 ? 2 : 3;
+
+// A question always enters the machine with every answer unrevealed,
+// regardless of what the caller supplied.
+const normalizeQuestion = (question: Question): Question => ({
+  prompt: question.prompt,
+  answers: question.answers.map((answer) => ({ ...answer, revealed: false })),
+});
+
+const setPresence = gameAssign(({ context, event }) => {
+  assertEvent(event, 'CLIENT_CONNECTED');
+  if (event.role === 'host') {
+    return { presence: { ...context.presence, host: true } };
+  }
+  if (event.role === 'board') {
+    return { presence: { ...context.presence, board: true } };
+  }
+  if (event.teamId) {
+    return {
+      presence: {
+        ...context.presence,
+        players: { ...context.presence.players, [event.teamId]: true },
+      },
+    };
+  }
+  return {};
+});
+
+const clearPresence = gameAssign(({ context, event }) => {
+  assertEvent(event, 'CLIENT_DISCONNECTED');
+  if (event.role === 'host') {
+    return { presence: { ...context.presence, host: false } };
+  }
+  if (event.role === 'board') {
+    return { presence: { ...context.presence, board: false } };
+  }
+  if (event.teamId) {
+    return {
+      presence: {
+        ...context.presence,
+        players: { ...context.presence.players, [event.teamId]: false },
+      },
+    };
+  }
+  return {};
+});
+
+const setTeamName = gameAssign(({ context, event }) => {
+  assertEvent(event, 'HOST_SET_TEAM_NAME');
+  return {
+    teams: {
+      ...context.teams,
+      [event.teamId]: { ...context.teams[event.teamId], name: event.name },
+    },
+  };
+});
+
+const setTargetScore = gameAssign(({ event }) => {
+  assertEvent(event, 'HOST_SET_TARGET_SCORE');
+  return { targetScore: event.targetScore };
+});
+
+const loadQuestion = gameAssign(({ event }) => {
+  assertEvent(event, 'HOST_START_GAME');
+  return { currentQuestion: normalizeQuestion(event.question) };
+});
+
+const setAnsweringTeam = gameAssign(({ event }) => {
+  assertEvent(event, 'BUZZ');
+  return { answeringTeam: event.teamId };
+});
+
+const flipAnsweringTeam = gameAssign(({ context }) => {
+  return {
+    answeringTeam: context.answeringTeam
+      ? otherTeam(context.answeringTeam)
+      : null,
+  };
+});
+
+// Used for both the face-off correct answer and in-play reveals — both
+// events carry a `slotIndex` into currentQuestion.answers.
+const revealSlotAndBank = gameAssign(({ context, event }) => {
+  assertEvent(event, ['HOST_MARK_CORRECT', 'HOST_REVEAL_ANSWER']);
+  if (!context.currentQuestion) return {};
+  const answer = context.currentQuestion.answers[event.slotIndex];
+  if (!answer || answer.revealed) return {};
+
+  const answers = context.currentQuestion.answers.map((a, index) =>
+    index === event.slotIndex ? { ...a, revealed: true } : a,
+  );
+
+  return {
+    currentQuestion: { ...context.currentQuestion, answers },
+    boardBank: context.boardBank + answer.points,
+  };
+});
+
+const takeControl = gameAssign(({ context }) => {
+  return { controllingTeam: context.answeringTeam };
+});
+
+const flipControl = gameAssign(({ context }) => {
+  return {
+    controllingTeam: context.controllingTeam
+      ? otherTeam(context.controllingTeam)
+      : null,
+  };
+});
+
+const incrementStrike = gameAssign(({ context }) => {
+  return { strikes: context.strikes + 1 };
+});
+
+const resetStrikes = gameAssign(() => {
+  return { strikes: 0 };
+});
+
+const commitBankToController = gameAssign(({ context }) => {
+  if (!context.controllingTeam) return { boardBank: 0 };
+  const team = context.controllingTeam;
+  const award = context.boardBank * roundMultiplier(context.roundNumber);
+  return {
+    teams: {
+      ...context.teams,
+      [team]: {
+        ...context.teams[team],
+        score: context.teams[team].score + award,
+      },
+    },
+    boardBank: 0,
+  };
+});
+
+const stageStealReveal = gameAssign(({ context, event }) => {
+  assertEvent(event, 'HOST_REVEAL_ANSWER');
+  if (!context.currentQuestion) return {};
+  const answer = context.currentQuestion.answers[event.slotIndex];
+  if (!answer || answer.revealed) return {};
+  const answers = context.currentQuestion.answers.map((a, index) =>
+    index === event.slotIndex ? { ...a, revealed: true } : a,
+  );
+  return {
+    currentQuestion: { ...context.currentQuestion, answers },
+    pendingStealSlot: event.slotIndex,
+  };
+});
+
+const commitSteal = gameAssign(({ context }) => {
+  if (context.controllingTeam === null || context.pendingStealSlot === null) {
+    return { boardBank: 0, pendingStealSlot: null };
+  }
+  const stealer = otherTeam(context.controllingTeam);
+  const stolen = context.currentQuestion?.answers[context.pendingStealSlot];
+  const stolenPoints = stolen ? stolen.points : 0;
+  const award =
+    (context.boardBank + stolenPoints) * roundMultiplier(context.roundNumber);
+  return {
+    teams: {
+      ...context.teams,
+      [stealer]: {
+        ...context.teams[stealer],
+        score: context.teams[stealer].score + award,
+      },
+    },
+    boardBank: 0,
+    pendingStealSlot: null,
+  };
+});
+
+const cancelStealReveal = gameAssign(({ context }) => {
+  if (!context.currentQuestion || context.pendingStealSlot === null) {
+    return { pendingStealSlot: null };
+  }
+  const answers = context.currentQuestion.answers.map((a, index) =>
+    index === context.pendingStealSlot ? { ...a, revealed: false } : a,
+  );
+  return {
+    currentQuestion: { ...context.currentQuestion, answers },
+    pendingStealSlot: null,
+  };
+});
+
+const revealSlotOnly = gameAssign(({ context, event }) => {
+  assertEvent(event, 'HOST_REVEAL_ANSWER');
+  if (!context.currentQuestion) return {};
+  const answer = context.currentQuestion.answers[event.slotIndex];
+  if (!answer || answer.revealed) return {};
+  const answers = context.currentQuestion.answers.map((a, index) =>
+    index === event.slotIndex ? { ...a, revealed: true } : a,
+  );
+  return { currentQuestion: { ...context.currentQuestion, answers } };
+});
+
+const startNextRound = gameAssign(({ context, event }) => {
+  assertEvent(event, 'HOST_NEXT_ROUND');
+  return {
+    strikes: 0,
+    boardBank: 0,
+    answeringTeam: null,
+    controllingTeam: null,
+    faceoffPoints: { home: null, away: null },
+    pendingStealSlot: null,
+    roundNumber: context.roundNumber + 1,
+    currentQuestion: normalizeQuestion(event.question),
+  };
+});
+
+const setWinner = gameAssign(({ context }) => {
+  if (context.targetScore === null) return {};
+  const winner: TeamId | null =
+    context.teams.home.score >= context.targetScore
+      ? 'home'
+      : context.teams.away.score >= context.targetScore
+        ? 'away'
+        : null;
+  return { winner };
+});
+
+const recordFaceoffAnswer = gameAssign(({ context, event }) => {
+  assertEvent(event, 'HOST_MARK_CORRECT');
+  if (context.answeringTeam === null || !context.currentQuestion) return {};
+  const answer = context.currentQuestion.answers[event.slotIndex];
+  if (!answer) return {};
+  return {
+    faceoffPoints: {
+      ...context.faceoffPoints,
+      [context.answeringTeam]: answer.points,
+    },
+  };
+});
+
+const giveControlToOther = gameAssign(({ context }) => {
+  return {
+    controllingTeam: context.answeringTeam
+      ? otherTeam(context.answeringTeam)
+      : null,
+  };
+});
+
+const awardBuzz = gameAssign(({ event }) => {
+  assertEvent(event, 'HOST_AWARD_BUZZ');
+  return { answeringTeam: event.teamId };
+});
+
+const startFastMoney = gameAssign(({ event }) => {
+  assertEvent(event, 'HOST_START_FAST_MONEY');
+  return {
+    fastMoney: {
+      questions: event.questions,
+      player1: [],
+      player2: [],
+      total: 0,
+      won: null,
+    },
+  };
+});
+
+const submitPlayer1 = gameAssign(({ context, event }) => {
+  assertEvent(event, 'HOST_FM_SUBMIT_ANSWERS');
+  if (!context.fastMoney) return {};
+  return { fastMoney: { ...context.fastMoney, player1: event.slots } };
+});
+
+const submitPlayer2 = gameAssign(({ context, event }) => {
+  assertEvent(event, 'HOST_FM_SUBMIT_ANSWERS');
+  if (!context.fastMoney) return {};
+  return { fastMoney: { ...context.fastMoney, player2: event.slots } };
+});
+
+const tallyFastMoney = gameAssign(({ context }) => {
+  const fm = context.fastMoney;
+  if (!fm) return {};
+  const pointsFor = (questionIndex: number, slot: number | null): number => {
+    if (slot === null) return 0;
+    return fm.questions[questionIndex]?.answers[slot]?.points ?? 0;
+  };
+  let total = 0;
+  fm.player1.forEach((slot, index) => {
+    total += pointsFor(index, slot);
+  });
+  fm.player2.forEach((slot, index) => {
+    if (slot !== null && slot === fm.player1[index]) return; // duplicate scores 0
+    total += pointsFor(index, slot);
+  });
+  return { fastMoney: { ...fm, total, won: total >= 200 } };
+});
+
+export const actions = {
+  setPresence,
+  clearPresence,
+  setTeamName,
+  setTargetScore,
+  loadQuestion,
+  setAnsweringTeam,
+  flipAnsweringTeam,
+  revealSlotAndBank,
+  takeControl,
+  flipControl,
+  recordFaceoffAnswer,
+  giveControlToOther,
+  awardBuzz,
+  incrementStrike,
+  resetStrikes,
+  commitBankToController,
+  stageStealReveal,
+  commitSteal,
+  cancelStealReveal,
+  revealSlotOnly,
+  startNextRound,
+  setWinner,
+  startFastMoney,
+  submitPlayer1,
+  submitPlayer2,
+  tallyFastMoney,
+};
