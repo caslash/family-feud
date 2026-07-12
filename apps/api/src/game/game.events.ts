@@ -17,4 +17,6 @@ export type GameEvent =
   | { type: 'BUZZ'; teamId: TeamId }
   | { type: 'HOST_AWARD_BUZZ'; teamId: TeamId }
   | { type: 'PLAY'; teamId: TeamId }
-  | { type: 'PASS'; teamId: TeamId };
+  | { type: 'PASS'; teamId: TeamId }
+  | { type: 'HOST_PLAY' }
+  | { type: 'HOST_PASS' };

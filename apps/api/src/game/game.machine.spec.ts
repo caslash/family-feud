@@ -493,4 +493,52 @@ describe('game machine', () => {
       expect(actor.getSnapshot().context.presence.players.away).toBe(false);
     });
   });
+
+  describe('host overrides', () => {
+    it('HOST_AWARD_BUZZ assigns the buzz when no player buzzes', () => {
+      const actor = makeActor();
+      connectEveryone(actor);
+      setUpTeams(actor);
+      actor.send({ type: 'HOST_START_GAME', question: makeQuestion() });
+      actor.send({ type: 'HOST_OPEN_BUZZER' });
+
+      actor.send({ type: 'HOST_AWARD_BUZZ', teamId: 'away' });
+      expect(actor.getSnapshot().context.answeringTeam).toBe('away');
+      expect(actor.getSnapshot().value).toEqual({
+        roundActive: { faceoff: 'firstAnswer' },
+      });
+    });
+
+    it('HOST_PLAY drives play without a player client', () => {
+      const actor = makeActor();
+      connectEveryone(actor);
+      setUpTeams(actor);
+      actor.send({ type: 'HOST_START_GAME', question: makeQuestion() });
+      actor.send({ type: 'HOST_OPEN_BUZZER' });
+      actor.send({ type: 'BUZZ', teamId: 'home' });
+      actor.send({ type: 'HOST_MARK_CORRECT', slotIndex: 0 });
+
+      actor.send({ type: 'HOST_PLAY' });
+      expect(actor.getSnapshot().value).toEqual({
+        roundActive: { play: 'awaitingGuess' },
+      });
+      expect(actor.getSnapshot().context.controllingTeam).toBe('home');
+    });
+
+    it('HOST_PASS flips control without a player client', () => {
+      const actor = makeActor();
+      connectEveryone(actor);
+      setUpTeams(actor);
+      actor.send({ type: 'HOST_START_GAME', question: makeQuestion() });
+      actor.send({ type: 'HOST_OPEN_BUZZER' });
+      actor.send({ type: 'BUZZ', teamId: 'home' });
+      actor.send({ type: 'HOST_MARK_CORRECT', slotIndex: 0 });
+
+      actor.send({ type: 'HOST_PASS' });
+      expect(actor.getSnapshot().value).toEqual({
+        roundActive: { play: 'awaitingGuess' },
+      });
+      expect(actor.getSnapshot().context.controllingTeam).toBe('away');
+    });
+  });
 });

@@ -143,6 +143,11 @@ export function createGameMachine(roomCode: string) {
                     actions: 'flipControl',
                     target: '#game.roundActive.play',
                   },
+                  HOST_PLAY: { target: '#game.roundActive.play' },
+                  HOST_PASS: {
+                    actions: 'flipControl',
+                    target: '#game.roundActive.play',
+                  },
                 },
               },
             },
