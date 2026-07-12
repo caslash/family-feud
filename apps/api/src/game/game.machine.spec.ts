@@ -1,6 +1,31 @@
+import type { GameSocketActorEvent } from '@family-feud/types';
+import type { Server } from 'socket.io';
 import { createActor, type Actor } from 'xstate';
 import { createGameMachine } from './game.machine';
 import type { Question } from './game.types';
+
+/**
+ * The socketActor stub captures every event the machine sends via
+ * sendTo('socket', …). vi.hoisted is required so socketState is accessible
+ * inside the vi.mock factory, which is hoisted above all imports.
+ */
+const socketState = vi.hoisted(() => ({
+  received: [] as GameSocketActorEvent[],
+  sendBack: null as ((e: GameSocketActorEvent) => void) | null,
+}));
+
+vi.mock('./game.socket.actor', async () => {
+  const { fromCallback } = await import('xstate');
+  return {
+    socketActor: fromCallback<GameSocketActorEvent, unknown>(
+      ({ sendBack, receive }) => {
+        socketState.sendBack = sendBack;
+        receive((e: GameSocketActorEvent) => socketState.received.push(e));
+        return () => {};
+      },
+    ),
+  };
+});
 
 function makeQuestion(prompt = 'Q1'): Question {
   return {
@@ -14,7 +39,9 @@ function makeQuestion(prompt = 'Q1'): Question {
 }
 
 function makeActor() {
-  return createActor(createGameMachine('ROOM1')).start();
+  return createActor(
+    createGameMachine({ io: {} as unknown as Server, roomId: 'ROOM1' }),
+  ).start();
 }
 
 function connectEveryone(actor: Actor<ReturnType<typeof createGameMachine>>) {
@@ -75,6 +102,11 @@ function reachFastMoney(actor: Actor<ReturnType<typeof createGameMachine>>) {
 }
 
 describe('game machine', () => {
+  beforeEach(() => {
+    socketState.received = [];
+    socketState.sendBack = null;
+  });
+
   describe('lobby', () => {
     it('rejects HOST_START_GAME until everyone is connected, teams named, and target set', () => {
       const actor = makeActor();
@@ -453,17 +485,21 @@ describe('game machine', () => {
 
       actor.send({ type: 'HOST_REVEAL_ANSWER', slotIndex: 1 });
       expect(actor.getSnapshot().value).toEqual({ roundEnd: 'revealingBoard' });
-      expect(actor.getSnapshot().context.currentQuestion?.answers[1].revealed).toBe(
-        true,
-      );
+      expect(
+        actor.getSnapshot().context.currentQuestion?.answers[1].revealed,
+      ).toBe(true);
 
       actor.send({ type: 'HOST_REVEAL_ANSWER', slotIndex: 2 }); // board now complete
-      expect(actor.getSnapshot().value).toEqual({ roundEnd: 'awaitingNextRound' });
+      expect(actor.getSnapshot().value).toEqual({
+        roundEnd: 'awaitingNextRound',
+      });
     });
   });
 
   describe('point multipliers', () => {
-    function clearBoardAsHome(actor: Actor<ReturnType<typeof createGameMachine>>) {
+    function clearBoardAsHome(
+      actor: Actor<ReturnType<typeof createGameMachine>>,
+    ) {
       actor.send({ type: 'HOST_OPEN_BUZZER' });
       actor.send({ type: 'BUZZ', teamId: 'home' });
       actor.send({ type: 'HOST_MARK_CORRECT', slotIndex: 0 }); // #1 answer -> control
@@ -697,6 +733,173 @@ describe('game machine', () => {
       } finally {
         vi.useRealTimers();
       }
+    });
+  });
+
+  describe('outbound notifications', () => {
+    it('sends NOTIFY_PRESENCE_CHANGED on connect', () => {
+      const actor = makeActor();
+      actor.send({ type: 'CLIENT_CONNECTED', role: 'host' });
+
+      expect(socketState.received).toContainEqual({
+        type: 'NOTIFY_PRESENCE_CHANGED',
+        presence: actor.getSnapshot().context.presence,
+      });
+    });
+
+    it('sends NOTIFY_TEAM_NAME_SET when the host sets a team name', () => {
+      const actor = makeActor();
+      actor.send({
+        type: 'HOST_SET_TEAM_NAME',
+        teamId: 'home',
+        name: 'Home Team',
+      });
+
+      expect(socketState.received).toContainEqual({
+        type: 'NOTIFY_TEAM_NAME_SET',
+        teamId: 'home',
+        name: 'Home Team',
+      });
+    });
+
+    it('sends a redacted NOTIFY_ROUND_STARTED (prompt + answerCount, no answer text/points)', () => {
+      const actor = makeActor();
+      connectEveryone(actor);
+      setUpTeams(actor);
+      actor.send({
+        type: 'HOST_START_GAME',
+        question: makeQuestion('Face-off question'),
+      });
+
+      const notification = socketState.received.find(
+        (e) => e.type === 'NOTIFY_ROUND_STARTED',
+      );
+      expect(notification).toEqual({
+        type: 'NOTIFY_ROUND_STARTED',
+        roundNumber: 1,
+        prompt: 'Face-off question',
+        answerCount: 3,
+      });
+      expect(notification).not.toHaveProperty('answers');
+      expect(notification).not.toHaveProperty('text');
+      expect(notification).not.toHaveProperty('points');
+    });
+
+    it('sends NOTIFY_BUZZED with the buzzing team', () => {
+      const actor = makeActor();
+      connectEveryone(actor);
+      setUpTeams(actor);
+      actor.send({ type: 'HOST_START_GAME', question: makeQuestion() });
+      actor.send({ type: 'HOST_OPEN_BUZZER' });
+      actor.send({ type: 'BUZZ', teamId: 'away' });
+
+      expect(socketState.received).toContainEqual({
+        type: 'NOTIFY_BUZZED',
+        teamId: 'away',
+      });
+    });
+
+    it('sends NOTIFY_ANSWER_REVEALED with the correct slot text/points', () => {
+      const actor = makeActor();
+      connectEveryone(actor);
+      setUpTeams(actor);
+      actor.send({ type: 'HOST_START_GAME', question: makeQuestion() });
+      actor.send({ type: 'HOST_OPEN_BUZZER' });
+      actor.send({ type: 'BUZZ', teamId: 'home' });
+      actor.send({ type: 'HOST_MARK_CORRECT', slotIndex: 0 });
+
+      expect(socketState.received).toContainEqual({
+        type: 'NOTIFY_ANSWER_REVEALED',
+        slotIndex: 0,
+        text: 'first',
+        points: 30,
+      });
+    });
+
+    it('sends NOTIFY_STRIKE with the updated strike count', () => {
+      const actor = makeActor();
+      startAndReachPlay(actor);
+
+      actor.send({ type: 'HOST_STRIKE' });
+      expect(socketState.received).toContainEqual({
+        type: 'NOTIFY_STRIKE',
+        strikes: 1,
+      });
+
+      actor.send({ type: 'HOST_STRIKE' });
+      expect(socketState.received).toContainEqual({
+        type: 'NOTIFY_STRIKE',
+        strikes: 2,
+      });
+    });
+
+    it('sends NOTIFY_ROUND_ENDED with the teams when the round ends', () => {
+      const actor = makeActor();
+      startAndReachPlay(actor); // home controls, slot 0 (30) revealed, boardBank=30
+
+      actor.send({ type: 'HOST_REVEAL_ANSWER', slotIndex: 1 }); // +20 => 50
+      actor.send({ type: 'HOST_REVEAL_ANSWER', slotIndex: 2 }); // +10 => 60, board complete
+
+      expect(socketState.received).toContainEqual({
+        type: 'NOTIFY_ROUND_ENDED',
+        teams: actor.getSnapshot().context.teams,
+      });
+    });
+
+    it('sends NOTIFY_ANSWER_WRONG naming the team that just struck, not the post-flip team', () => {
+      const actor = makeActor();
+      connectEveryone(actor);
+      setUpTeams(actor);
+      actor.send({ type: 'HOST_START_GAME', question: makeQuestion() });
+      actor.send({ type: 'HOST_OPEN_BUZZER' });
+      actor.send({ type: 'BUZZ', teamId: 'home' });
+
+      // firstAnswer branch: flipAnsweringTeam changes answeringTeam
+      // home -> away, but the notify must still report 'home' as the team
+      // that struck.
+      actor.send({ type: 'HOST_MARK_WRONG' });
+      expect(actor.getSnapshot().context.answeringTeam).toBe('away');
+      expect(socketState.received).toContainEqual({
+        type: 'NOTIFY_ANSWER_WRONG',
+        answeringTeam: 'home',
+      });
+    });
+
+    it('sends NOTIFY_ANSWER_WRONG naming the striking team in the non-flipping (giveControlToOther) branch', () => {
+      const actor = makeActor();
+      connectEveryone(actor);
+      setUpTeams(actor);
+      actor.send({ type: 'HOST_START_GAME', question: makeQuestion() });
+      actor.send({ type: 'HOST_OPEN_BUZZER' });
+      actor.send({ type: 'BUZZ', teamId: 'home' });
+      actor.send({ type: 'HOST_MARK_CORRECT', slotIndex: 2 }); // home: 10, not #1 -> secondAnswer, away's turn
+      socketState.received = [];
+
+      // secondAnswer branch, firstTeamHasAnswer guard true (home already
+      // recorded) -> giveControlToOther, no flip. Notify must still name
+      // 'away' as the team that struck.
+      actor.send({ type: 'HOST_MARK_WRONG' });
+      expect(actor.getSnapshot().context.answeringTeam).toBe('away');
+      expect(socketState.received).toContainEqual({
+        type: 'NOTIFY_ANSWER_WRONG',
+        answeringTeam: 'away',
+      });
+    });
+
+    it('sends NOTIFY_GAME_OVER with the winner once fast money resolves', () => {
+      const actor = makeActor();
+      reachFastMoney(actor);
+      actor.send({ type: 'HOST_START_FAST_MONEY', questions: fmQuestions() });
+      actor.send({ type: 'HOST_FM_END_ANSWERING' });
+      actor.send({ type: 'HOST_FM_SUBMIT_ANSWERS', slots: [0, 0, 0, 0, 0] });
+      actor.send({ type: 'HOST_FM_CONTINUE' });
+      actor.send({ type: 'HOST_FM_END_ANSWERING' });
+      actor.send({ type: 'HOST_FM_SUBMIT_ANSWERS', slots: [1, 1, 1, 1, 1] });
+
+      expect(socketState.received).toContainEqual({
+        type: 'NOTIFY_GAME_OVER',
+        winner: 'away',
+      });
     });
   });
 });
