@@ -1,6 +1,72 @@
 # Repository Guide
 
-This is a Turborepo-managed monorepo using npm workspaces.
+This is a Turborepo-managed monorepo using npm workspaces. It houses **Family
+Feud** — a real-time, room-based multiplayer implementation of the game show.
+
+## What We're Building
+
+A single game of Family Feud runs inside a **Socket.io room** managed by the
+server. Three kinds of client join the same room, each with a distinct job:
+
+- **Board display** — a passive screen (think the TV in the room) that renders
+  the game board and each team's score. Display only; it sends no game input.
+- **Host console** — the emcee's device. It drives essentially everything:
+  starting the game, opening the buzzer, marking answers correct/wrong,
+  revealing slots, awarding strikes, advancing rounds, and running Fast Money.
+- **Team players** — one per team (`home` / `away`). Their only job is to buzz
+  in during the face-off (and choose play/pass when their team wins control).
+
+### Architecture
+
+The design is **server-authoritative**. All game state and rules live in a
+single **XState v5** state machine instance running on the server — one machine
+per room. Clients are thin Socket.io consumers: they emit events and render the
+snapshots the server broadcasts back. There is **no game state machine on the
+client**. The `apps/api` server owns room lifecycle (creation, membership,
+teardown) and is the only source of truth for scores, the board, and whose turn
+it is.
+
+```
+host / board / players  ──Socket.io events──▶  api (XState machine per room)
+        ▲                                                    │
+        └──────────────  state broadcasts  ◀─────────────────┘
+```
+
+### Questions
+
+The board's questions and answers are supplied to the machine when a round
+starts (via the `HOST_START_GAME` event), so the machine stays agnostic about
+question *content*. The intended source is a large Family Feud question/answer
+dataset (originally a Google Sheet) that will be loaded into a **PostgreSQL**
+database. **The `apps/api` server fetches questions from Postgres** (the host
+requests a question and the server pulls it and feeds it into the machine) — the
+web clients never talk to the database directly. That persistence layer does not
+exist yet.
+
+### Tech Stack
+
+| Layer          | Technology                                   |
+| -------------- | -------------------------------------------- |
+| Frontend       | Vite + React + TypeScript (`apps/web`)       |
+| Backend        | NestJS (`apps/api`)                          |
+| State machine  | XState v5 (server-side, one per room)        |
+| Real-time      | Socket.io                                    |
+| Shared types   | `@family-feud/types`                         |
+| Monorepo       | Turborepo + npm workspaces                   |
+| Tests          | Vitest                                       |
+
+### Apps at a glance
+
+- **`apps/web`** — a single Vite + React frontend that serves all three client
+  types as different views/routes (host console, board display, player buzzer),
+  each connecting to the same room. (No app-level guide yet.)
+- **`apps/api`** — the NestJS server: the XState game machine plus the Socket.io
+  room layer. See [`apps/api/AGENTS.md`](apps/api/AGENTS.md) for its conventions,
+  the machine design, and the target multiplayer wiring. **Read it before working
+  in the API.**
+
+When an app has its own `AGENTS.md` (surfaced to agents via a `CLAUDE.md` that
+`@`-includes it), read that guide before working inside the app.
 
 ## Topography
 
