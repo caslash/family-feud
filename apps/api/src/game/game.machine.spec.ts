@@ -413,7 +413,7 @@ describe('game machine', () => {
       expect(snapshot.context.roundNumber).toBe(2);
     });
 
-    it('reaching the target score ends the game with the correct winner', () => {
+    it('reaching the target routes the winning team into fast money', () => {
       const actor = makeActor();
       connectEveryone(actor);
       setUpTeams(actor); // targetScore = 100
@@ -431,12 +431,11 @@ describe('game machine', () => {
       actor.send({ type: 'HOST_STRIKE' }); // board is already fully revealed (1 answer)
 
       // With a single-answer board, the face-off reveal already clears it —
-      // control should have gone straight to roundEnd. Confirm winner and
-      // routing into fast money (Task 1 retargets the win branch away from
-      // gameOver).
+      // control goes straight to roundEnd, then on to fast money. This test's
+      // unique coverage beyond the "fast money" describe block below is
+      // pinning the winning team's exact banked score.
       const snapshot = actor.getSnapshot();
       expect(snapshot.value).toEqual({ fastMoney: 'setup' });
-      expect(snapshot.context.winner).toBe('away');
       expect(snapshot.context.teams.away.score).toBe(150);
     });
 
@@ -495,6 +494,10 @@ describe('game machine', () => {
       actor.send({ type: 'HOST_NEXT_ROUND', question: makeQuestion() });
       clearBoardAsHome(actor); // round 4: +60 * 3 => 420
       expect(actor.getSnapshot().context.teams.home.score).toBe(420);
+
+      actor.send({ type: 'HOST_NEXT_ROUND', question: makeQuestion() });
+      clearBoardAsHome(actor); // round 5: +60 * 3 => 600 (multiplier plateaus at x3)
+      expect(actor.getSnapshot().context.teams.home.score).toBe(600);
     });
   });
 
@@ -525,6 +528,16 @@ describe('game machine', () => {
       });
       expect(actor.getSnapshot().context.presence.board).toBe(false);
       expect(actor.getSnapshot().context.presence.players.away).toBe(false);
+    });
+
+    it('tears the room down from fast money too', () => {
+      const actor = makeActor();
+      reachFastMoney(actor);
+
+      actor.send({ type: 'CLIENT_DISCONNECTED', role: 'host' });
+
+      expect(actor.getSnapshot().value).toBe('closed');
+      expect(actor.getSnapshot().status).toBe('done');
     });
   });
 

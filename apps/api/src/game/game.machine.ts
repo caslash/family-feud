@@ -248,6 +248,10 @@ export function createGameMachine(roomCode: string) {
         },
       },
 
+      // Note the intentional asymmetry below: player1 has its own `reveal`
+      // substate so player 1's answers are shown to the room before player 2
+      // takes their turn, whereas player2.entry goes straight to `tally` —
+      // player 2's board is revealed as part of the tally/gameOver flow.
       fastMoney: {
         initial: 'setup',
         states: {
