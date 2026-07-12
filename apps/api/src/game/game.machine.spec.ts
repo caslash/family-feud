@@ -453,17 +453,21 @@ describe('game machine', () => {
 
       actor.send({ type: 'HOST_REVEAL_ANSWER', slotIndex: 1 });
       expect(actor.getSnapshot().value).toEqual({ roundEnd: 'revealingBoard' });
-      expect(actor.getSnapshot().context.currentQuestion?.answers[1].revealed).toBe(
-        true,
-      );
+      expect(
+        actor.getSnapshot().context.currentQuestion?.answers[1].revealed,
+      ).toBe(true);
 
       actor.send({ type: 'HOST_REVEAL_ANSWER', slotIndex: 2 }); // board now complete
-      expect(actor.getSnapshot().value).toEqual({ roundEnd: 'awaitingNextRound' });
+      expect(actor.getSnapshot().value).toEqual({
+        roundEnd: 'awaitingNextRound',
+      });
     });
   });
 
   describe('point multipliers', () => {
-    function clearBoardAsHome(actor: Actor<ReturnType<typeof createGameMachine>>) {
+    function clearBoardAsHome(
+      actor: Actor<ReturnType<typeof createGameMachine>>,
+    ) {
       actor.send({ type: 'HOST_OPEN_BUZZER' });
       actor.send({ type: 'BUZZ', teamId: 'home' });
       actor.send({ type: 'HOST_MARK_CORRECT', slotIndex: 0 }); // #1 answer -> control
