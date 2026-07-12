@@ -14,6 +14,9 @@ export interface GameContext {
   controllingTeam: TeamId | null;
   strikes: number;
   boardBank: number;
+  roundNumber: number;
+  faceoffPoints: Record<TeamId, number | null>;
+  pendingStealSlot: number | null;
   winner: TeamId | null;
 }
 
@@ -35,6 +38,9 @@ export function initialGameContext(roomCode: string): GameContext {
     controllingTeam: null,
     strikes: 0,
     boardBank: 0,
+    roundNumber: 1,
+    faceoffPoints: { home: null, away: null },
+    pendingStealSlot: null,
     winner: null,
   };
 }

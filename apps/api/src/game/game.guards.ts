@@ -46,6 +46,12 @@ const targetReached = ({ context }: GameGuardArgs): boolean => {
   );
 };
 
+const isUnrevealedSlot = ({ context, event }: GameGuardArgs): boolean => {
+  assertEvent(event, 'HOST_REVEAL_ANSWER');
+  const answer = context.currentQuestion?.answers[event.slotIndex];
+  return !!answer && !answer.revealed;
+};
+
 export const guards = {
   canStartGame,
   isDecidingTeam,
@@ -53,4 +59,5 @@ export const guards = {
   isBoardComplete,
   reachedMaxStrikes,
   targetReached,
+  isUnrevealedSlot,
 };

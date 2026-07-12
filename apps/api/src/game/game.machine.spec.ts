@@ -204,7 +204,7 @@ describe('game machine', () => {
       actor.send({ type: 'HOST_REVEAL_ANSWER', slotIndex: 2 }); // +10 => 60, board complete
 
       const snapshot = actor.getSnapshot();
-      expect(snapshot.value).toBe('roundEnd');
+      expect(snapshot.value).toEqual({ roundEnd: 'awaitingNextRound' });
       expect(snapshot.context.teams.home.score).toBe(60);
       expect(snapshot.context.teams.away.score).toBe(0);
       expect(snapshot.context.boardBank).toBe(0);
@@ -241,7 +241,7 @@ describe('game machine', () => {
       actor.send({ type: 'HOST_REVEAL_ANSWER', slotIndex: 1 }); // away steals: +20 => bank 50
 
       const snapshot = actor.getSnapshot();
-      expect(snapshot.value).toBe('roundEnd');
+      expect(snapshot.value).toEqual({ roundEnd: 'revealingBoard' });
       expect(snapshot.context.teams.away.score).toBe(50);
       expect(snapshot.context.teams.home.score).toBe(0);
       expect(snapshot.context.boardBank).toBe(0);
@@ -257,7 +257,7 @@ describe('game machine', () => {
       actor.send({ type: 'HOST_STRIKE' }); // away's steal attempt misses
 
       const snapshot = actor.getSnapshot();
-      expect(snapshot.value).toBe('roundEnd');
+      expect(snapshot.value).toEqual({ roundEnd: 'revealingBoard' });
       expect(snapshot.context.teams.home.score).toBe(30);
       expect(snapshot.context.teams.away.score).toBe(0);
     });
@@ -283,6 +283,7 @@ describe('game machine', () => {
       expect(snapshot.context.answeringTeam).toBeNull();
       expect(snapshot.context.currentQuestion?.prompt).toBe('Round 2');
       expect(snapshot.context.teams.home.score).toBe(60);
+      expect(snapshot.context.roundNumber).toBe(2);
     });
 
     it('reaching the target score ends the game with the correct winner', () => {
@@ -308,6 +309,28 @@ describe('game machine', () => {
       expect(snapshot.value).toBe('gameOver');
       expect(snapshot.context.winner).toBe('away');
       expect(snapshot.context.teams.away.score).toBe(150);
+    });
+
+    it('requires the host to click through remaining slots before advancing', () => {
+      const actor = makeActor();
+      startAndReachPlay(actor); // home controls, slot 0 (30) revealed, boardBank=30
+
+      // Strike out so the round ends with the board incomplete.
+      actor.send({ type: 'HOST_STRIKE' });
+      actor.send({ type: 'HOST_STRIKE' });
+      actor.send({ type: 'HOST_STRIKE' }); // -> steal
+      actor.send({ type: 'HOST_STRIKE' }); // steal misses -> roundEnd
+
+      expect(actor.getSnapshot().value).toEqual({ roundEnd: 'revealingBoard' });
+
+      actor.send({ type: 'HOST_REVEAL_ANSWER', slotIndex: 1 });
+      expect(actor.getSnapshot().value).toEqual({ roundEnd: 'revealingBoard' });
+      expect(actor.getSnapshot().context.currentQuestion?.answers[1].revealed).toBe(
+        true,
+      );
+
+      actor.send({ type: 'HOST_REVEAL_ANSWER', slotIndex: 2 }); // board now complete
+      expect(actor.getSnapshot().value).toEqual({ roundEnd: 'awaitingNextRound' });
     });
   });
 

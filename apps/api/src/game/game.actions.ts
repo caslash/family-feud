@@ -154,13 +154,27 @@ const commitBankToStealer = gameAssign(({ context }) => {
   };
 });
 
-const resetRound = gameAssign(({ event }) => {
+const revealSlotOnly = gameAssign(({ context, event }) => {
+  assertEvent(event, 'HOST_REVEAL_ANSWER');
+  if (!context.currentQuestion) return {};
+  const answer = context.currentQuestion.answers[event.slotIndex];
+  if (!answer || answer.revealed) return {};
+  const answers = context.currentQuestion.answers.map((a, index) =>
+    index === event.slotIndex ? { ...a, revealed: true } : a,
+  );
+  return { currentQuestion: { ...context.currentQuestion, answers } };
+});
+
+const startNextRound = gameAssign(({ context, event }) => {
   assertEvent(event, 'HOST_NEXT_ROUND');
   return {
     strikes: 0,
     boardBank: 0,
     answeringTeam: null,
     controllingTeam: null,
+    faceoffPoints: { home: null, away: null },
+    pendingStealSlot: null,
+    roundNumber: context.roundNumber + 1,
     currentQuestion: normalizeQuestion(event.question),
   };
 });
@@ -191,6 +205,7 @@ export const actions = {
   resetStrikes,
   commitBankToController,
   commitBankToStealer,
-  resetRound,
+  revealSlotOnly,
+  startNextRound,
   setWinner,
 };

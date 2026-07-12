@@ -131,13 +131,35 @@ export function createGameMachine(roomCode: string) {
       },
 
       roundEnd: {
-        always: {
-          guard: 'targetReached',
-          actions: 'setWinner',
-          target: 'gameOver',
-        },
-        on: {
-          HOST_NEXT_ROUND: { actions: 'resetRound', target: 'roundActive' },
+        initial: 'revealingBoard',
+        states: {
+          revealingBoard: {
+            always: { guard: 'isBoardComplete', target: 'checkWin' },
+            on: {
+              HOST_REVEAL_ANSWER: {
+                guard: 'isUnrevealedSlot',
+                actions: 'revealSlotOnly',
+              },
+            },
+          },
+          checkWin: {
+            always: [
+              {
+                guard: 'targetReached',
+                actions: 'setWinner',
+                target: '#game.gameOver',
+              },
+              { target: 'awaitingNextRound' },
+            ],
+          },
+          awaitingNextRound: {
+            on: {
+              HOST_NEXT_ROUND: {
+                actions: 'startNextRound',
+                target: '#game.roundActive',
+              },
+            },
+          },
         },
       },
 
