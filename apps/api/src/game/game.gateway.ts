@@ -74,6 +74,10 @@ export class GameGateway
       }
 
       data.roomCode = roomCode;
+      // Synchronous under the default in-memory adapter: the socket actor's
+      // own `connection` handler (game.socket.actor.ts) checks
+      // socket.rooms.has(roomId) and relies on this join having already
+      // completed by the time it runs.
       socket.join(roomCode);
       this.roomSocketCounts.set(
         roomCode,
@@ -83,7 +87,9 @@ export class GameGateway
       return;
     }
 
-    // Temp socket used only to obtain a generated roomCode.
+    // Temp socket used only to obtain a generated roomCode: it joins the
+    // newly created room solely so the client can be told the code, and is
+    // cleaned up in handleDisconnect below if no real participant ever joins.
     // Store it so handleDisconnect can clean up if no participant ever joins.
     let newRoomCode: string;
     try {

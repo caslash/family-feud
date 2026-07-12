@@ -846,6 +846,46 @@ describe('game machine', () => {
       });
     });
 
+    it('sends NOTIFY_ANSWER_WRONG naming the team that just struck, not the post-flip team', () => {
+      const actor = makeActor();
+      connectEveryone(actor);
+      setUpTeams(actor);
+      actor.send({ type: 'HOST_START_GAME', question: makeQuestion() });
+      actor.send({ type: 'HOST_OPEN_BUZZER' });
+      actor.send({ type: 'BUZZ', teamId: 'home' });
+
+      // firstAnswer branch: flipAnsweringTeam changes answeringTeam
+      // home -> away, but the notify must still report 'home' as the team
+      // that struck.
+      actor.send({ type: 'HOST_MARK_WRONG' });
+      expect(actor.getSnapshot().context.answeringTeam).toBe('away');
+      expect(socketState.received).toContainEqual({
+        type: 'NOTIFY_ANSWER_WRONG',
+        answeringTeam: 'home',
+      });
+    });
+
+    it('sends NOTIFY_ANSWER_WRONG naming the striking team in the non-flipping (giveControlToOther) branch', () => {
+      const actor = makeActor();
+      connectEveryone(actor);
+      setUpTeams(actor);
+      actor.send({ type: 'HOST_START_GAME', question: makeQuestion() });
+      actor.send({ type: 'HOST_OPEN_BUZZER' });
+      actor.send({ type: 'BUZZ', teamId: 'home' });
+      actor.send({ type: 'HOST_MARK_CORRECT', slotIndex: 2 }); // home: 10, not #1 -> secondAnswer, away's turn
+      socketState.received = [];
+
+      // secondAnswer branch, firstTeamHasAnswer guard true (home already
+      // recorded) -> giveControlToOther, no flip. Notify must still name
+      // 'away' as the team that struck.
+      actor.send({ type: 'HOST_MARK_WRONG' });
+      expect(actor.getSnapshot().context.answeringTeam).toBe('away');
+      expect(socketState.received).toContainEqual({
+        type: 'NOTIFY_ANSWER_WRONG',
+        answeringTeam: 'away',
+      });
+    });
+
     it('sends NOTIFY_GAME_OVER with the winner once fast money resolves', () => {
       const actor = makeActor();
       reachFastMoney(actor);

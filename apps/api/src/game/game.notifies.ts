@@ -5,6 +5,12 @@ import { socketActor } from './game.socket.actor';
 
 type SocketRef = ActorRefFrom<typeof socketActor>;
 
+// The 5th generic (TEvent) types the *raising* machine's own event union
+// (GameEvent) for consistency with setup()'s action map — it is NOT the
+// sent-event type. The event actually sent to 'socket' is already
+// type-checked against EventFrom<SocketRef> via the 4th generic (SocketRef),
+// which resolves to GameSocketActorEvent because socketActor is
+// fromCallback<GameSocketActorEvent, ...>. See the nestjs-xstate skill.
 const sendToSocket = sendTo<
   GameContext,
   GameEvent,

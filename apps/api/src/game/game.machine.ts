@@ -99,7 +99,7 @@ export function createGameMachine(input: SocketActorInput) {
                     },
                   ],
                   HOST_MARK_WRONG: {
-                    actions: ['flipAnsweringTeam', 'notifyAnswerWrong'],
+                    actions: ['notifyAnswerWrong', 'flipAnsweringTeam'],
                     target: 'secondAnswer',
                   },
                 },
@@ -130,11 +130,11 @@ export function createGameMachine(input: SocketActorInput) {
                   HOST_MARK_WRONG: [
                     {
                       guard: 'firstTeamHasAnswer',
-                      actions: ['giveControlToOther', 'notifyAnswerWrong'],
+                      actions: ['notifyAnswerWrong', 'giveControlToOther'],
                       target: 'controlDecision',
                     },
                     {
-                      actions: ['flipAnsweringTeam', 'notifyAnswerWrong'],
+                      actions: ['notifyAnswerWrong', 'flipAnsweringTeam'],
                       target: 'bounceBack',
                     },
                   ],
@@ -151,7 +151,7 @@ export function createGameMachine(input: SocketActorInput) {
                     target: 'controlDecision',
                   },
                   HOST_MARK_WRONG: {
-                    actions: ['flipAnsweringTeam', 'notifyAnswerWrong'],
+                    actions: ['notifyAnswerWrong', 'flipAnsweringTeam'],
                   },
                 },
               },
