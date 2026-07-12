@@ -263,6 +263,7 @@ export function createGameMachine(roomCode: string) {
             initial: 'answering',
             states: {
               answering: {
+                after: { 15000: 'entry' },
                 on: { HOST_FM_END_ANSWERING: 'entry' },
               },
               entry: {
@@ -282,6 +283,7 @@ export function createGameMachine(roomCode: string) {
             initial: 'answering',
             states: {
               answering: {
+                after: { 20000: 'entry' },
                 on: { HOST_FM_END_ANSWERING: 'entry' },
               },
               entry: {

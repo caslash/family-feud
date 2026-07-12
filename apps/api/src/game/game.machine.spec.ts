@@ -655,5 +655,35 @@ describe('game machine', () => {
       expect(snapshot.context.fastMoney?.total).toBe(40);
       expect(snapshot.context.fastMoney?.won).toBe(false);
     });
+
+    it('auto-closes each answering window on its timer', () => {
+      vi.useFakeTimers();
+      try {
+        const actor = makeActor();
+        reachFastMoney(actor);
+        actor.send({ type: 'HOST_START_FAST_MONEY', questions: fmQuestions() });
+
+        expect(actor.getSnapshot().value).toEqual({
+          fastMoney: { player1: 'answering' },
+        });
+        vi.advanceTimersByTime(15000);
+        expect(actor.getSnapshot().value).toEqual({
+          fastMoney: { player1: 'entry' },
+        });
+
+        actor.send({ type: 'HOST_FM_SUBMIT_ANSWERS', slots: [0, 0, 0, 0, 0] });
+        actor.send({ type: 'HOST_FM_CONTINUE' });
+        expect(actor.getSnapshot().value).toEqual({
+          fastMoney: { player2: 'answering' },
+        });
+
+        vi.advanceTimersByTime(20000);
+        expect(actor.getSnapshot().value).toEqual({
+          fastMoney: { player2: 'entry' },
+        });
+      } finally {
+        vi.useRealTimers();
+      }
+    });
   });
 });
