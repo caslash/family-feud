@@ -50,30 +50,34 @@ The XLSX has one sheet per answer count plus Fast Money and unusable extras:
 
 ## Part 1 — Seed
 
-### 1a. Schema: add a `kind` discriminator
+### 1a. Schema: reclassify by `kind`
 
 The game must distinguish a **standard-round** question from a **Fast Money**
-question (different game phase). `category` / `difficulty` are generic metadata
-that don't capture this, so add a dedicated column.
+question (different game phase). The existing `category` / `difficulty` columns
+(added by `InitQuestions` in PR #5) don't capture this, and — now that the source
+dataset is known to carry neither — nothing writes or reads them. So the schema
+is reclassified: drop both dead columns and add a dedicated `kind` discriminator.
 
-- **New migration** `apps/api/src/migrations/<timestamp>-AddQuestionKind.ts`
-  (append-only — the existing `InitQuestions` migration is left untouched):
+- **New migration** `apps/api/src/migrations/<timestamp>-ReclassifyQuestions.ts`
+  (append-only — `InitQuestions` is left untouched; this migration edits the
+  table forward):
   ```sql
-  ALTER TABLE "questions"
-    ADD COLUMN "kind" text NOT NULL DEFAULT 'standard';
+  ALTER TABLE "questions" ADD COLUMN "kind" text NOT NULL DEFAULT 'standard';
+  ALTER TABLE "questions" DROP COLUMN "category";
+  ALTER TABLE "questions" DROP COLUMN "difficulty";
   ```
-  The `DEFAULT 'standard'` keeps the `ADD COLUMN NOT NULL` safe even against an
+  The `DEFAULT 'standard'` keeps `ADD COLUMN NOT NULL` safe even against an
   already-created (empty) table; the seed always sets the real value. `down`
-  drops the column.
-- **`QuestionEntity`** (in `packages/types/src/question.entity.ts`) gains:
+  reverses it (re-add the two nullable columns, drop `kind`).
+- **`QuestionEntity`** (in `packages/types/src/question.entity.ts`) drops the
+  `category` and `difficulty` fields and gains:
   ```ts
   @Column('text', { default: 'standard' })
   kind!: 'standard' | 'fast_money';
   ```
-- **`category` and `difficulty` both stay `null`.** The game distinguishes
-  question type purely by `kind`; answer count is already derivable from the
-  answers array, so nothing is stored in `category`. `toQuestion` is unaffected
-  (it only maps `prompt` + ordered answers).
+- The game distinguishes question type purely by `kind`; answer count is already
+  derivable from the answers array. `toQuestion` is unaffected (it only maps
+  `prompt` + ordered answers).
 
 ### 1b. Provenance parser (one-time, kept in-repo)
 
@@ -244,14 +248,17 @@ socket.on('HOST_START_GAME', async () => {
 
 **New:** `apps/api/scripts/parse-dataset.ts`,
 `apps/api/src/seed/questions.seed.json`, `apps/api/src/seed.ts`,
-`apps/api/src/migrations/<timestamp>-AddQuestionKind.ts`,
+`apps/api/src/migrations/<timestamp>-ReclassifyQuestions.ts`,
 `apps/api/src/game/game.questions.ts` (provider interface).
 
-**Modified:** `packages/types/src/question.entity.ts` (kind column),
+**Modified:** `packages/types/src/question.entity.ts` (drop `category` /
+`difficulty`, add `kind`),
 `apps/api/src/question/question.service.ts` (+2 methods),
+`apps/api/src/question/question.service.spec.ts` (fixture drops the two columns),
 `apps/api/src/game/game.socket.actor.ts` (async handlers + input),
 `apps/api/src/game/game.machine.ts` (input type),
 `apps/api/src/game/game.service.ts` (inject + pass provider),
 `apps/api/src/game/game.module.ts` (import QuestionModule),
 `apps/api/package.json` (`seed` script; xlsx parser dev-dep for the parser),
-plus the three `*.spec.ts` above.
+`apps/api/src/game/game.socket.actor.spec.ts` (mock provider + no-repeat), plus a
+new unit test for the parser transform.
