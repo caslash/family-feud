@@ -24,7 +24,9 @@ export class ReclassifyQuestions1721000000000 implements MigrationInterface {
     await queryRunner.query(
       `ALTER TABLE "questions" ADD COLUMN "difficulty" text`,
     );
-    await queryRunner.query(`ALTER TABLE "questions" ADD COLUMN "category" text`);
+    await queryRunner.query(
+      `ALTER TABLE "questions" ADD COLUMN "category" text`,
+    );
     await queryRunner.query(`ALTER TABLE "questions" DROP COLUMN "kind"`);
   }
 }

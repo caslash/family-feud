@@ -13,5 +13,8 @@ export interface PickedQuestion {
  */
 export interface QuestionProvider {
   getRandomStandard(excludeIds: string[]): Promise<PickedQuestion | null>;
-  getRandomFastMoney(count: number, excludeIds: string[]): Promise<PickedQuestion[]>;
+  getRandomFastMoney(
+    count: number,
+    excludeIds: string[],
+  ): Promise<PickedQuestion[]>;
 }

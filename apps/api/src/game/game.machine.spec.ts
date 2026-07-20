@@ -44,8 +44,8 @@ function makeActor() {
       io: {} as unknown as Server,
       roomId: 'ROOM1',
       questions: {
-        getRandomStandard: async () => null,
-        getRandomFastMoney: async () => [],
+        getRandomStandard: () => Promise.resolve(null),
+        getRandomFastMoney: () => Promise.resolve([]),
       },
     }),
   ).start();

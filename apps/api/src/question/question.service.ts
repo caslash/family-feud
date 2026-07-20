@@ -60,7 +60,9 @@ export class QuestionService {
    *
    * @returns `{ id, question }`, or `null` if the (post-exclusion) pool is empty.
    */
-  async getRandomStandard(excludeIds: string[]): Promise<PickedQuestion | null> {
+  async getRandomStandard(
+    excludeIds: string[],
+  ): Promise<PickedQuestion | null> {
     const qb = this.questions
       .createQueryBuilder('question')
       .where('question.kind = :kind', { kind: 'standard' });

@@ -14,7 +14,7 @@ function buildEntity(): QuestionEntity {
     prompt: 'Name a fruit',
     kind: 'standard',
     answers,
-  } as QuestionEntity;
+  };
 }
 
 /** A chainable createQueryBuilder stub whose getMany/getOne are controllable. */
@@ -36,7 +36,10 @@ describe('QuestionService', () => {
   beforeEach(() => {
     findOne = vi.fn();
     createQueryBuilder = vi.fn();
-    const repo = { findOne, createQueryBuilder } as unknown as Repository<QuestionEntity>;
+    const repo = {
+      findOne,
+      createQueryBuilder,
+    } as unknown as Repository<QuestionEntity>;
     service = new QuestionService(repo);
   });
 
@@ -71,7 +74,7 @@ describe('QuestionService', () => {
       const qb = {
         orderBy: vi.fn().mockReturnThis(),
         limit: vi.fn().mockReturnThis(),
-        getOne: vi.fn().mockResolvedValue({ id: 'q1' } as QuestionEntity),
+        getOne: vi.fn().mockResolvedValue({ id: 'q1' }),
       };
       createQueryBuilder.mockReturnValue(qb);
       findOne.mockResolvedValue(buildEntity());
@@ -159,7 +162,16 @@ describe('QuestionService', () => {
       });
       expect(qb.limit).toHaveBeenCalledWith(5);
       expect(picks).toHaveLength(2);
-      expect(picks[0]).toEqual({ id: 'q1', question: expect.any(Object) });
+      expect(picks[0]).toEqual({
+        id: 'q1',
+        question: {
+          prompt: 'Name a fruit',
+          answers: [
+            { text: 'First', points: 40, revealed: false },
+            { text: 'Second', points: 20, revealed: false },
+          ],
+        },
+      });
     });
 
     it('returns [] when the pool is empty', async () => {

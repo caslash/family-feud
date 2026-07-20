@@ -27,8 +27,8 @@ describe('GameService', () => {
 
   beforeEach(() => {
     service = new GameService({
-      getRandomStandard: async () => null,
-      getRandomFastMoney: async () => [],
+      getRandomStandard: () => Promise.resolve(null),
+      getRandomFastMoney: () => Promise.resolve([]),
     } as unknown as QuestionService);
   });
 

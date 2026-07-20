@@ -9,7 +9,11 @@ import { join } from 'node:path';
 import { QuestionEntity } from '@family-feud/types/entities';
 import AppDataSource from './data-source';
 
-interface SeedAnswer { text: string; points: number; rank: number }
+interface SeedAnswer {
+  text: string;
+  points: number;
+  rank: number;
+}
 interface SeedQuestion {
   kind: 'standard' | 'fast_money';
   prompt: string;
@@ -23,7 +27,10 @@ function* chunks<T>(items: T[], size: number): Generator<T[]> {
 }
 
 async function main(): Promise<void> {
-  const raw = readFileSync(join(__dirname, 'seed', 'questions.seed.json'), 'utf8');
+  const raw = readFileSync(
+    join(__dirname, 'seed', 'questions.seed.json'),
+    'utf8',
+  );
   const seed = JSON.parse(raw) as SeedQuestion[];
 
   const ds = await AppDataSource.initialize(); // runs pending migrations first
