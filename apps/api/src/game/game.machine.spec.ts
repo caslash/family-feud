@@ -40,7 +40,14 @@ function makeQuestion(prompt = 'Q1'): Question {
 
 function makeActor() {
   return createActor(
-    createGameMachine({ io: {} as unknown as Server, roomId: 'ROOM1' }),
+    createGameMachine({
+      io: {} as unknown as Server,
+      roomId: 'ROOM1',
+      questions: {
+        getRandomStandard: () => Promise.resolve(null),
+        getRandomFastMoney: () => Promise.resolve([]),
+      },
+    }),
   ).start();
 }
 

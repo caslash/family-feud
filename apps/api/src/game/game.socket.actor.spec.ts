@@ -38,7 +38,16 @@ function makeFakeSocket(query: Record<string, string | undefined>) {
 /** Invokes the real socketActor as a child of a tiny harness machine so we
  * can capture every event it `sendBack`s to its parent, and reach the child
  * ref to simulate outbound `receive()` delivery. */
-function makeHarness(io: Server) {
+function makeHarness(
+  io: Server,
+  questions: {
+    getRandomStandard: ReturnType<typeof vi.fn>;
+    getRandomFastMoney: ReturnType<typeof vi.fn>;
+  } = {
+    getRandomStandard: vi.fn().mockResolvedValue(null),
+    getRandomFastMoney: vi.fn().mockResolvedValue([]),
+  },
+) {
   const received: GameEvent[] = [];
   const machine = createMachine({
     types: {},
@@ -46,7 +55,7 @@ function makeHarness(io: Server) {
     invoke: {
       id: 'socket',
       src: socketActor,
-      input: { io, roomId: ROOM_ID },
+      input: { io, roomId: ROOM_ID, questions },
     },
     on: {
       '*': {
@@ -219,6 +228,163 @@ describe('socketActor', () => {
         type: 'NOTIFY_STRIKE',
         strikes: 1,
       });
+    });
+  });
+
+  const Q1 = {
+    prompt: 'Q1',
+    answers: [{ text: 'a', points: 50, revealed: false }],
+  };
+  const Q2 = {
+    prompt: 'Q2',
+    answers: [{ text: 'b', points: 40, revealed: false }],
+  };
+
+  describe('server-sourced question events', () => {
+    it('fetches a standard question on HOST_START_GAME and sends it into the machine', async () => {
+      const io = makeFakeIo();
+      const getRandomStandard = vi
+        .fn()
+        .mockResolvedValue({ id: 'q1', question: Q1 });
+      const { received } = makeHarness(io, {
+        getRandomStandard,
+        getRandomFastMoney: vi.fn().mockResolvedValue([]),
+      });
+      const socket = makeFakeSocket({ role: 'host' });
+
+      io.emit('connection', socket);
+      socket.emit('HOST_START_GAME', {});
+
+      await vi.waitFor(() =>
+        expect(received).toContainEqual({
+          type: 'HOST_START_GAME',
+          question: Q1,
+        }),
+      );
+      expect(getRandomStandard).toHaveBeenCalledWith([]);
+    });
+
+    it('excludes the previously served id on the next fetch (no repeats)', async () => {
+      const io = makeFakeIo();
+      const getRandomStandard = vi
+        .fn()
+        .mockResolvedValueOnce({ id: 'q1', question: Q1 })
+        .mockResolvedValueOnce({ id: 'q2', question: Q2 });
+      const { received } = makeHarness(io, {
+        getRandomStandard,
+        getRandomFastMoney: vi.fn().mockResolvedValue([]),
+      });
+      const socket = makeFakeSocket({ role: 'host' });
+
+      io.emit('connection', socket);
+      socket.emit('HOST_START_GAME', {});
+      await vi.waitFor(() =>
+        expect(received).toContainEqual({
+          type: 'HOST_START_GAME',
+          question: Q1,
+        }),
+      );
+      socket.emit('HOST_NEXT_ROUND', {});
+      await vi.waitFor(() =>
+        expect(received).toContainEqual({
+          type: 'HOST_NEXT_ROUND',
+          question: Q2,
+        }),
+      );
+
+      expect(getRandomStandard).toHaveBeenNthCalledWith(1, []);
+      expect(getRandomStandard).toHaveBeenNthCalledWith(2, ['q1']);
+    });
+
+    it('emits ERROR and sends nothing when no question is available', async () => {
+      const io = makeFakeIo();
+      const { received } = makeHarness(io, {
+        getRandomStandard: vi.fn().mockResolvedValue(null),
+        getRandomFastMoney: vi.fn().mockResolvedValue([]),
+      });
+      const socket = makeFakeSocket({ role: 'host' });
+      const errors: unknown[] = [];
+      socket.on('ERROR', (e) => errors.push(e));
+
+      io.emit('connection', socket);
+      received.length = 0;
+      socket.emit('HOST_START_GAME', {});
+
+      await vi.waitFor(() => expect(errors).toHaveLength(1));
+      expect(received).not.toContainEqual(
+        expect.objectContaining({ type: 'HOST_START_GAME' }),
+      );
+    });
+
+    it('fetches 5 Fast Money questions on HOST_START_FAST_MONEY', async () => {
+      const io = makeFakeIo();
+      // A full set of 5 picks (the handler errors on fewer).
+      const fmPicks = [1, 2, 3, 4, 5].map((n) => ({
+        id: `f${n}`,
+        question: {
+          prompt: `FM${n}`,
+          answers: [{ text: 'x', points: 30, revealed: false }],
+        },
+      }));
+      const getRandomFastMoney = vi.fn().mockResolvedValue(fmPicks);
+      const { received } = makeHarness(io, {
+        getRandomStandard: vi.fn().mockResolvedValue(null),
+        getRandomFastMoney,
+      });
+      const socket = makeFakeSocket({ role: 'host' });
+
+      io.emit('connection', socket);
+      socket.emit('HOST_START_FAST_MONEY', {});
+
+      await vi.waitFor(() =>
+        expect(received).toContainEqual({
+          type: 'HOST_START_FAST_MONEY',
+          questions: fmPicks.map((p) => p.question),
+        }),
+      );
+      expect(getRandomFastMoney).toHaveBeenCalledWith(5, []);
+    });
+
+    it('emits ERROR when fewer than 5 Fast Money questions are available', async () => {
+      const io = makeFakeIo();
+      const { received } = makeHarness(io, {
+        getRandomStandard: vi.fn().mockResolvedValue(null),
+        getRandomFastMoney: vi
+          .fn()
+          .mockResolvedValue([{ id: 'f1', question: Q1 }]),
+      });
+      const socket = makeFakeSocket({ role: 'host' });
+      const errors: unknown[] = [];
+      socket.on('ERROR', (e) => errors.push(e));
+
+      io.emit('connection', socket);
+      received.length = 0;
+      socket.emit('HOST_START_FAST_MONEY', {});
+
+      await vi.waitFor(() => expect(errors).toHaveLength(1));
+      expect(received).not.toContainEqual(
+        expect.objectContaining({ type: 'HOST_START_FAST_MONEY' }),
+      );
+    });
+
+    it('ignores server-sourced events from a non-host socket', async () => {
+      const io = makeFakeIo();
+      const getRandomStandard = vi
+        .fn()
+        .mockResolvedValue({ id: 'q1', question: Q1 });
+      const { received } = makeHarness(io, {
+        getRandomStandard,
+        getRandomFastMoney: vi.fn().mockResolvedValue([]),
+      });
+      const socket = makeFakeSocket({ role: 'player', teamId: 'home' });
+
+      io.emit('connection', socket);
+      received.length = 0;
+      socket.emit('HOST_START_GAME', {});
+
+      await new Promise((r) => setTimeout(r, 10));
+      expect(getRandomStandard).not.toHaveBeenCalled();
+      expect(received).toEqual([]);
     });
   });
 });
