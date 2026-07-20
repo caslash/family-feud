@@ -2,6 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import ShortUniqueId from 'short-unique-id';
 import type { Server } from 'socket.io';
 import { createActor, type Actor, type Subscription } from 'xstate';
+import { QuestionService } from '../question/question.service';
 import { createGameMachine } from './game.machine';
 
 const uid = new ShortUniqueId({ length: 5, dictionary: 'alphanum_upper' });
@@ -30,6 +31,8 @@ export class GameService {
   /** Optional callback invoked when a room is destroyed (for external cleanup). */
   onRoomDestroyed?: (roomCode: string) => void;
 
+  constructor(private readonly questions: QuestionService) {}
+
   /**
    * Creates a new game room, starts its XState actor, and registers a
    * subscription to auto-destroy the room when the machine reaches its
@@ -50,7 +53,7 @@ export class GameService {
     const roomCode = uid.randomUUID();
 
     const actor = createActor(
-      createGameMachine({ io, roomId: roomCode }),
+      createGameMachine({ io, roomId: roomCode, questions: this.questions }),
     ).start();
 
     const subscription = actor.subscribe((state) => {

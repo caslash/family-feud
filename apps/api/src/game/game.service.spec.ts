@@ -1,5 +1,6 @@
 import type { GameSocketActorEvent } from '@family-feud/types';
 import type { Server } from 'socket.io';
+import { QuestionService } from '../question/question.service';
 import { GameService } from './game.service';
 
 /**
@@ -25,7 +26,10 @@ describe('GameService', () => {
   let service: GameService;
 
   beforeEach(() => {
-    service = new GameService();
+    service = new GameService({
+      getRandomStandard: async () => null,
+      getRandomFastMoney: async () => [],
+    } as unknown as QuestionService);
   });
 
   describe('createRoom', () => {

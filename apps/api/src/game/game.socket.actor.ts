@@ -2,8 +2,13 @@ import type { GameSocketActorEvent } from '@family-feud/types';
 import type { Server, Socket } from 'socket.io';
 import { fromCallback } from 'xstate';
 import type { ClientRole, TeamId } from './game.types';
+import type { QuestionProvider } from './game.questions';
 
-export type SocketActorInput = { io: Server; roomId: string };
+export type SocketActorInput = {
+  io: Server;
+  roomId: string;
+  questions: QuestionProvider;
+};
 
 // Client-emitted machine events the socket actor forwards inbound. Server-
 // derived events (CLIENT_CONNECTED / CLIENT_DISCONNECTED) are handled
