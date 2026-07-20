@@ -28,11 +28,8 @@ export class QuestionEntity {
   @Column('text')
   prompt!: string;
 
-  @Column('text', { nullable: true })
-  category!: string | null;
-
-  @Column('text', { nullable: true })
-  difficulty!: string | null;
+  @Column('text', { default: 'standard' })
+  kind!: 'standard' | 'fast_money';
 
   @OneToMany(() => AnswerEntity, (answer) => answer.question, {
     cascade: true,

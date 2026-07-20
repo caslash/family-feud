@@ -12,8 +12,7 @@ function buildEntity(): QuestionEntity {
   return {
     id: 'q1',
     prompt: 'Name a fruit',
-    category: null,
-    difficulty: null,
+    kind: 'standard',
     answers,
   } as QuestionEntity;
 }
