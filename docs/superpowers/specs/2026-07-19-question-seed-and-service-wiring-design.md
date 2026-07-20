@@ -70,11 +70,10 @@ that don't capture this, so add a dedicated column.
   @Column('text', { default: 'standard' })
   kind!: 'standard' | 'fast_money';
   ```
-- **`category`** is repurposed at seed time to hold the source answer-count
-  bucket (`"3"`…`"7"`) for standard questions, `null` for Fast Money. This is
-  cheap and lets the host later filter a round by answer count. `difficulty`
-  stays `null` (the dataset has none). `toQuestion` is unaffected (it only maps
-  `prompt` + ordered answers).
+- **`category` and `difficulty` both stay `null`.** The game distinguishes
+  question type purely by `kind`; answer count is already derivable from the
+  answers array, so nothing is stored in `category`. `toQuestion` is unaffected
+  (it only maps `prompt` + ordered answers).
 
 ### 1b. Provenance parser (one-time, kept in-repo)
 
@@ -82,8 +81,8 @@ that don't capture this, so add a dedicated column.
 
 - downloads the workbook from the documented Drive URL (or accepts a local path
   arg),
-- parses the `3`–`7 Answers` sheets → `kind: 'standard'`, `category: "<n>"`,
-- parses `Fast Money` → `kind: 'fast_money'`, `category: null`,
+- parses the `3`–`7 Answers` sheets → `kind: 'standard'`,
+- parses `Fast Money` → `kind: 'fast_money'`,
 - skips `No Points *` and `Broken Fast Money`,
 - for each row: `prompt` from column A; answers from each non-empty
   `Answer N` / `#N` pair, `rank` = 0-based position, `points` = `#N`,
@@ -98,7 +97,6 @@ Fixture shape (array of):
 {
   "kind": "standard",
   "prompt": "Name the most used piece of furniture in a house.",
-  "category": "3",
   "answers": [
     { "text": "Couch", "points": 55, "rank": 0 },
     { "text": "Bed", "points": 23, "rank": 1 },
@@ -129,12 +127,21 @@ lives there. The machine and gateway are untouched.
 ### 2a. A framework-agnostic provider
 
 Define (in `game/`, e.g. `game.questions.ts`) a minimal interface so the socket
-actor stays free of NestJS coupling:
+actor stays free of NestJS coupling. Because the machine's `Question` shape
+carries no id, the provider returns a small `PickedQuestion` wrapper so the
+caller can record which rows it has served (for no-repeat tracking, §2b), and it
+accepts an `excludeIds` list so already-served rows are filtered out at query
+time:
 
 ```ts
+export interface PickedQuestion {
+  id: string;        // DB row id — used only for no-repeat exclusion, never sent to the machine
+  question: Question;
+}
+
 export interface QuestionProvider {
-  getRandomStandard(): Promise<Question | null>;
-  getRandomFastMoney(count: number): Promise<Question[]>;
+  getRandomStandard(excludeIds: string[]): Promise<PickedQuestion | null>;
+  getRandomFastMoney(count: number, excludeIds: string[]): Promise<PickedQuestion[]>;
 }
 ```
 
@@ -149,25 +156,36 @@ registered for `role === 'host'` sockets, reusing the existing auth gate). The
 remaining `HOST_*` events keep the current synchronous `sendBack({ ...data,
 type })` pass-through.
 
+**No-repeat tracking.** The socket actor is invoked once per room and lives for
+the whole game, so a `Set<string>` of served row ids held in its closure is
+naturally scoped to a single game (a new room/game starts with an empty set;
+teardown discards it). Standard and Fast Money draw from disjoint `kind` pools,
+so one shared set is correct. Each handler passes the current ids as
+`excludeIds`, then records the ids it just served:
+
 ```ts
+const servedIds = new Set<string>();
+
 socket.on('HOST_START_GAME', async () => {
-  const question = await questions.getRandomStandard();
-  if (!question) { socket.emit('ERROR', { message: 'No questions available' }); return; }
-  sendBack({ type: 'HOST_START_GAME', question });
+  const picked = await questions.getRandomStandard([...servedIds]);
+  if (!picked) { socket.emit('ERROR', { message: 'No questions available' }); return; }
+  servedIds.add(picked.id);
+  sendBack({ type: 'HOST_START_GAME', question: picked.question });
 });
-// HOST_NEXT_ROUND: identical, getRandomStandard()
-// HOST_START_FAST_MONEY: const qs = await questions.getRandomFastMoney(FAST_MONEY_QUESTION_COUNT /* 5 */)
-//   if (qs.length < 5) → ERROR; else sendBack({ type, questions: qs })
+// HOST_NEXT_ROUND: identical, getRandomStandard([...servedIds])
+// HOST_START_FAST_MONEY:
+//   const picks = await questions.getRandomFastMoney(FAST_MONEY_QUESTION_COUNT /* 5 */, [...servedIds])
+//   if (picks.length < 5) → ERROR; else record every id, sendBack({ type, questions: picks.map(p => p.question) })
 ```
 
 - Client-supplied content on these events is **ignored** — the server always
   sources it. The inbound wire contract becomes "emit the event with no payload".
-- On a failed/empty fetch: emit `ERROR` to the requesting socket, do **not**
-  `sendBack`; the machine stays put. Errors are logged.
+- On a failed/empty fetch (store empty, or the pool is exhausted by exclusions):
+  emit `ERROR` to the requesting socket, do **not** `sendBack`; the machine stays
+  put. Errors are logged.
 - The machine's guard (`canStartGame`) still runs when it receives the event; a
   rejected start merely wastes one fetch (rare, negligible against ~4,700 rows).
-- Repeats within a game are not tracked in v1 (probability is tiny at this
-  dataset size). Noted as a possible later refinement, deliberately out of scope.
+  A wasted fetch still records its id — acceptable, since the pool is enormous.
 
 ### 2c. Threading the provider through DI
 
@@ -180,11 +198,17 @@ socket.on('HOST_START_GAME', async () => {
 
 ### 2d. QuestionService additions
 
-- `getRandomStandard(): Promise<Question | null>` — random row where
-  `kind = 'standard'` (mirrors existing `getRandom`: random id, then re-fetch
-  with answers, then `toQuestion`).
-- `getRandomFastMoney(count: number): Promise<Question[]>` — up to `count` random
-  rows where `kind = 'fast_money'`, each mapped via `toQuestion`.
+- `getRandomStandard(excludeIds: string[]): Promise<PickedQuestion | null>` —
+  random row where `kind = 'standard'` and `id` not in `excludeIds` (mirrors
+  existing `getRandom`: random id, then re-fetch with answers, then
+  `toQuestion`), returned as `{ id, question }`.
+- `getRandomFastMoney(count, excludeIds): Promise<PickedQuestion[]>` — up to
+  `count` random rows where `kind = 'fast_money'` and `id` not in `excludeIds`,
+  each mapped to `{ id, question }`.
+- The exclusion is applied with a query-builder `andWhere('id NOT IN (:...ids)')`
+  added **only when `excludeIds` is non-empty** (an empty `NOT IN ()` is invalid
+  SQL). `RANDOM()` ordering with `LIMIT count` yields distinct rows within a Fast
+  Money batch.
 - Existing `getById` unchanged. `getRandom` retained (now kind-agnostic) but
   unused by the wiring.
 
@@ -193,14 +217,16 @@ socket.on('HOST_START_GAME', async () => {
 - **Parser transform** — unit-test the pure row→question function: correct
   rank/points ordering, skips empty answer pairs, tags `kind`/`category`.
 - **QuestionService** — extend `question.service.spec.ts` (mock repo /
-  query-builder) for `getRandomStandard` (filters `kind='standard'`) and
-  `getRandomFastMoney` (filters `kind='fast_money'`, returns N mapped questions,
+  query-builder) for `getRandomStandard` (filters `kind='standard'`, applies
+  `NOT IN` only when `excludeIds` non-empty, returns `{ id, question }`) and
+  `getRandomFastMoney` (filters `kind='fast_money'`, returns N mapped picks,
   empty store → `[]`).
 - **Socket actor** — extend `game.socket.actor.spec.ts` with a mock
   `QuestionProvider` in input: host `HOST_START_GAME` → provider called →
   `sendBack` carries the fetched question; provider returns `null` → `ERROR`
-  emitted, no `sendBack`; `HOST_START_FAST_MONEY` → `getRandomFastMoney(5)`;
-  non-host socket cannot trigger a fetch.
+  emitted, no `sendBack`; **a second fetch passes the first pick's id in
+  `excludeIds`** (no-repeat); `HOST_START_FAST_MONEY` → `getRandomFastMoney(5,
+  …)`; non-host socket cannot trigger a fetch.
 - **Seed runner / migration** — DB integration is a manual step (`npm run seed`
   against a local Postgres); no automated DB test (no test database is
   configured). The migration is exercised via `migrationsRun` on that manual run.
@@ -209,9 +235,10 @@ socket.on('HOST_START_GAME', async () => {
 
 - Client (`apps/web`) changes — the host UI will drop the inline `Question`
   payload later; this spec only changes the server contract.
-- No-repeat-within-a-game tracking.
+- Persisting served-question history — no-repeat tracking is in-memory per game
+  and resets when the room ends.
 - Importing the No-Points / Broken sheets.
-- Any question metadata beyond `kind` + answer-count `category`.
+- Any question metadata beyond `kind` (no `category` / `difficulty` in v1).
 
 ## Files touched
 
