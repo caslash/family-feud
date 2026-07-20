@@ -4,6 +4,12 @@ import { QuestionEntity, toQuestion } from '@family-feud/types/entities';
 import type { Question } from '@family-feud/types';
 import { Repository } from 'typeorm';
 
+/** A question plus its DB row id — the id is used only for no-repeat exclusion. */
+export interface PickedQuestion {
+  id: string;
+  question: Question;
+}
+
 /**
  * Read-only access to the PostgreSQL question store. Returns questions already
  * mapped to the plain {@link Question} shape the game machine consumes, so the
@@ -47,5 +53,49 @@ export class QuestionService {
 
     // Re-fetch with the answers relation; the random pick only needs the id.
     return this.getById(picked.id);
+  }
+
+  /**
+   * Picks a random standard-round question not in `excludeIds`.
+   *
+   * @returns `{ id, question }`, or `null` if the (post-exclusion) pool is empty.
+   */
+  async getRandomStandard(excludeIds: string[]): Promise<PickedQuestion | null> {
+    const qb = this.questions
+      .createQueryBuilder('question')
+      .where('question.kind = :kind', { kind: 'standard' });
+    if (excludeIds.length > 0) {
+      qb.andWhere('question.id NOT IN (:...ids)', { ids: excludeIds });
+    }
+    const picked = await qb.orderBy('RANDOM()').limit(1).getOne();
+    if (!picked) return null;
+
+    const question = await this.getById(picked.id);
+    return question ? { id: picked.id, question } : null;
+  }
+
+  /**
+   * Picks up to `count` random Fast Money questions not in `excludeIds`.
+   *
+   * @returns An array of `{ id, question }` (possibly shorter than `count`).
+   */
+  async getRandomFastMoney(
+    count: number,
+    excludeIds: string[],
+  ): Promise<PickedQuestion[]> {
+    const qb = this.questions
+      .createQueryBuilder('question')
+      .where('question.kind = :kind', { kind: 'fast_money' });
+    if (excludeIds.length > 0) {
+      qb.andWhere('question.id NOT IN (:...ids)', { ids: excludeIds });
+    }
+    const rows = await qb.orderBy('RANDOM()').limit(count).getMany();
+
+    const picks: PickedQuestion[] = [];
+    for (const row of rows) {
+      const question = await this.getById(row.id);
+      if (question) picks.push({ id: row.id, question });
+    }
+    return picks;
   }
 }

@@ -17,6 +17,17 @@ function buildEntity(): QuestionEntity {
   } as QuestionEntity;
 }
 
+/** A chainable createQueryBuilder stub whose getMany/getOne are controllable. */
+function makeQb(result: unknown) {
+  const qb: Record<string, ReturnType<typeof vi.fn>> = {};
+  for (const m of ['where', 'andWhere', 'orderBy', 'limit']) {
+    qb[m] = vi.fn().mockReturnThis();
+  }
+  qb.getMany = vi.fn().mockResolvedValue(result);
+  qb.getOne = vi.fn().mockResolvedValue(result);
+  return qb;
+}
+
 describe('QuestionService', () => {
   let findOne: ReturnType<typeof vi.fn>;
   let createQueryBuilder: ReturnType<typeof vi.fn>;
@@ -84,6 +95,77 @@ describe('QuestionService', () => {
       createQueryBuilder.mockReturnValue(qb);
 
       expect(await service.getRandom()).toBeNull();
+      expect(findOne).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('getRandomStandard', () => {
+    it('filters by kind=standard and returns { id, question }', async () => {
+      const qb = makeQb({ id: 'q1' });
+      createQueryBuilder.mockReturnValue(qb);
+      findOne.mockResolvedValue(buildEntity());
+
+      const picked = await service.getRandomStandard([]);
+
+      expect(qb.where).toHaveBeenCalledWith('question.kind = :kind', {
+        kind: 'standard',
+      });
+      expect(qb.andWhere).not.toHaveBeenCalled(); // empty excludeIds → no NOT IN
+      expect(picked).toEqual({
+        id: 'q1',
+        question: {
+          prompt: 'Name a fruit',
+          answers: [
+            { text: 'First', points: 40, revealed: false },
+            { text: 'Second', points: 20, revealed: false },
+          ],
+        },
+      });
+    });
+
+    it('excludes already-served ids when the list is non-empty', async () => {
+      const qb = makeQb({ id: 'q2' });
+      createQueryBuilder.mockReturnValue(qb);
+      findOne.mockResolvedValue(buildEntity());
+
+      await service.getRandomStandard(['q1']);
+
+      expect(qb.andWhere).toHaveBeenCalledWith('question.id NOT IN (:...ids)', {
+        ids: ['q1'],
+      });
+    });
+
+    it('returns null when the pool is empty', async () => {
+      createQueryBuilder.mockReturnValue(makeQb(null));
+
+      expect(await service.getRandomStandard([])).toBeNull();
+      expect(findOne).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('getRandomFastMoney', () => {
+    it('filters by kind=fast_money, honors count, and maps each pick', async () => {
+      const qb = makeQb([{ id: 'q1' }, { id: 'q2' }]);
+      createQueryBuilder.mockReturnValue(qb);
+      findOne.mockResolvedValue(buildEntity());
+
+      const picks = await service.getRandomFastMoney(5, ['old']);
+
+      expect(qb.where).toHaveBeenCalledWith('question.kind = :kind', {
+        kind: 'fast_money',
+      });
+      expect(qb.andWhere).toHaveBeenCalledWith('question.id NOT IN (:...ids)', {
+        ids: ['old'],
+      });
+      expect(qb.limit).toHaveBeenCalledWith(5);
+      expect(picks).toHaveLength(2);
+      expect(picks[0]).toEqual({ id: 'q1', question: expect.any(Object) });
+    });
+
+    it('returns [] when the pool is empty', async () => {
+      createQueryBuilder.mockReturnValue(makeQb([]));
+
+      expect(await service.getRandomFastMoney(5, [])).toEqual([]);
       expect(findOne).not.toHaveBeenCalled();
     });
   });
